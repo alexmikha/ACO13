@@ -6,7 +6,6 @@ package homeWork.myString;
 public class MyString {
     private char[] chars;
     private int length;
-//    String str;
 
     public MyString() {
 
@@ -20,7 +19,6 @@ public class MyString {
 
     public MyString(char[] ch) {
         int count = ch.length;
-        if (ch == null) return;
         chars = new char[count];
         System.arraycopy(ch, 0, chars, 0, count);
     }
@@ -30,7 +28,6 @@ public class MyString {
     }
 
     public char charAt(int index) {
-
         if ((index < 0) || (index >= chars.length))
             throw new StringIndexOutOfBoundsException(index);
         return chars[index];
@@ -51,7 +48,6 @@ public class MyString {
 
 
     public int indexOf(int ch, int fromIndex) {
-
         if (fromIndex < 0)
             fromIndex = 0;
         else if (fromIndex >= length)
@@ -132,8 +128,9 @@ public class MyString {
     }
 
     public MyString contains(MyString string) {
-        for (int i = 0; i < string.chars.length; i++)
-            chars[i] = string.chars[i];
+        System.arraycopy(string.chars, 0, chars, 0, string.chars.length);
+//        for (int i = 0; i < string.chars.length; i++)
+//            chars[i] = string.chars[i];
         return string;
     }
 }
