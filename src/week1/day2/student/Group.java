@@ -1,8 +1,8 @@
 package week1.day2.student;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-
 
 
 /**
@@ -11,12 +11,11 @@ import java.util.List;
 public class Group {
     private static final int DEFAULT_SIZE = 15;
 
-    //   private int counter;
     private String nameGroup;
-    SortByName sortByName = new SortByName();
-    SortBySurName sortBySurName = new SortBySurName();
-    SortByBirthDay sortByBirthDay = new SortByBirthDay();
-    SortByAverageMark sortByAverageMark = new SortByAverageMark();
+    private Comparator<Student> sortByName = (o1, o2) -> o1.getName().compareTo(o2.getName());
+    private Comparator<Student> sortBySurName = (o1, o2) -> o1.getSurname().compareTo(o2.getSurname());
+    private Comparator<Student> sortByBirthDay = (o1, o2) -> o1.getBirthDay().compareTo(o2.getBirthDay());
+    private Comparator<Student> sortByAverageMark = (o1, o2) -> (int) (o1.getAverageMark()- o2.getAverageMark());
 
     private List<Student> studList = new ArrayList<>(DEFAULT_SIZE);
 
@@ -34,7 +33,7 @@ public class Group {
     public boolean addStudent(Student student) {
         if (student == null) return false;
         if (studList.contains(student)) return false;
-        return  studList.add(student);
+        return studList.add(student);
     }
 
 

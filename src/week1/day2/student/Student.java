@@ -13,7 +13,6 @@ public class Student implements Comparable {
     private double averageMark;
     private char gender;
 
-
     public Student(String name, String surname, MyDate birthDay, char gender) {
         this.name = name;
         this.surname = surname;
