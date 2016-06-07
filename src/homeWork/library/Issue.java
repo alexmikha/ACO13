@@ -5,7 +5,7 @@ package homeWork.library;
  */
 public class Issue {
 
-    String name;
+    private String name;
     private int count;
 
     public Issue(String name, int count) {

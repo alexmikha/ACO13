@@ -1,4 +1,4 @@
-package week3.testequals;
+package week3.ACO13Tasks.testequals;
 
 public class ColorPoint extends Point {
     private Color color;

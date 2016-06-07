@@ -1,4 +1,4 @@
-package week3.sort;
+package week3.ACO13Tasks.sort;
 
 public class Duck {
 	String name;

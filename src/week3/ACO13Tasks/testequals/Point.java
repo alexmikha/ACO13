@@ -1,4 +1,4 @@
-package week3.testequals;
+package week3.ACO13Tasks.testequals;
 
 public class Point {
 

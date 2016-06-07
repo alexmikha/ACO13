@@ -1,4 +1,4 @@
-package week3.simplebarista;
+package week3.ACO13Tasks.simplebarista;
 
 public class Coffee {
  

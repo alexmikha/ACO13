@@ -1,11 +1,9 @@
-package week3.sort;
-
-import java.util.Arrays;
+package week3.ACO13Tasks.sort;
 
 public class DuckSortTestDrive {
 
 	public static void main(String[] args) {
-		Duck[] ducks = { 
+		Duck[] ducks = {
 						new Duck("Daffy", 8), 
 						new Duck("Dewey", 2),
 						new Duck("Howard", 7),
