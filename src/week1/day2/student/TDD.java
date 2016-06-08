@@ -1,7 +1,5 @@
 package week1.day2.student;
 
-import utils.MyDate;
-
 /**
  * Created by mykhailov on 22.05.2016.
  */

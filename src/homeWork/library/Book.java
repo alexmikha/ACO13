@@ -3,27 +3,17 @@ package homeWork.library;
 /**
  * Created by mykhailov on 02.06.2016.
  */
-public class Book extends Issue{
+public class Book extends Issue {
 
-    private int id;
     private String autor;
     private String publisherName;
-    private int year;
 
-    public Book(int id, String name, int count, String autor, String publisherName, int years) {
-        super(name, count);
-        this.id = id;
+
+    public Book(String name, String autor, String publisherName, int year, int count) {
+        super(name,count, year);
         this.autor = autor;
         this.publisherName = publisherName;
-        this.year = years;
-    }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getAutor() {
@@ -42,25 +32,12 @@ public class Book extends Issue{
         this.publisherName = publisherName;
     }
 
-    public int getYears() {
-        return year;
-    }
 
-    public void setYears(int years) {
-        this.year = years;
-    }
 
     @Override
     public String toString() {
-        return "Book{" +
-                "id=" + id +
-                "name=" + getName() +
-                ",count=" + getCount() +
-                ", autor='" + autor + '\'' +
-                ", publisherName='" + publisherName + '\'' +
-                ", years=" + year +
-                '}';
+        return String.format("%1$s, %2$s, %3$s, %4$d, %5$d",
+                getName(), autor, publisherName, getYear(), getCount());
+
     }
-
-
 }

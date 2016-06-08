@@ -1,6 +1,4 @@
-package utils;
-
-import week1.day2.student.Student;
+package week1.day2.student;
 
 /**
  * Created by mykhailov on 22.05.2016.
