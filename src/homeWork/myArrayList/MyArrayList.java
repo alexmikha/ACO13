@@ -9,7 +9,6 @@ public class MyArrayList {
 
     private Object[] myArray;
     private int size;
-    //  private int capacity;
 
     public static final int DEFAULT_CAPACITY = 10;
 
@@ -35,58 +34,77 @@ public class MyArrayList {
             throw new IndexOutOfBoundsException();
 
         if (size() == myArray.length)
-            expandCapacity(myArray);
-
-        for (int i = size; i > index; i--)
-            myArray[i] = myArray[i - 1];
-
+            //   expandCapacity(myArray);
+            expandCapacity();
+//        for (int i = size; i > index; i--)
+//            myArray[i] = myArray[i - 1];
+        System.arraycopy(myArray, size - 1, myArray, index, size - index);
         // add element
         myArray[index] = object;
         size++;
     }
 
-    private Object[] expandCapacity(Object[] myArray) {
-        Object[] newArray = new Object[this.myArray.length * 2];
-        System.arraycopy(this.myArray, 0, newArray, 0, size());
-        this.myArray = newArray;
-        return newArray;
+//    private Object[] expandCapacity(Object[] myArray) {
+//        Object[] newArray = new Object[this.myArray.length * 2];
+//        System.arraycopy(this.myArray, 0, newArray, 0, size());
+//        this.myArray = newArray;
+//        return newArray;
+//    }
+
+    public void expandCapacity() {
+        if (size >= myArray.length) {
+            Object[] newArray = new Object[this.myArray.length * 2];
+            System.arraycopy(this.myArray, 0, newArray, 0, size());
+            this.myArray = newArray;
+        }
     }
 
 
     public boolean add(Object object) {
-        if (size > myArray.length)
-            myArray = expandCapacity(myArray);
+        if (size < myArray.length) {
+            myArray[size] = object;
+            size++;
+        } else if (size == myArray.length)
+            // myArray = expandCapacity(myArray);
+            expandCapacity();
         add(size(), object);
+        //     myArray[size++] = object; // не работает
         return false;
     }
 
     public Object get(int index) {
-        return myArray[index];
+        if (index >= 0 && index < this.size())
+            return myArray[index];
+        else
+            throw new IndexOutOfBoundsException();
     }
 
     public Object remove(int index) {
         if (index >= 0 && index < this.size()) {
             Object temp = myArray[index];
-            for (int i = index; i < this.size() - 1; i++)
-                myArray[index] = myArray[index + 1];
-            size--;
+            fastRemove(index);
             return temp;
         }
         return false;
     }
 
-    public boolean remove(int index, Object object) {
-        if (object == null) {
+    public void fastRemove(int index) {
+        int moved = size - index - 1;
+        System.arraycopy(myArray, index + 1, myArray, index, moved);
+        myArray[size--] = null;
+    }
 
-            for (index = 0; index < size; index++)
-                if (myArray[index] == null) {
-                    remove(index);
+    public boolean remove(Object object) {
+        if (object == null) {
+            for (int i = 0; i < size; i++)
+                if (myArray[i] == null) {
+                    fastRemove(i);
                     return true;
                 }
         } else {
-            for (index = 0; index < size; index++)
-                if (object.equals(myArray[index])) {
-                    remove(index);
+            for (int j = 0; j < size; j++)
+                if (object.equals(myArray[j])) {
+                    fastRemove(j);
                     return true;
                 }
         }
@@ -95,25 +113,29 @@ public class MyArrayList {
 
 
     public Object set(int index, Object newObject) {
-        if (index < 0 || index >= myArray.length - 1)
+        if (index < 0 || index > myArray.length - 1)
             throw new IndexOutOfBoundsException();
         Object oldObject = myArray[index];
         myArray[index] = newObject;
-
         return oldObject;
     }
 
+
     public void clear() {
-        myArray = null;
-        size = 0;
+        for (int i = 0; i < size; i++) {
+            myArray[i] = null;
+            size = 0;
+        }
     }
 
     public boolean contains(Object object) {
-        for (int i = 0; i < this.size(); i++) {
-            if (this.myArray[i].equals(object))
-                return true;
-        }
-        return false;
+        return indexOf(object) != -1;
+    }
+
+    public int indexOf(Object object) {
+        for (int i = 0; i < size; i++)
+            if (object.equals(myArray[i])) return i;
+        return -1;
     }
 
     @Override
