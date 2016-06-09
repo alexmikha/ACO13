@@ -37,17 +37,6 @@ public class MyDate implements Comparable {
         if (yearsBirth != myDate.yearsBirth) return false;
         if (monthBirth != myDate.monthBirth) return false;
         return dayBirth == myDate.dayBirth;
-
-    }
-
-    @Override
-    public int hashCode() {
-        return 0;
-    }
-
-
-    public String asString() {
-        return String.format("%d.%d.%d", dayBirth, monthBirth, yearsBirth);
     }
 
     @Override
@@ -57,14 +46,17 @@ public class MyDate implements Comparable {
         } else {
             MyDate myDate = (MyDate) o;
             if (yearsBirth != myDate.yearsBirth) {
-                return  Math.abs(yearsBirth - myDate.yearsBirth);
-            } else
-            if (monthBirth != myDate.monthBirth) {
-                return Math.abs(monthBirth - myDate.monthBirth);
-            } else
-            if (dayBirth != myDate.dayBirth)
-                return Math.abs(dayBirth - myDate.dayBirth);
+                return yearsBirth - myDate.yearsBirth;
+            } else if (monthBirth != myDate.monthBirth) {
+                return monthBirth - myDate.monthBirth;
+            } else if (dayBirth != myDate.dayBirth)
+                return (dayBirth - myDate.dayBirth);
         }
         return -1;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%d.%d.%d", dayBirth, monthBirth, yearsBirth);
     }
 }

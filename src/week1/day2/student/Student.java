@@ -62,10 +62,10 @@ public class Student implements Comparable {
                 && this.birthDay.equals(tmp.birthDay);
     }
 
-
+    @Override
     public String toString() {
         return String.format("%2$s, %3$s, BD - %1$s, gender - %4$c",
-                birthDay.asString(), name, surname, gender);
+                birthDay.toString(), name, surname, gender);
     }
 
 }
