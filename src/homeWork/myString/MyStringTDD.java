@@ -16,6 +16,7 @@ public class MyStringTDD {
         String str5 = " great";
         String str6 = "I am working first my program great";
         String str7 = "i am working first my program";
+//        String str7 = "";
         String str8 = "I AM WORKING FIRST MY PROGRAM";
 
 
@@ -78,11 +79,11 @@ public class MyStringTDD {
                         " expected - %s, actual - %s\n", "trim"
                 , expected6.equals(actual6), expected6, actual6);
 
-        MyString expected7 = myString4;
-        MyString actual7 = myString5.contains(myString4);
+        boolean expected7 = true;
+        boolean actual7 = myString5.contains(myString4);
         System.out.printf("Method name - %s, result - %s," +
                         " expected - %s, actual - %s\n", "contains"
-                , expected7.equals(actual7), expected7, actual7);
+                , expected7 == (actual7), expected7, actual7);
 
         int expected8 = 3;
         int actual8 = myString6.indexOf('o', 3);
