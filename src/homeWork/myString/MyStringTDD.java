@@ -16,7 +16,6 @@ public class MyStringTDD {
         String str5 = " great";
         String str6 = "I am working first my program great";
         String str7 = "i am working first my program";
-//        String str7 = "";
         String str8 = "I AM WORKING FIRST MY PROGRAM";
 
 

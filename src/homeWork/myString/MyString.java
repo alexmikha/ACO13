@@ -12,20 +12,25 @@ public class MyString {
     }
 
     public MyString(String str) {
+        if (str == null)
+            throw new StringIndexOutOfBoundsException("!!!");
         length = str.length();
-        if (str.length() == 0) return;
+        if (str.length() == 0) return;  // работает
         chars = str.toCharArray();
     }
 
     public MyString(char[] ch) {
         if (ch == null) return;
-        int count = ch.length;
         chars = ch;
-        System.arraycopy(ch, 0, chars, 0, count);
     }
 
+
     public String toString() {
-        return new String(chars);
+        String outString = "";
+        for (int i = 0; i < chars.length; i++) {
+            outString = outString + chars[i];
+        }
+        return outString;
     }
 
     public char charAt(int index) {
@@ -40,10 +45,7 @@ public class MyString {
     }
 
     public MyString concat(MyString str) {
-        int otherLength = str.length();
-        if (otherLength == 0) {
-            return this;
-        }
+        if (str == null && str.length() == 0) return this;
         int length = this.chars.length + str.chars.length;
         char[] temp = new char[length];
         System.arraycopy(this.chars, 0, temp, 0, this.chars.length);
@@ -53,8 +55,7 @@ public class MyString {
 
 
     public int indexOf(int ch, int fromIndex) {
-        if (fromIndex < 0) return -1;
-        if (fromIndex >= length) return -1;
+        if (fromIndex < 0 && fromIndex >= length) return -1;
         for (int i = fromIndex; i < length; i++)
             if (chars[i] == ch)
                 return i;
@@ -100,10 +101,7 @@ public class MyString {
 
 
     public MyString substring(int beginIndex, int endIndex) throws IndexOutOfBoundsException {
-        if (beginIndex < 0) {
-            throw new IndexOutOfBoundsException();
-        }
-        if (endIndex > chars.length) {
+        if (beginIndex < 0 && endIndex > chars.length) {
             throw new IndexOutOfBoundsException();
         }
         int sublength = (endIndex - beginIndex + 1);
@@ -134,13 +132,13 @@ public class MyString {
         return result;
     }
 
-    public boolean contains(MyString string) {
-        System.arraycopy(string.chars, 0, chars, 0, string.chars.length);
-//        for (int i = 0; i < string.chars.length; i++)
-//            chars[i] = string.chars[i];
-        return true;
+    public boolean contains(MyString str) {
+        //System.arraycopy(str.chars, 0, chars, 0, str.chars.length);
+        for (int i = 0; i < chars.length; i++) {
+            chars[i] = str.chars[i];
+            if (chars[i] == str.chars[i])
+                return true;
+        }
+        return false;
     }
 }
-
-
-
