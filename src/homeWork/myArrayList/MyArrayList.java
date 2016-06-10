@@ -30,26 +30,15 @@ public class MyArrayList {
     }
 
     public void add(int index, Object object) {
-        if (index < 0 || index > myArray.length)
+        if (index < 0 && index >= myArray.length)
             throw new IndexOutOfBoundsException();
-
-        if (size() == myArray.length)
-            //   expandCapacity(myArray);
-            expandCapacity();
-//        for (int i = size; i > index; i--)
-//            myArray[i] = myArray[i - 1];
+        expandCapacity();
         System.arraycopy(myArray, size - 1, myArray, index, size - index);
         // add element
         myArray[index] = object;
         size++;
     }
 
-//    private Object[] expandCapacity(Object[] myArray) {
-//        Object[] newArray = new Object[this.myArray.length * 2];
-//        System.arraycopy(this.myArray, 0, newArray, 0, size());
-//        this.myArray = newArray;
-//        return newArray;
-//    }
 
     public void expandCapacity() {
         if (size >= myArray.length) {
@@ -62,24 +51,24 @@ public class MyArrayList {
 
     public boolean add(Object object) {
         if (size < myArray.length) {
-            myArray[size] = object;
-            size++;
+            myArray[size++] = object;
         } else if (size == myArray.length)
-            // myArray = expandCapacity(myArray);
             expandCapacity();
-        add(size(), object);
-        //     myArray[size++] = object; // не работает
+       // myArray[size++] = object; // так не работает
+        add(size(), object); // а так add элемент к поседнему эл. в массиве
         return false;
     }
 
     public Object get(int index) {
-        if (index >= 0 && index < this.size())
-            return myArray[index];
+        if (index >= size || index < 0 || index >= myArray.length)
+            throw new ArrayIndexOutOfBoundsException(index);
         else
-            throw new IndexOutOfBoundsException();
+            return myArray[index];
     }
 
     public Object remove(int index) {
+        if (index >= size && index < 0 && index >= myArray.length)
+            throw new ArrayIndexOutOfBoundsException(index);
         if (index >= 0 && index < this.size()) {
             Object temp = myArray[index];
             fastRemove(index);
@@ -133,8 +122,13 @@ public class MyArrayList {
     }
 
     public int indexOf(Object object) {
-        for (int i = 0; i < size; i++)
-            if (object.equals(myArray[i])) return i;
+        if (object == null) {
+            for (int i = 0; i < size; i++)
+                if (myArray[i] == null) return i;
+        } else {
+            for (int j = 0; j < size; j++)
+                if (object.equals(myArray[j])) return j;
+        }
         return -1;
     }
 
