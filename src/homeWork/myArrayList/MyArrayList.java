@@ -42,9 +42,7 @@ public class MyArrayList {
 
     public void expandCapacity() {
         if (size >= myArray.length) {
-            Object[] newArray = new Object[this.myArray.length * 2];
-            System.arraycopy(this.myArray, 0, newArray, 0, size());
-            this.myArray = newArray;
+            myArray = Arrays.copyOf(myArray, myArray.length * 2);
         }
     }
 
@@ -54,22 +52,21 @@ public class MyArrayList {
             myArray[size++] = object;
         } else if (size == myArray.length)
             expandCapacity();
-       // myArray[size++] = object; // так не работает
-        add(size(), object); // а так add элемент к поседнему эл. в массиве
+        add(size(), object);
         return false;
     }
 
     public Object get(int index) {
-        if (index >= size || index < 0 || index >= myArray.length)
+        if (index < 0 || index >= size)
             throw new ArrayIndexOutOfBoundsException(index);
         else
             return myArray[index];
     }
 
     public Object remove(int index) {
-        if (index >= size && index < 0 && index >= myArray.length)
+        if (index < 0 || index >= size)
             throw new ArrayIndexOutOfBoundsException(index);
-        if (index >= 0 && index < this.size()) {
+        if (index >= 0 && index < size()) {
             Object temp = myArray[index];
             fastRemove(index);
             return temp;
