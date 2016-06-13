@@ -132,13 +132,11 @@ public class MyString {
         return result;
     }
 
-    public boolean contains(MyString str) {
-        //System.arraycopy(str.chars, 0, chars, 0, str.chars.length);
+    public boolean contains(char ch) {
         for (int i = 0; i < chars.length; i++) {
-            chars[i] = str.chars[i];
-            if (chars[i] == str.chars[i])
-                return true;
+            if (chars[i] == ch) return true;
         }
         return false;
     }
+
 }
