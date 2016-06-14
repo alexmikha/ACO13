@@ -3,41 +3,65 @@ package homeWork.library;
 /**
  * Created by mykhailov on 02.06.2016.
  */
-public class Book extends Issue {
+class Book extends Issue implements Comparable {
 
-    private String autor;
-    private String publisherName;
+    private String author;
 
 
-    public Book(String name, String autor, String publisherName, int year, int count) {
-        super(name,count, year);
-        this.autor = autor;
-        this.publisherName = publisherName;
+    Book(String title, String author, String publisher, int year) {
+        super(title, publisher, year);
+        this.author = author;
 
     }
 
-    public String getAutor() {
-        return autor;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
+    String getAuthor() {
+        return author;
     }
-
-    public String getPublisherName() {
-        return publisherName;
-    }
-
-    public void setPublisherName(String publisherName) {
-        this.publisherName = publisherName;
-    }
-
 
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Book book = (Book) o;
+        return getAuthor() != null ? getAuthor().equals(book.getAuthor()) : book.getAuthor() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (getAuthor() != null ? getAuthor().hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+
+        if (this == o) return 0;
+        if (o != null && o instanceof Issue) {
+        } else {
+            Book tmp = (Book) o;
+//            if (!this.getTitle().equals(tmp.getTitle())) {
+//                return this.getTitle().compareTo(tmp.getTitle());
+//            }
+            if (!this.author.equals(tmp.author)) {
+                return this.author.compareTo(tmp.author);
+            }
+        }
+        return 0;
+    }
+
+    @Override
     public String toString() {
-        return String.format("%1$s, %2$s, %3$s, %4$d, %5$d",
-                getName(), autor, publisherName, getYear(), getCount());
+
+        return String.format("Book - %1s, author - %2$s, publisher - %3$s, year - %4$d, count - %5$s",
+                getTitle(), author, getPublisher(), getYear(), getCount());
+
 
     }
 }
