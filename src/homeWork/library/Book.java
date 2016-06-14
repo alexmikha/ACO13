@@ -46,9 +46,6 @@ class Book extends Issue implements Comparable {
         if (o != null && o instanceof Issue) {
         } else {
             Book tmp = (Book) o;
-//            if (!this.getTitle().equals(tmp.getTitle())) {
-//                return this.getTitle().compareTo(tmp.getTitle());
-//            }
             if (!this.author.equals(tmp.author)) {
                 return this.author.compareTo(tmp.author);
             }
@@ -61,7 +58,5 @@ class Book extends Issue implements Comparable {
 
         return String.format("Book - %1s, author - %2$s, publisher - %3$s, year - %4$d, count - %5$s",
                 getTitle(), author, getPublisher(), getYear(), getCount());
-
-
     }
 }

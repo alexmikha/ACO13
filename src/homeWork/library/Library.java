@@ -8,7 +8,7 @@ import java.util.List;
  * Created by mykhailov on 03.06.2016.
  */
 public class Library {
-    //   private List<Issue> printsYear;
+
     private Issue issue;
     private ArrayList<Book> prints;
     private List<Reader> readers = new ArrayList<>();
@@ -20,7 +20,6 @@ public class Library {
 
 
     public Library() {
-
         prints = new ArrayList<>();
     }
 
@@ -38,12 +37,7 @@ public class Library {
     public void showIssueLibrary() {
         if (prints == null) return;
         for (int i = 0; i < prints.size(); i++) {
-
-//            if (prints.get(i).equals(prints.get(i + 1)))
-//               i++;
-
             System.out.println(prints.get(i));
-
         }
     }
 
@@ -52,7 +46,6 @@ public class Library {
         readers.sort(sortByNameReaders);
         for (int i = 0; i < readers.size(); i++) {
             System.out.println(readers.get(i));
-
         }
     }
 
@@ -61,16 +54,11 @@ public class Library {
         if (prints.isEmpty()) {
             prints.add(issue);
             issue.setCount(1);
-        } else
-
-        {
+        } else {
             for (int i = 0; i < prints.size(); i++) {
-                //   if (prints.get(i).getCount() >= 1) {
-                if (issue.equals(prints.get(i)) ) {  // && prints.get(i).getCount() >= 1
-              //      prints.add(issue);
+                if (issue.equals(prints.get(i))) {  // && prints.get(i).getCount() >= 1
                     issue.setCount(prints.get(i).getCount() + 1);
-                } else                       //if (issue.equals(prints.get(i))) {
-                    //  }
+                } else
                     prints.add(issue);
                 issue.setCount(prints.get(i).getCount());
 
@@ -78,7 +66,7 @@ public class Library {
             }
         }
         return false;
-   }
+    }
 
     public boolean addReaderToList(Reader reader) {
         if (reader == null || readers == null) return false;
@@ -86,19 +74,26 @@ public class Library {
         return true;
     }
 
-    public boolean giveIssueToReader(Issue issue, Reader reader) {
-        if (issue == null || reader == null ) return false;
+    public boolean giveIssueToReader(Issue issue, Reader readerGive) {
+        if (issue == null || readerGive == null) return false;
+        for (Reader reader1 : readers) {
+            if (reader1.equals(readerGive))
+                if (readerGive.isReaderBlackList() || readerGive.getReaderList().size() >= 3) return false;
+        }
+
         for (Book issue1 : prints) {
             if (issue.equals(issue1) && issue.getCount() >= 1) {
-                reader.getReaderList().add(issue1);
-                //     issue1.setCount(issue.getCount() - 1);
+                readerGive.getReaderList().add(issue1);
             }
         }
-                for (int i = 0; i < prints.size(); i++) {
-                    if(prints.get(i).equals(issue))
-                        prints.remove(i);
-
-                }
+        for (int i = 0; i < prints.size(); i++) {
+            if (prints.get(i).equals(issue)) {
+                if (prints.get(i).getCount() >= 1)
+                    prints.get(i).setCount((prints.get(i).getCount() - 1));
+                if (prints.get(i).getCount() == 0)
+                    prints.remove(i);
+            }
+        }
 
         return false;
     }
@@ -166,7 +161,6 @@ public class Library {
                 System.out.println(print);
 
         }
-
     }
 
     public List<Reader> getReaders() {

@@ -33,12 +33,12 @@ public class TestLibrary {
         library.showReadersLibrary();
 
         System.out.println("---------------------giveIssueToReader-------------------");
-        library.giveIssueToReader(book2, reader1);
+        library.giveIssueToReader(book3, reader1);
 
         System.out.println("---------------------showIssueOfReader------------------ ");
         library.showIssueOfReader(reader1);
 
-        System.out.println("---------------------showIssueOfLibrary------------------");
+        System.out.println("---------------------showIssueOfLibraryByTitle------------------");
         library.showIssueLibrary();
 
         System.out.println("---------------------showIssueByAuthor------------------ ");

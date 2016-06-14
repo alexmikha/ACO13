@@ -6,30 +6,20 @@ import java.util.List;
 /**
  * Created by mykhailov on 02.06.2016.
  */
-public class Issue  implements Comparable{
+public class Issue implements Comparable {
     private String title;
     private String publisher;
     private int year;
-    private  int count;
+    private int count;
     private boolean available;
 
     private List<Issue> issueList = new ArrayList<>();
-
-
-
-//    public Issue(String title, String publisher, int year, int count ) {
-//        this.title = title;
-//        this.year = year;
-//        this.count = count;
-//        this.publisher = publisher;
-//
-//    }
 
     public Issue(String title, String publisher, int year) {
         this.title = title;
         this.year = year;
         this.publisher = publisher;
-         this.count = 0;
+        this.count = 0;
     }
 
     public List<Issue> getIssueList() {
@@ -109,31 +99,29 @@ public class Issue  implements Comparable{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("count - %s", count);
     }
 
-        @Override
-        public int compareTo(Object o) {
-            if (this == o) return 0;
-            if (o != null && o instanceof Issue) {
-            } else {
-                Issue tmp = (Issue) o;
-                if (!this.getTitle().equals(tmp.getTitle())) {
-                    return this.getTitle().compareTo(tmp.getTitle());
-                }
-                if (this.publisher.equals(tmp.getPublisher())) {
-                    return this.compareTo(tmp.publisher);
-                }
-                if (this.year !=(tmp.year)) {
-                    return this.year -(tmp.year);
-                }
+    @Override
+    public int compareTo(Object o) {
+        if (this == o) return 0;
+        if (o != null && o instanceof Issue) {
+        } else {
+            Issue tmp = (Issue) o;
+            if (!this.getTitle().equals(tmp.getTitle())) {
+                return this.getTitle().compareTo(tmp.getTitle());
+            }
+            if (this.publisher.equals(tmp.getPublisher())) {
+                return this.compareTo(tmp.publisher);
+            }
+            if (this.year != (tmp.year)) {
+                return this.year - (tmp.year);
+            }
 //                if (this.count !=(tmp.count)) {
 //                    return this.count -(tmp.count);
 //                }
-            }
-            return 0;
         }
-
-
+        return 0;
+    }
 }
