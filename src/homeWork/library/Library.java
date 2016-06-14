@@ -91,11 +91,15 @@ public class Library {
         for (Book issue1 : prints) {
             if (issue.equals(issue1) && issue.getCount() >= 1) {
                 reader.getReaderList().add(issue1);
-           //     issue1.setCount(issue.getCount() - 1);
+                //     issue1.setCount(issue.getCount() - 1);
             }
-//            if (issue.getCount() == 0)
-//                prints.remove(issue1);
-       }
+        }
+                for (int i = 0; i < prints.size(); i++) {
+                    if(prints.get(i).equals(issue))
+                        prints.remove(i);
+
+                }
+
         return false;
     }
 
