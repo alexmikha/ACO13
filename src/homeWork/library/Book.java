@@ -7,7 +7,6 @@ class Book extends Issue implements Comparable {
 
     private String author;
 
-
     Book(String title, String author, String publisher, int year) {
         super(title, publisher, year);
         this.author = author;
@@ -18,7 +17,7 @@ class Book extends Issue implements Comparable {
         this.author = author;
     }
 
-    String getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
@@ -28,8 +27,11 @@ class Book extends Issue implements Comparable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
+
         Book book = (Book) o;
+
         return getAuthor() != null ? getAuthor().equals(book.getAuthor()) : book.getAuthor() == null;
+
     }
 
     @Override

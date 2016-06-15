@@ -14,7 +14,7 @@ public class TestLibrary {
         Book book3 = new Book("Harry Potter", "Joan Rowling ", "Scholastic Press", 1997);
         Reader reader1 = new Reader("Alex", "Kenton", "street one", "0-00-00-01");
         Reader reader2 = new Reader("Jack", "Fisher", "street two", "0-00-00-02");
-        Reader reader3 = new Reader("Nik", "Evans", "street three", "0-00-00-03");
+        Reader reader3 = new Reader("Nick", "Evans", "street three", "0-00-00-03");
 
         System.out.println("---------------------addIssueToLibrary------------------");
         library.addIssueToLibrary(book3);
@@ -41,25 +41,35 @@ public class TestLibrary {
         System.out.println("---------------------showIssueOfLibraryByTitle------------------");
         library.showIssueLibrary();
 
-        System.out.println("---------------------showIssueByAuthor------------------ ");
-        library.showIssueByAuthor();
+        System.out.println("---------------------sortIssueByAuthor------------------ ");
+        library.sortIssueByAuthor();
         library.showIssueLibrary();
 
-        System.out.println("---------------------showIssueByYear---------------------");
-        library.showIssueByYear();
+        System.out.println("---------------------sortIssueByYear---------------------");
+        library.sortIssueByYear();
         library.showIssueLibrary();
 
+        System.out.println("---------------------addReaderOnBlack - Alex,Nick---------------------");
         library.addReaderOnBlack(reader1);
         library.addReaderOnBlack(reader3);
 
-        System.out.println("---------------------showReaderOfDlackList---------------------");
-        library.showReaderOfDlackList();
+        System.out.println("---------------------showReaderOfBlackList---------------------");
+        library.showReaderOfBlackList();
 
-        System.out.println("---------------------showByIssueByYear-2000 year---------------------");
+
+        System.out.println("---------------------showByIssueByYear - 2000 year---------------------");
         library.showByIssueByYear(2000);
 
-        System.out.println("---------------------findIssueByWord Java---------------------");
+        System.out.println("---------------------findIssueByWord - Java---------------------");
         library.findIssueByWord("Java");
+
+        System.out.println("---------------------getIssueOfReader---------------------");
+        library.getIssueOfReader(book3, reader1);
+
+        System.out.println("---------------------showIssueOfReader---------------------");
+        library.showIssueOfReader(reader1);
+        System.out.println("---------------------showIssueOfLibrary---------------------");
+        library.showIssueLibrary();
 
     }
 

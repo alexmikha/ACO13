@@ -5,13 +5,12 @@ package homeWork.library;
  */
 public class Journal extends Issue implements Comparable{
 
-  //  private  String publisher;
+
     private int numberJournal;
 
 
     public Journal(String title, String publisher, int numberJournal, int year) {
         super(title, publisher, year);
-      //  this.publisher = publisher;
         this.numberJournal = numberJournal;
     }
 
@@ -46,7 +45,7 @@ public class Journal extends Issue implements Comparable{
 
     @Override
     public String toString() {
-        return String.format("Newspaper - %1s, publisher - %2$s, numberJournal - %3$d, year - %4$d, count - %5$d",
+        return String.format("Journal - %1s, publisher - %2$s, numberJournal - %3$d, year - %4$d, count - %5$d",
                 getTitle() ,getPublisher(), numberJournal, getYear(), getCount());
 
     }

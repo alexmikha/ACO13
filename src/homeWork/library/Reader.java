@@ -21,7 +21,7 @@ public class Reader implements Comparable {
     }
 
     public Reader(boolean readerBlackList) {
-        this.readerBlackList = false;
+        this.readerBlackList = readerBlackList;
     }
 
     public Reader(String nameReader, String surnameReader, String address, String phone) {
@@ -32,31 +32,19 @@ public class Reader implements Comparable {
         this.phone = phone;
     }
 
-
-
     public String getNameReader() {
         return nameReader;
     }
-
-//    public void setNameReader(String nameReader) {
-//        this.nameReader = nameReader;
-//    }
 
     public String getSurnameReader() {
         return surnameReader;
     }
 
-//    public void setSurnameReader(String surnameReader) {
-//        this.surnameReader = surnameReader;
-//    }
 
     public String getAddress() {
         return address;
     }
 
-//    public void setAddress(String address) {
-//        this.address = address;
-//    }
 
     public String getPhone() {
         return phone;
@@ -64,10 +52,6 @@ public class Reader implements Comparable {
 
     public List<Issue> getReaderList() {
         return readerList;
-    }
-
-    public void setReaderList(List<Issue> readerList) {
-        this.readerList = readerList;
     }
 
     public boolean isReaderBlackList() {
