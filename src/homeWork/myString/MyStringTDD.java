@@ -79,8 +79,10 @@ public class MyStringTDD {
                 , expected6.equals(actual6), expected6, actual6);
 
         boolean expected7 = true;
-        MyString myString9 = new MyString("Hello");
-        boolean actual7 = myString9.contains('i');
+        MyString myString9 = new MyString("I am working");
+        MyString myString10 = new MyString("am");
+        char[] ch = {'a','d'};
+        boolean actual7 = myString9.contains(myString10);
         System.out.printf("Method name - %s, result - %s," +
                         " expected - %s, actual - %s\n", "contains"
                 , expected7 == (actual7), expected7, actual7);

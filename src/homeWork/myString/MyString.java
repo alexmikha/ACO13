@@ -15,13 +15,14 @@ public class MyString {
         if (str == null)
             throw new StringIndexOutOfBoundsException("!!!");
         length = str.length();
-        if (str.length() == 0) return;  // работает
         chars = str.toCharArray();
     }
 
+
     public MyString(char[] ch) {
         if (ch == null) return;
-        chars = ch;
+        chars = new char[ch.length];
+        System.arraycopy(ch, 0, chars, 0, ch.length);
     }
 
 
@@ -33,8 +34,9 @@ public class MyString {
         return outString;
     }
 
+
     public char charAt(int index) {
-        if ((index < 0) || (index >= chars.length))
+        if (index < 0 || index >= chars.length)
             throw new StringIndexOutOfBoundsException(index);
         return chars[index];
     }
@@ -43,6 +45,7 @@ public class MyString {
     public int length() {
         return length;
     }
+
 
     public MyString concat(MyString str) {
         if (str == null && str.length() == 0) return this;
@@ -55,7 +58,7 @@ public class MyString {
 
 
     public int indexOf(int ch, int fromIndex) {
-        if (fromIndex < 0 && fromIndex >= length) return -1;
+        if (fromIndex < 0 || fromIndex >= length) return -1;
         for (int i = fromIndex; i < length; i++)
             if (chars[i] == ch)
                 return i;
@@ -101,7 +104,7 @@ public class MyString {
 
 
     public MyString substring(int beginIndex, int endIndex) throws IndexOutOfBoundsException {
-        if (beginIndex < 0 && endIndex > chars.length) {
+        if (beginIndex < 0 || endIndex > chars.length) {
             throw new IndexOutOfBoundsException();
         }
         int sublength = (endIndex - beginIndex + 1);
@@ -132,11 +135,51 @@ public class MyString {
         return result;
     }
 
-    public boolean contains(char ch) {
-        for (int i = 0; i < chars.length; i++) {
-            if (chars[i] == ch) return true;
+
+    public boolean contains(MyString subString) {
+
+        if (subString == null || this.length() < subString.length()) {
+            return false;
         }
-        return false;
+        boolean result = false;
+        for (int i = 0; i < this.length(); i++) {
+            if (this.chars[i] == subString.chars[0]) {
+                if ((this.length() - i) < subString.length()) {
+                    return false;
+                }
+                for (int k = 0; k < subString.length() - 1; k++) {
+                    if (this.chars[i + k] == subString.chars[k]) {
+                        result = true;
+                    } else {
+                        result = false;
+                        break;
+                    }
+                }
+            }
+        }
+        return result;
     }
 
+
+    public boolean contains(char[] ch) {
+        if (ch == null || this.chars.length < ch.length) return false;
+        boolean result1 = false;
+        for (int i = 0; i < this.chars.length; i++) {
+            if (this.chars[i] == ch[0]) {
+                if ((this.chars.length - i) < ch.length) {
+                    return false;
+                }
+                for (int k = 0; k < ch.length; k++) {
+                    if (this.chars[i + k] == ch[k]) {
+                        result1 = true;
+                    } else {
+                        result1 = false;
+                        break;
+                    }
+                }
+            }
+        }
+        return result1;
+    }
 }
+
