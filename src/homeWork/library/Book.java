@@ -3,24 +3,28 @@ package homeWork.library;
 /**
  * Created by mykhailov on 02.06.2016.
  */
-class Book extends Issue implements Comparable {
+public class Book extends Issue  {
 
     private String author;
 
-    Book(String title, String author, String publisher, int year) {
+//    public Book(){
+//
+//    }
+
+    public Book(String title, String author , String publisher, int year) {
         super(title, publisher, year);
         this.author = author;
 
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 
     public String getAuthor() {
         return author;
     }
 
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -42,15 +46,15 @@ class Book extends Issue implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-
+    public int compareTo(Issue o) {
         if (this == o) return 0;
-        if (o != null && o instanceof Issue) {
-        } else {
+
             Book tmp = (Book) o;
-            if (!this.author.equals(tmp.author)) {
-                return this.author.compareTo(tmp.author);
+            if (this.author != null) {
+                return (this.author.compareTo(tmp.author));
             }
+        if (getTitle() != null) {
+                return getTitle().compareTo(tmp.getTitle());
         }
         return 0;
     }
@@ -58,7 +62,7 @@ class Book extends Issue implements Comparable {
     @Override
     public String toString() {
 
-        return String.format("Book - %1s, author - %2$s, publisher - %3$s, year - %4$d, count - %5$s",
-                getTitle(), author, getPublisher(), getYear(), getCount());
+        return String.format("Book - %1s, author - %2$s, publisher - %3$s, year - %4$d",
+                getTitle(), author, getPublisher(), getYear());
     }
 }

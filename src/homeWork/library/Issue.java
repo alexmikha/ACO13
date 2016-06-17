@@ -1,21 +1,27 @@
 package homeWork.library;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by mykhailov on 02.06.2016.
  */
-public class Issue implements Comparable {
+public class Issue implements Comparable<Issue> {
     private String title;
     private String publisher;
     private int year;
     private int count;
 
+    List<Issue> issueList ;
 
     public Issue(String title, String publisher, int year) {
         this.title = title;
-        this.year = year;
         this.publisher = publisher;
+        this.year = year;
         this.count = 0;
+        this.issueList = new ArrayList<>();
     }
+
 
     public int getYear() {
         return year;
@@ -49,6 +55,13 @@ public class Issue implements Comparable {
         this.publisher = publisher;
     }
 
+    public List<Issue> getIssueList() {
+        return issueList;
+    }
+
+    public void setIssueList(List<Issue> issueList) {
+        this.issueList = issueList;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -57,10 +70,10 @@ public class Issue implements Comparable {
 
         Issue issue = (Issue) o;
 
-        if (getYear() != issue.getYear()) return false;
-        if (getCount() != issue.getCount()) return false;
         if (getTitle() != null ? !getTitle().equals(issue.getTitle()) : issue.getTitle() != null) return false;
-        return getPublisher() != null ? getPublisher().equals(issue.getPublisher()) : issue.getPublisher() == null;
+        if (getPublisher() != null ? !getPublisher().equals(issue.getPublisher()) : issue.getPublisher() != null)
+            return false;
+        return issueList != null ? issueList.equals(issue.issueList) : issue.issueList == null;
 
     }
 
@@ -68,37 +81,36 @@ public class Issue implements Comparable {
     public int hashCode() {
         int result = getTitle() != null ? getTitle().hashCode() : 0;
         result = 31 * result + (getPublisher() != null ? getPublisher().hashCode() : 0);
-        result = 31 * result + getYear();
-        result = 31 * result + getCount();
+        result = 31 * result + (issueList != null ? issueList.hashCode() : 0);
         return result;
     }
 
-    @Override
-    public int compareTo(Object o) {
+
+        @Override
+    public int compareTo(Issue o) {
         if (this == o) return 0;
-        if (o != null && o instanceof Issue) {
-        } else {
-            Issue tmp = (Issue) o;
-            if (!this.getTitle().equals(tmp.getTitle())) {
-                return this.getTitle().compareTo(tmp.getTitle());
+
+            if (!this.title.equals(o.title)) {
+                return this.title.compareTo(o.title);
             }
-            if (!this.publisher.equals(tmp.getPublisher())) {
-                return this.compareTo(tmp.publisher);
+            if (!this.publisher.equals(o.getPublisher())) {
+                return this.publisher.compareTo(o.publisher);
             }
-            if (this.year != (tmp.year)) {
-                return this.year - (tmp.year);
+            if (this.year != o.year) {
+                return this.year - (o.year);
             }
-//                if (this.count !=(tmp.count)) {
-//                    return this.count -(tmp.count);
-//                }
-            }
+//            if (this.count != (tmp.count)) {
+//                return this.count - (tmp.count);
+//            }
         return 0;
-        }
+    }
+
 
     @Override
     public String toString() {
-        return String.format("count - %s", count);
-    }
 
+        return String.format("Issue - %1s, publisher - %2$s, year - %3$d, count - %4$s",
+                getTitle(), getPublisher(), getYear(), getCount());
     }
+}
 
