@@ -40,7 +40,6 @@ public class Student implements Comparable {
 
         if (this == o) return 0;
         if (o != null && o instanceof Student) {
-        } else {
             Student tmp = (Student) o;
             if (!this.name.equals(tmp.name)) {
                 return this.name.compareTo(tmp.name);

@@ -43,7 +43,6 @@ public class MyDate implements Comparable {
     public int compareTo(Object o) {
         if (this == o) return 0;
         if (o != null && o instanceof Student) {
-        } else {
             MyDate myDate = (MyDate) o;
             if (yearsBirth != myDate.yearsBirth) {
                 return yearsBirth - myDate.yearsBirth;
