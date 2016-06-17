@@ -104,7 +104,7 @@ public class MyString {
 
 
     public MyString substring(int beginIndex, int endIndex) throws IndexOutOfBoundsException {
-        if (beginIndex < 0 || endIndex > chars.length) {
+        if (beginIndex < 0 || endIndex >= chars.length) {
             throw new IndexOutOfBoundsException();
         }
         int sublength = (endIndex - beginIndex + 1);
