@@ -15,13 +15,16 @@ public class Group {
     private Comparator<Student> sortByName = (o1, o2) -> o1.getName().compareTo(o2.getName());
     private Comparator<Student> sortBySurName = (o1, o2) -> o1.getSurname().compareTo(o2.getSurname());
     private Comparator<Student> sortByBirthDay = (o1, o2) -> o1.getBirthDay().compareTo(o2.getBirthDay());
-    private Comparator<Student> sortByAverageMark = (o1, o2) -> (int) (o1.getAverageMark()- o2.getAverageMark());
+    private Comparator<Student> sortByAverageMark = (o1, o2) -> {
+        if (o1.getAverageMark() < o2.getAverageMark())return -1;
+        if (o1.getAverageMark() > o2.getAverageMark())return 1;
+        return 0;
+    };
 
     private List<Student> studList = new ArrayList<>(DEFAULT_SIZE);
 
     public Group(String nameGroup) {
         this.nameGroup = nameGroup;
-        this.studList = new ArrayList<>();
     }
 
     public Group(String nameGroup, List<Student> studList) {
@@ -31,8 +34,7 @@ public class Group {
 
 
     public boolean addStudent(Student student) {
-        if (student == null) return false;
-        if (studList.contains(student)) return false;
+        if (student == null || studList.contains(student)) return false;
         return studList.add(student);
     }
 
@@ -60,20 +62,24 @@ public class Group {
         studList.sort(sortByAverageMark);
     }
 
-    public String searchBySurName(String surname) {
-        for (Student st : studList) {
-            if (surname.equals(st.getSurname()))
-                System.out.println("Found the student - " + " " + st);
+    public Student searchBySurName(String surname) {
+        List<Student> searchSurnameStudent = new ArrayList<>() ;
+        for (Student stud : studList) {
+            if (surname.equals(stud.getSurname()))
+                searchSurnameStudent.add(0, stud);
         }
-        return surname;
+        System.out.println("Found the student - " + " " + searchSurnameStudent.get(0));
+        return searchSurnameStudent.get(0);
     }
 
-    public String searchByName(String name) {
+    public Student searchByName(String name) {
+        List<Student> searchNameStudent = new ArrayList<>() ;
         for (Student stud : studList) {
             if (name.equals(stud.getName()))
-                System.out.println("Found the student - " + " " + stud);
+                searchNameStudent.add(0, stud);
         }
-        return name;
+        System.out.println("Found the student - " + " " + searchNameStudent.get(0));
+      return searchNameStudent.get(0);
     }
 
     public boolean delStudent(Student student) {

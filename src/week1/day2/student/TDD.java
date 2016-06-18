@@ -26,7 +26,7 @@ public class TDD {
 
 //--------------------------search------------------------------------------
         String expected2 = "Kenton";
-        String actual2 = group.searchBySurName("Kenton");
+        Student actual2 = group.searchBySurName("Kenton");
         System.out.printf("Method name - %s, result - %s," +
                         " expected - %s, actual - %s\n", "search"
                 , expected2.equals(actual2), expected2, actual2);

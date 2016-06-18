@@ -51,7 +51,7 @@ public class MyDate implements Comparable {
             } else if (dayBirth != myDate.dayBirth)
                 return dayBirth - myDate.dayBirth;
         }
-        return -1;
+        return 0;
     }
 
     @Override
