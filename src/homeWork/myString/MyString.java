@@ -137,18 +137,21 @@ public class MyString {
 
 
     public boolean contains(MyString subString) {
+        return !(subString == null || this.length() < subString.length()) &&
+                contains(subString.chars);
+    }
 
-        if (subString == null || this.length() < subString.length()) {
-            return false;
-        }
+
+    public boolean contains(char[] ch) {
+        if (ch == null || this.chars.length < ch.length) return false;
         boolean result = false;
-        for (int i = 0; i < this.length(); i++) {
-            if (this.chars[i] == subString.chars[0]) {
-                if ((this.length() - i) < subString.length()) {
+        for (int i = 0; i < this.chars.length; i++) {
+            if (this.chars[i] == ch[0]) {
+                if ((this.chars.length - i) < ch.length) {
                     return false;
                 }
-                for (int k = 0; k < subString.length() - 1; k++) {
-                    if (this.chars[i + k] == subString.chars[k]) {
+                for (int k = 0; k < ch.length; k++) {
+                    if (this.chars[i + k] == ch[k]) {
                         result = true;
                     } else {
                         result = false;
@@ -158,28 +161,6 @@ public class MyString {
             }
         }
         return result;
-    }
-
-
-    public boolean contains(char[] ch) {
-        if (ch == null || this.chars.length < ch.length) return false;
-        boolean result1 = false;
-        for (int i = 0; i < this.chars.length; i++) {
-            if (this.chars[i] == ch[0]) {
-                if ((this.chars.length - i) < ch.length) {
-                    return false;
-                }
-                for (int k = 0; k < ch.length; k++) {
-                    if (this.chars[i + k] == ch[k]) {
-                        result1 = true;
-                    } else {
-                        result1 = false;
-                        break;
-                    }
-                }
-            }
-        }
-        return result1;
     }
 }
 
