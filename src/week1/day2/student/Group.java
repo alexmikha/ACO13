@@ -15,14 +15,7 @@ public class Group {
     private Comparator<Student> sortByName = (o1, o2) -> o1.getName().compareTo(o2.getName());
     private Comparator<Student> sortBySurName = (o1, o2) -> o1.getSurname().compareTo(o2.getSurname());
     private Comparator<Student> sortByBirthDay = (o1, o2) -> o1.getBirthDay().compareTo(o2.getBirthDay());
-    //    private Comparator<Student> sortByAverageMark = (o1, o2) -> {
-//        if (o1.getAverageMark() < o2.getAverageMark())return -1;
-//        if (o1.getAverageMark() > o2.getAverageMark())return 1;     // можно так
-//        return 0;
-//    };
-    private Comparator<Student> sortByAverageMark = (o1, o2) -> {
-        return Double.compare(o1.getAverageMark(), o2.getAverageMark());
-    };
+    private Comparator<Student> sortByAverageMark = (o1, o2) -> Double.compare(o1.getAverageMark(), o2.getAverageMark());
 
     private List<Student> studList = new ArrayList<>(DEFAULT_SIZE);
 
