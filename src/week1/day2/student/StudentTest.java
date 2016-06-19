@@ -34,5 +34,7 @@ public class StudentTest {
         System.out.println("------------------delStudent---------------------");
         if (studGroup.delStudent(st1))
             System.out.println("Student - " + st1 + " was deleted");
+        System.out.println("------------------showGroup---------------------");
+        studGroup.showGroup();
     }
 }

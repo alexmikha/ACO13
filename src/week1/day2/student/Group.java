@@ -15,10 +15,14 @@ public class Group {
     private Comparator<Student> sortByName = (o1, o2) -> o1.getName().compareTo(o2.getName());
     private Comparator<Student> sortBySurName = (o1, o2) -> o1.getSurname().compareTo(o2.getSurname());
     private Comparator<Student> sortByBirthDay = (o1, o2) -> o1.getBirthDay().compareTo(o2.getBirthDay());
+    //        private Comparator<Student> sortByAverageMark = (o1, o2) -> {
+//        if (o1.getAverageMark() < o2.getAverageMark())return -1;
+//        if (o1.getAverageMark() > o2.getAverageMark())return 1;     // можно так
+//        return 0;
+//    };
     private Comparator<Student> sortByAverageMark = (o1, o2) -> {
-        if (o1.getAverageMark() < o2.getAverageMark())return -1;
-        if (o1.getAverageMark() > o2.getAverageMark())return 1;
-        return 0;
+        int result = Double.compare(o1.getAverageMark(), o2.getAverageMark());
+        return result;
     };
 
     private List<Student> studList = new ArrayList<>(DEFAULT_SIZE);
@@ -62,25 +66,37 @@ public class Group {
         studList.sort(sortByAverageMark);
     }
 
-    public Student searchBySurName(String surname) {
-        List<Student> searchSurnameStudent = new ArrayList<>() ;
-        for (Student stud : studList) {
-            if (surname.equals(stud.getSurname()))
-                searchSurnameStudent.add(0, stud);
+    public Student searchByName(String name) {
+        List<Student> searchName = new ArrayList<>();
+
+        for (Student student : studList) {
+            if (name.equals(student.getName()))
+                searchName.add(student);
         }
-        System.out.println("Found the student - " + " " + searchSurnameStudent.get(0));
-        return searchSurnameStudent.get(0);
+        for (int i = 0; i < searchName.size(); i++) {
+            System.out.println("Found the student - " + " " + searchName.get(i));
+            return searchName.get(i);
+        }
+        System.out.println("This student " + name + " is not in the group ");
+        return null;
     }
 
-    public Student searchByName(String name) {
-        List<Student> searchNameStudent = new ArrayList<>() ;
-        for (Student stud : studList) {
-            if (name.equals(stud.getName()))
-                searchNameStudent.add(0, stud);
+
+    public Student searchBySurName(String surname) {
+        List<Student> searchSurName = new ArrayList<>();
+
+        for (Student student : studList) {
+            if (surname.equals(student.getSurname()))
+                searchSurName.add(student);
         }
-        System.out.println("Found the student - " + " " + searchNameStudent.get(0));
-      return searchNameStudent.get(0);
+        for (int i = 0; i < searchSurName.size(); i++) {
+            System.out.println("Found the student - " + " " + searchSurName.get(i));
+            return searchSurName.get(i);
+        }
+        System.out.println("This student " + surname + " is not in the group ");
+        return null;
     }
+
 
     public boolean delStudent(Student student) {
         return studList.remove(student);

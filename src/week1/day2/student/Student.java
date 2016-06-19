@@ -34,6 +34,16 @@ public class Student implements Comparable {
         return surname;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null) return false;
+        if (!(o instanceof Student)) return false;
+        Student tmp = (Student) o;
+        return this.name.equals(tmp.name) && this.surname.equals(tmp.surname)
+                && this.birthDay.equals(tmp.birthDay);
+    }
+
 
     @Override
     public int compareTo(Object o) {
@@ -52,18 +62,8 @@ public class Student implements Comparable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null) return false;
-        if (!(o instanceof Student)) return false;
-        Student tmp = (Student) o;
-        return this.name.equals(tmp.name) && this.surname.equals(tmp.surname)
-                && this.birthDay.equals(tmp.birthDay);
-    }
-
-    @Override
     public String toString() {
-        return String.format("%2$s, %3$s, BD - %1$s, gender - %4$c",
+        return String.format("%2$s, %3$s, BD - %1$s, gender - %4$s",
                 birthDay.toString(), name, surname, gender);
     }
 
