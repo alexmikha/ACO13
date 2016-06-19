@@ -29,8 +29,14 @@ public class StudentTest {
         studGroup.showGroup();
         System.out.println("------------------searchByName-------------------");
         studGroup.searchByName("Jack");
+        System.out.println("Found the student :");
+        System.out.println(studGroup.searchByName("Jack"));
+
         System.out.println("------------------searchBySurName----------------");
         studGroup.searchBySurName("Kenton");
+        System.out.println("Found the student :");
+        System.out.println(studGroup.searchBySurName("Kenton"));
+
         System.out.println("------------------delStudent---------------------");
         if (studGroup.delStudent(st1))
             System.out.println("Student - " + st1 + " was deleted");

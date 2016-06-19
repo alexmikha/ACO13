@@ -1,5 +1,8 @@
 package week1.day2.student;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by mykhailov on 22.05.2016.
  */
@@ -23,14 +26,18 @@ public class TDD {
                         " expected - %s, actual - %s\n", "addStudent st2"
                 , expected1 == actual1, expected1, actual1);
 //---------------------------searchName-----------------------------------------
-        Student expected2 = st1;
-        Student actual2 = group.searchByName("Alex");
+        List tmp1 = new ArrayList();
+        tmp1.add(st1);
+        List expected2 = tmp1;
+        List<Student> actual2 = group.searchByName("Alex");
         System.out.printf("Method name - %s, result - %s," +
                         " expected - %s, actual - %s\n", "searchName"
                 , expected2.equals(actual2), expected2, actual2);
 //--------------------------searchSurName------------------------------------------
-        Student expected3 = st2;
-        Student actual3 = group.searchBySurName("Fisher");
+        List tmp2 = new ArrayList();
+        tmp2.add(st2);
+        List expected3 = tmp2;
+        List<Student> actual3 = group.searchBySurName("Fisher");
         System.out.printf("Method name - %s, result - %s," +
                         " expected - %s, actual - %s\n", "searchSurName"
                 , expected3.equals(actual3), expected3, actual3);
