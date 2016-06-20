@@ -33,7 +33,7 @@ public class MyArrayList {
         if (index < 0 && index >= myArray.length)
             throw new IndexOutOfBoundsException();
         expandCapacity();
-        System.arraycopy(myArray, size - 1, myArray, index, size - index);
+        System.arraycopy(myArray, size , myArray, index, size - index);
         // add element
         myArray[index] = object;
         size++;
