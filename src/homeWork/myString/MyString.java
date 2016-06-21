@@ -21,8 +21,7 @@ public class MyString {
 
     public MyString(char[] ch) {
         if (ch == null) return;
-        chars = new char[ch.length];
-        System.arraycopy(ch, 0, chars, 0, ch.length);
+        chars = ch;
     }
 
 

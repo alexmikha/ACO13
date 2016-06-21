@@ -1,5 +1,7 @@
 package homeWork.myString;
 
+import java.util.Objects;
+
 /**
  * Created by mykhailov on 29.05.2016.
  */
@@ -38,54 +40,48 @@ public class MyStringTDD {
         System.out.println();
 
 
-        MyString expected1 = myString5;
         MyString actual1 = myString2.concat(myString4);
         System.out.printf("Method name - %s, result - %s," +
                         " expected - %s, actual - %s\n", "concat"
-                , expected1.equals(actual1), expected1, actual1);
+                , myString5.equals(actual1), myString5, actual1);
 
 
-        boolean expected2 = true;
-        boolean actual2 = myString1.equals(myString1);
+        boolean expected2;
+        boolean actual2 = Objects.equals(myString1, myString1);
         System.out.printf("Method name - %s, result - %s," +
                         " expected - %s, actual - %s\n", "equals"
-                , expected2 == actual2, expected2, actual2);
+                , expected2 = actual2, expected2, actual2);
 
 
-        MyString expected3 = myString1;
         MyString actual3 = myString2.toLowerCase();
         System.out.printf("Method name - %s, result - %s," +
                         " expected - %s, actual - %s\n", "toLowerCase"
-                , expected3.equals(actual3), expected3, actual3);
+                , myString1.equals(actual3), myString1, actual3);
 
-        MyString expected4 = myString8;
         MyString actual4 = myString1.toUpperCase();
         System.out.printf("Method name - %s, result - %s," +
                         " expected - %s, actual - %s\n", "toUpperCase"
-                , expected4.equals(actual4), expected4, actual4);
+                , myString8.equals(actual4), myString8, actual4);
 
 
-        MyString expected5 = myString6;
         MyString actual5 = myString3.substring(13, 18);
         System.out.printf("Method name - %s, result - %s," +
                         " expected - %s, actual - %s\n", "substring"
-                , expected5.equals(actual5), expected5, actual5);
+                , myString6.equals(actual5), myString6, actual5);
 
 
-        MyString expected6 = myString2;
         MyString actual6 = myString7.trim();
         System.out.printf("Method name - %s, result - %s," +
                         " expected - %s, actual - %s\n", "trim"
-                , expected6.equals(actual6), expected6, actual6);
+                , myString2.equals(actual6), myString2, actual6);
 
-        boolean expected7 = true;
         MyString myString9 = new MyString("I am working");
         MyString myString10 = new MyString("am");
-        char[] ch = {'a','d'};
+       // char[] ch = {'a','m'};
         boolean actual7 = myString9.contains(myString10);
         System.out.printf("Method name - %s, result - %s," +
                         " expected - %s, actual - %s\n", "contains"
-                , expected7 == (actual7), expected7, actual7);
+                , (actual7), true, actual7);
 
         int expected8 = 3;
         int actual8 = myString6.indexOf('o', 3);
