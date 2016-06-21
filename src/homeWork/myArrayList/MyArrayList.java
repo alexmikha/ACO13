@@ -10,7 +10,7 @@ public class MyArrayList {
     private Object[] myArray;
     private int size;
 
-    public static final int DEFAULT_CAPACITY = 10;
+    public static final int DEFAULT_CAPACITY = 4;
 
     public MyArrayList() {
         this(DEFAULT_CAPACITY);
@@ -32,8 +32,10 @@ public class MyArrayList {
     public void add(int index, Object object) {
         if (index < 0 && index >= myArray.length)
             throw new IndexOutOfBoundsException();
-        expandCapacity();
-        System.arraycopy(myArray, size , myArray, index, size - index);
+        if (size == myArray.length) {
+            expandCapacity();
+        }
+        System.arraycopy(myArray, size, myArray, index, size - index);
         // add element
         myArray[index] = object;
         size++;
@@ -48,13 +50,14 @@ public class MyArrayList {
 
 
     public boolean add(Object object) {
+        if (size == myArray.length)
+            expandCapacity();
         if (size < myArray.length) {
             myArray[size++] = object;
-        } else if (size == myArray.length)
-            expandCapacity();
-        add(size(), object);
-        return false;
+        }
+        return true;
     }
+
 
     public Object get(int index) {
         if (index < 0 || index >= size)
@@ -77,7 +80,7 @@ public class MyArrayList {
     public void fastRemove(int index) {
         int moved = size - index - 1;
         System.arraycopy(myArray, index + 1, myArray, index, moved);
-        myArray[size--] = null;
+        myArray[--size] = null;
     }
 
     public boolean remove(Object object) {
@@ -99,7 +102,7 @@ public class MyArrayList {
 
 
     public Object set(int index, Object newObject) {
-        if (index < 0 || index > myArray.length - 1)
+        if (index < 0 || index >= size)
             throw new IndexOutOfBoundsException();
         Object oldObject = myArray[index];
         myArray[index] = newObject;
