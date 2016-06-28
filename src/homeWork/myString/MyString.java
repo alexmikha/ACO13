@@ -1,5 +1,7 @@
 package homeWork.myString;
 
+import java.util.Arrays;
+
 /**
  * Created by mykhailov on 29.05.2016.
  */
@@ -21,7 +23,8 @@ public class MyString {
 
     public MyString(char[] ch) {
         if (ch == null) return;
-        chars = ch;
+        length = ch.length;
+        chars = Arrays.copyOf(ch, ch.length);
     }
 
 
@@ -47,7 +50,7 @@ public class MyString {
 
 
     public MyString concat(MyString str) {
-        if (str == null && str.length() == 0) return this;
+        if (str == null || str.length() == 0) return this;
         int length = this.chars.length + str.chars.length;
         char[] temp = new char[length];
         System.arraycopy(this.chars, 0, temp, 0, this.chars.length);

@@ -10,7 +10,6 @@ public class MyStringTDD {
 
     public static void main(String[] args) {
 
-
         String str1 = " I am working first my program ";
         String str2 = "I am working first my program";
         String str3 = "I am working second my program";
@@ -19,7 +18,6 @@ public class MyStringTDD {
         String str6 = "I am working first my program great";
         String str7 = "i am working first my program";
         String str8 = "I AM WORKING FIRST MY PROGRAM";
-
 
         MyString myString1 = new MyString(str7);
         MyString myString2 = new MyString(str2);
