@@ -1,5 +1,7 @@
 package homeWork.myArrayList;
 
+import java.io.Serializable;
+
 /**
  * Created by mykhailov on 05.06.2016.
  */
@@ -8,7 +10,7 @@ public class TestMyArrayList {
 
     public static void main(String[] args) {
 
-        MyArrayList myArrayList = new MyArrayList();
+        MyArrayList<Serializable> myArrayList = new MyArrayList<>();
         int number1 = 1;
         int number2 = 2;
         int number3 = 3;
@@ -54,7 +56,6 @@ public class TestMyArrayList {
         System.out.println("MyAraayList size - " + myArrayList.size());
         System.out.println("-----------------remove(Object)-------------");
         myArrayList.remove(str2);
-       // System.out.println("MyAraayList size - " + myArrayList.size());
         System.out.println(myArrayList);
         System.out.println("MyAraayList size - " + myArrayList.size());
         System.out.println("-----------------set------------------------");

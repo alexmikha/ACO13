@@ -7,7 +7,7 @@ public class TestMAL {
 
     public static void main(String[] args) {
 
-        MyArrayList myList = new MyArrayList(4);
+        MyArrayList<Integer> myList = new MyArrayList<>(4);
         int number1 = 1;
         int number2 = 2;
         int number3 = 3;
@@ -18,7 +18,7 @@ public class TestMAL {
         int expected = 1;
         Object actual = myList.get(0);
         boolean result = actual.equals(expected);
-        System.out.printf("Method name - add(int index, Object object), " +
+        System.out.printf("Method name - add(int index, T object), " +
                 "result - %s, expected - %s,  actual - %s\n", result, expected, actual);
 
 
@@ -27,7 +27,7 @@ public class TestMAL {
         Object actual1 = myList.get(1);
         boolean result1 = actual1.equals(expected1);
         System.out.printf("Method name - %s, result - %s," +
-                        " expected - %s, actual - %s\n", "add(Object object)",
+                        " expected - %s, actual - %s\n", "add(T object)",
                 result1, expected1, actual1);
 
 
@@ -41,24 +41,24 @@ public class TestMAL {
 
 
         int expected3 = 2;
-        Object actual3 = myList.remove(1);
+        Integer actual3 = myList.remove(1);
         boolean result3 = actual3.equals(expected3);
         System.out.printf("Method name - %s, result - %s," +
                         " expected - %s, actual - %s\n", "remove(int index)",
                 result3, expected3, actual3);
 
         int expected4 = 3;
-        Object actual4 = myList.remove(1);
+        Integer actual4 = myList.remove(1);
         boolean result4 = actual4.equals(expected4);
         System.out.printf("Method name - %s, result - %s," +
-                        " expected - %s, actual - %s\n", "remove(Object object)",
+                        " expected - %s, actual - %s\n", "remove(T object)",
                 result4, expected4, actual4);
 
 
-        Object actual5 = myList.contains(1);
+        Boolean actual5 = myList.contains(1);
         boolean result5 = actual5.equals(true);
         System.out.printf("Method name - %s, result - %s," +
-                        " expected - %s, actual - %s\n", "contains(Object object)",
+                        " expected - %s, actual - %s\n", "contains(T object)",
                 result5, true, actual5);
 
         myList.clear();
@@ -76,10 +76,10 @@ public class TestMAL {
                 result6, expected6, actual6);
 
         int expected7 = 4;
-        Object actual7 = myList.indexOf(5);
+        Integer actual7 = myList.indexOf(5);
         boolean result7 = actual7.equals(expected7);
         System.out.printf("Method name - %s, result - %s," +
-                        " expected - %s, actual - %s\n", "indexOf(Object object)",
+                        " expected - %s, actual - %s\n", "indexOf(T object)",
                 result7, expected7, actual7);
 
         myList.set(4, number1);
@@ -87,7 +87,7 @@ public class TestMAL {
         Object actual8 = myList.get(4);
         boolean result8 = actual8.equals(expected8);
         System.out.printf("Method name - %s, result - %s," +
-                        " expected - %s, actual - %s\n", "set(int index, Object newObject)",
+                        " expected - %s, actual - %s\n", "set(int index, T newObject)",
                 result8, expected8, actual8);
 
         myList.clear();

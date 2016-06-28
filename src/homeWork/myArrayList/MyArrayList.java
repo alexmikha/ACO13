@@ -1,13 +1,15 @@
 package homeWork.myArrayList;
 
+
 import java.util.Arrays;
 
 /**
  * Created by mykhailov on 04.06.2016.
  */
-public class MyArrayList {
+public class MyArrayList<T> {
 
-    private Object[] myArray;
+    private T[] myArray;
+
     private int size;
 
     public static final int DEFAULT_CAPACITY = 4;
@@ -20,7 +22,7 @@ public class MyArrayList {
         if (capacity < 0) {
             throw new IllegalArgumentException("capacity: " + capacity);
         }
-        myArray = new Object[capacity];
+        myArray =  (T[])new Object[capacity];
         size = 0;
     }
 
@@ -29,7 +31,7 @@ public class MyArrayList {
         return size;
     }
 
-    public void add(int index, Object object) {
+    public void add(int index, T object) {
         if (index < 0 && index >= myArray.length)
             throw new IndexOutOfBoundsException();
         if (size == myArray.length) {
@@ -37,7 +39,7 @@ public class MyArrayList {
         }
         System.arraycopy(myArray, size, myArray, index, size - index);
         // add element
-        myArray[index] = object;
+        myArray[index] =  object;
         size++;
     }
 
@@ -49,32 +51,27 @@ public class MyArrayList {
     }
 
 
-    public boolean add(Object object) {
+    public boolean add(T object) {
         if (size == myArray.length)
             expandCapacity();
-        if (size < myArray.length) {
             myArray[size++] = object;
-        }
         return true;
     }
 
 
-    public Object get(int index) {
+    public T get(int index) {
         if (index < 0 || index >= size)
             throw new ArrayIndexOutOfBoundsException(index);
         else
             return myArray[index];
     }
 
-    public Object remove(int index) {
+    public T remove(int index) {
         if (index < 0 || index >= size)
             throw new ArrayIndexOutOfBoundsException(index);
-        if (index >= 0 && index < size()) {
-            Object temp = myArray[index];
+            T temp = myArray[index];
             fastRemove(index);
-            return temp;
-        }
-        return false;
+            return  temp;
     }
 
     public void fastRemove(int index) {
@@ -83,7 +80,7 @@ public class MyArrayList {
         myArray[--size] = null;
     }
 
-    public boolean remove(Object object) {
+    public boolean remove(T object) {
         if (object == null) {
             for (int i = 0; i < size; i++)
                 if (myArray[i] == null) {
@@ -101,12 +98,12 @@ public class MyArrayList {
     }
 
 
-    public Object set(int index, Object newObject) {
+    public T set(int index, T newObject) {
         if (index < 0 || index >= size)
             throw new IndexOutOfBoundsException();
-        Object oldObject = myArray[index];
-        myArray[index] = newObject;
-        return oldObject;
+        T oldObject = myArray[index];
+        myArray[index] =  newObject;
+        return  oldObject;
     }
 
 
@@ -117,11 +114,11 @@ public class MyArrayList {
         }
     }
 
-    public boolean contains(Object object) {
+    public boolean contains(T object) {
         return indexOf(object) != -1;
     }
 
-    public int indexOf(Object object) {
+    public int indexOf(T object) {
         if (object == null) {
             for (int i = 0; i < size; i++)
                 if (myArray[i] == null) return i;
