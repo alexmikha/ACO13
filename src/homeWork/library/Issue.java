@@ -1,8 +1,5 @@
 package homeWork.library;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by mykhailov on 02.06.2016.
  */
@@ -11,17 +8,29 @@ public class Issue implements Comparable<Issue> {
     private String publisher;
     private int year;
     private int count;
-
-    List<Issue> issueList ;
+    private Author author;
+    private String strCount;
 
     public Issue(String title, String publisher, int year) {
+        super();
         this.title = title;
         this.publisher = publisher;
         this.year = year;
         this.count = 0;
-        this.issueList = new ArrayList<>();
+        this.author = new Author(" ");
     }
 
+    public Issue() {
+
+    }
+
+    public Author getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
 
     public int getYear() {
         return year;
@@ -36,7 +45,16 @@ public class Issue implements Comparable<Issue> {
     }
 
     public int getCount() {
-        return count;
+        String strCount = "нет в наличии";
+        if (count == 0)
+            setCount(strCount);
+
+        return  count;
+
+    }
+
+    private void setCount(String strCount) {
+       this.strCount = strCount;
     }
 
     public String getTitle() {
@@ -55,14 +73,6 @@ public class Issue implements Comparable<Issue> {
         this.publisher = publisher;
     }
 
-    public List<Issue> getIssueList() {
-        return issueList;
-    }
-
-    public void setIssueList(List<Issue> issueList) {
-        this.issueList = issueList;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -70,47 +80,44 @@ public class Issue implements Comparable<Issue> {
 
         Issue issue = (Issue) o;
 
-        if (getTitle() != null ? !getTitle().equals(issue.getTitle()) : issue.getTitle() != null) return false;
-        if (getPublisher() != null ? !getPublisher().equals(issue.getPublisher()) : issue.getPublisher() != null)
-            return false;
-        return issueList != null ? issueList.equals(issue.issueList) : issue.issueList == null;
-
+        return this.title.equals(issue.title) && this.publisher.equals(issue.publisher) &&
+                this.publisher.equals(issue.publisher) && this.year == issue.year;
     }
 
     @Override
-    public int hashCode() {
-        int result = getTitle() != null ? getTitle().hashCode() : 0;
-        result = 31 * result + (getPublisher() != null ? getPublisher().hashCode() : 0);
-        result = 31 * result + (issueList != null ? issueList.hashCode() : 0);
-        return result;
-    }
-
-
-        @Override
     public int compareTo(Issue o) {
         if (this == o) return 0;
 
-            if (!this.title.equals(o.title)) {
-                return this.title.compareTo(o.title);
-            }
-            if (!this.publisher.equals(o.getPublisher())) {
-                return this.publisher.compareTo(o.publisher);
-            }
-            if (this.year != o.year) {
-                return this.year - (o.year);
-            }
-//            if (this.count != (tmp.count)) {
-//                return this.count - (tmp.count);
-//            }
+        if (!this.title.equals(o.title)) {
+            return this.title.compareTo(o.title);
+        }
+        if (!this.publisher.equals(o.getPublisher())) {
+            return this.publisher.compareTo(o.publisher);
+        }
+        if (this.year != o.year) {
+            return this.year - (o.year);
+        }
+        if (this.count != (o.count)) {
+            return this.count - (o.count);
+        }
         return 0;
     }
 
 
     @Override
     public String toString() {
-
-        return String.format("Issue - %1s, publisher - %2$s, year - %3$d, count - %4$s",
+        String strCount = "not available";
+        if (getCount() > 0)
+        return String.format("title - %1s,  publisher - %2$s, year - %3$d, count - %4$d",
                 getTitle(), getPublisher(), getYear(), getCount());
+        else
+            return String.format("title - %1s,  publisher - %2$s, year - %3$d,  %4$s",
+                    getTitle(), getPublisher(), getYear(), strCount);
     }
-}
 
+    public String asString() {
+        return String.format("title - %1s,  publisher - %2$s, year - %3$d",
+                getTitle(), getPublisher(), getYear());
+    }
+
+}
