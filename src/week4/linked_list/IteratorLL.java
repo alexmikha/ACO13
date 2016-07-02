@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by gorobec on 19.06.16.
+ * Created by mykhailov on 19.06.16.
  */
 public class IteratorLL {
     public static void main(String[] args) {

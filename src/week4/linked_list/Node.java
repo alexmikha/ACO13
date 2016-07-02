@@ -1,7 +1,7 @@
 package week4.linked_list;
 
 /**
- * Created by gorobec on 18.06.16.
+ * Created by mykhailov on 18.06.16.
  */
 public class Node {
     private Node next;

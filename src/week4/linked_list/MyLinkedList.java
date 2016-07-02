@@ -4,7 +4,7 @@ import java.util.*;
 
 
 /**
- * Created by gorobec on 18.06.16.
+ * Created by mykhailov on 18.06.16.
  */
 public class MyLinkedList<T> implements List<T> {
 
@@ -15,18 +15,26 @@ public class MyLinkedList<T> implements List<T> {
     public MyLinkedList() {
     }
 
-    public MyLinkedList(Node<T> head, Node<T> tail, int size) {
-        this.head = head;
-        this.tail = tail;
-        this.size = size;
-
+    public Node<T> getFinal() {
+        Node<T> node = head;
+        while (node.next != null) {
+            node = node.next;
+        }
+        return node;
     }
 
     private void assertIndex(int index) {
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("Invalid index input!!");
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException("Invalid index input!!!");
         }
     }
+
+    private void assertIndexExclusive(final int index) {
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException("Invalid index input!!!");
+        }
+    }
+
 
     @Override
     public int size() {
@@ -48,7 +56,7 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new MyIterator();
+        return new MyIterator<T>();
     }
 
 
@@ -68,8 +76,7 @@ public class MyLinkedList<T> implements List<T> {
             size++;
             return true;
         }
-
-        Node newNode = new Node(tail, o);
+        Node<T> newNode = new Node(tail, o);
         tail.next = newNode;
         tail = newNode;
         size++;
@@ -105,7 +112,7 @@ public class MyLinkedList<T> implements List<T> {
     @Override
     public boolean addAll(Collection c) {
         boolean change = false;
-        MyIterator it = (MyIterator) c.iterator();
+        MyIterator<T> it = (MyIterator<T>) c.iterator();
         while (it.hasNext())
             if (add(it.next()))
                 change = true;
@@ -114,8 +121,7 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public boolean addAll(int index, Collection c) {
-        // if (index < 0 || index > size) return false;
-        assertIndex(index);
+        assertIndexExclusive(index);
         T[] a = (T[]) c.toArray();
         int numNew = a.length;
         if (numNew == 0)
@@ -147,7 +153,6 @@ public class MyLinkedList<T> implements List<T> {
             successor.previous = predecessor;
         }
         size += numNew;
-
         return true;
     }
 
@@ -157,7 +162,7 @@ public class MyLinkedList<T> implements List<T> {
         if (isEmpty()) {
             return;
         }
-        head = tail = null;
+        head.next = tail.previous = null;
         size = 0;
 
     }
@@ -166,15 +171,13 @@ public class MyLinkedList<T> implements List<T> {
     @Override
     public T get(int index) {
         assertIndex(index);
-
         Node<T> iter = findNode(index);
         return iter.value;
     }
 
 
     private Node<T> findNode(int index) {
-        assertIndex(index);
-
+        assertIndexExclusive(index);
         Node<T> iter = head;
         for (int i = 0; i < index; i++) {
             iter = iter.next;
@@ -185,6 +188,9 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public T set(int index, Object element) {
+        if (this == element) {
+            throw new IllegalArgumentException();
+        }
         assertIndex(index);
 
         Node iter = findNode(index);
@@ -198,7 +204,7 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public void add(int index, Object element) {
-        assertIndex(index);
+        assertIndexExclusive(index);
         if (element == null) {
             throw new NullPointerException("Invalid element input!!");
         }
@@ -299,40 +305,50 @@ public class MyLinkedList<T> implements List<T> {
     }
 
     @Override
-    public List subList(int fromIndex, int toIndex) {
-        if (fromIndex < 0 || fromIndex > toIndex) {
-            throw new IndexOutOfBoundsException("index invalid !!!");
+    public List<T> subList(int fromIndex, int toIndex) {
+        if (fromIndex < 0 || toIndex > size() || fromIndex > toIndex) {
+            throw new IndexOutOfBoundsException("Invalid index input!!!");
         }
-
-        Node<T> iter = findNode(fromIndex);
-
-        int count = (toIndex - fromIndex) + 1;
-
-        MyLinkedList<T> newSubList = new MyLinkedList<>();
-        newSubList.head = new Node(iter.value);
-        Node<T> lastIter = newSubList.head;
-        int countIndex = 1;
-        iter = iter.next;
-        while (iter != null && countIndex < count) {
-            lastIter.next = new Node<>(iter.value);
-            lastIter = lastIter.next;
-            iter = iter.next;
-            countIndex++;
+        MyLinkedList<T> newLinkedList = new MyLinkedList<>();
+        Node<T> startNode = head;
+        int counter = 0;
+        while (counter < fromIndex) {
+            startNode = startNode.next;
+            counter++;
         }
-        return newSubList;
+        for (int i = 0; i < toIndex - fromIndex + 1; i++) {
+            newLinkedList.add(startNode.value);
+            startNode = startNode.getNext();
+        }
+        return newLinkedList;
     }
 
 
     @Override
     public boolean retainAll(Collection c) {
-        return false;
+        if (c.isEmpty()) {
+            return false;
+        }
+        boolean change1 = false;
+        MyIterator<T> it = (MyIterator<T>) c.iterator();
+        while (it.hasNext()) {
+            T o = it.next();
+            if (!equals(o)) {
+                remove(o);
+                change1 = true;
+            }
+        }
+        return change1;
     }
+
 
     @Override
     public boolean removeAll(Collection c) {
-
+        if (c.isEmpty()) {
+            return false;
+        }
         boolean change = false;
-        MyIterator it = (MyIterator) c.iterator();
+        MyIterator<T> it = (MyIterator<T>) c.iterator();
         while (it.hasNext()) {
             T o = it.next();
             while (contains(o)) {
@@ -395,14 +411,14 @@ public class MyLinkedList<T> implements List<T> {
         }
     }
 
-    private class MyIterator implements Iterator, MyIterator1 {
+    private class MyIterator<T> implements Iterator, MyIterator1 {
 
         Node<T> iterator;
 
 
         public MyIterator() {
             iterator = new Node<>();
-            iterator.next = head;
+            iterator.next = (Node<T>) head;
         }
 
         @Override

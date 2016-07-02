@@ -1,10 +1,8 @@
 package week4.linked_list;
 
 
-import java.util.List;
-
 /**
- * Created by gorobec on 18.06.16.
+ * Created by mykhailov on 18.06.16.
  */
 public class TestLL {
     public static void main(String[] args) {
@@ -124,34 +122,34 @@ public class TestLL {
         }
         System.out.println();
 
-
-        System.out.print("subList: ");
-        for (Object o : list1.subList(1, 2)) {
+        System.out.println();
+        System.out.print("subList before ");
+        for (Object o : list1.subList(0, 3)) {
             System.out.print(o + ", ");
         }
         System.out.println();
-        System.out.print("subList: ");
-        for (Object o : list1.subList(2, 3)) {
+        System.out.println("------------------------");
+        list1.addAll(list.subList(1, 2));
+        System.out.print("subList after addAll(list.subList(1,2)) ");
+        for (Object o : list1) {
             System.out.print(o + ", ");
         }
         System.out.println();
-
-        System.out.print("subList: ");
-        List lst = list1.subList(0, 1);
-        for (Object o : lst) {
-            System.out.print(o + ", ");
-        }
-        System.out.println();
-
-        lst.subList(0, 1).get(0);                        // начало и конец subList определяется
-        System.out.println(lst.subList(0, 1).get(0));    // но не работает если list1.subList(0, 1).clear
-        int expected7 = 1;                               // или remove
-        Object actual7 = lst.subList(0, 1).get(0);
+        int expected7 = 6;
+        Integer actual7 = list1.size();
         boolean result7 = actual7.equals(expected7);
         System.out.printf("Method name - %s, result - %s," +
                         " expected - %s, actual - %s\n", "subList",
                 result7, expected7, actual7);
 
+        System.out.println("size before retainAll " + list.size());
+        expected11 = true;
+        actual11 = list.retainAll(list1);
+        System.out.println("size after retainAll " + list.size());
+        result11 = actual11 == (expected11);
+        System.out.printf("Method name - %s, result - %s," +
+                        " expected - %s, actual - %s\n", "retainAll",
+                result11, expected11, actual11);
 
         list1.removeAll(list1);
         int expected8 = 0;
