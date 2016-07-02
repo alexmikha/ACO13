@@ -35,7 +35,6 @@ public class MyLinkedList<T> implements List<T> {
         }
     }
 
-
     @Override
     public int size() {
         return size;
@@ -108,7 +107,6 @@ public class MyLinkedList<T> implements List<T> {
         return true;
     }
 
-
     @Override
     public boolean addAll(Collection c) {
         boolean change = false;
@@ -156,7 +154,6 @@ public class MyLinkedList<T> implements List<T> {
         return true;
     }
 
-
     @Override
     public void clear() {
         if (isEmpty()) {
@@ -175,7 +172,6 @@ public class MyLinkedList<T> implements List<T> {
         return iter.value;
     }
 
-
     private Node<T> findNode(int index) {
         assertIndexExclusive(index);
         Node<T> iter = head;
@@ -184,7 +180,6 @@ public class MyLinkedList<T> implements List<T> {
         }
         return iter;
     }
-
 
     @Override
     public T set(int index, Object element) {
@@ -200,7 +195,6 @@ public class MyLinkedList<T> implements List<T> {
 
         return toReturn;
     }
-
 
     @Override
     public void add(int index, Object element) {
@@ -230,7 +224,6 @@ public class MyLinkedList<T> implements List<T> {
         // update size
         size++;
     }
-
 
     @Override
     public T remove(int index) {
@@ -323,35 +316,34 @@ public class MyLinkedList<T> implements List<T> {
         return newLinkedList;
     }
 
+    public void checkIsEmty(Collection c) {
+        if (c.isEmpty()) return;
+    }
 
     @Override
     public boolean retainAll(Collection c) {
-        if (c.isEmpty()) {
-            return false;
-        }
-        boolean change1 = false;
+        checkIsEmty(c);
+ //       boolean change = false;
         MyIterator<T> it = (MyIterator<T>) c.iterator();
+        boolean change = false;
         while (it.hasNext()) {
             T o = it.next();
             if (!equals(o)) {
                 remove(o);
-                change1 = true;
+                change = true;
             }
         }
-        return change1;
+        return change;
     }
-
 
     @Override
     public boolean removeAll(Collection c) {
-        if (c.isEmpty()) {
-            return false;
-        }
+        checkIsEmty(c);
         boolean change = false;
         MyIterator<T> it = (MyIterator<T>) c.iterator();
         while (it.hasNext()) {
             T o = it.next();
-            while (contains(o)) {
+            if (contains(o)) {
                 remove(o);
                 change = true;
             }
