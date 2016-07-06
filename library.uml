@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>homeWork.library</OriginalElement>
+  <nodes>
+    <node x="381.41458333333327" y="706.0">homeWork.library.TestLibraryReader</node>
+    <node x="331.43125" y="111.0">homeWork.library.Issue</node>
+    <node x="246.66458333333327" y="706.0">homeWork.library.TestLibrary</node>
+    <node x="158.5" y="376.0">homeWork.library.Newspaper</node>
+    <node x="251.5" y="543.0">homeWork.library.Journal</node>
+    <node x="506.40833333333325" y="543.0">homeWork.library.Library</node>
+    <node x="10.5" y="376.0">homeWork.library.Book</node>
+    <node x="373.99375" y="310.0">homeWork.library.Reader</node>
+    <node x="168.68125" y="0.0">homeWork.library.Author</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="homeWork.library.TestLibrary" target="homeWork.library.Reader">
+      <point x="17.80000000000001" y="-14.5" />
+      <point x="308.9645833333333" y="656.0" />
+      <point x="437.0" y="656.0" />
+      <point x="437.0" y="518.0" />
+      <point x="404.11875" y="518.0" />
+      <point x="-90.375" y="91.5" />
+    </edge>
+    <edge source="homeWork.library.TestLibrary" target="homeWork.library.Author">
+      <point x="-35.599999999999994" y="-14.5" />
+      <point x="255.56458333333327" y="686.0" />
+      <point x="0.0" y="686.0" />
+      <point x="0.0" y="71.0" />
+      <point x="181.51458333333335" y="71.0" />
+      <point x="-64.16666666666666" y="25.5" />
+    </edge>
+    <edge source="homeWork.library.TestLibraryReader" target="homeWork.library.Author">
+      <point x="50.0" y="-14.5" />
+      <point x="493.91458333333327" y="686.0" />
+      <point x="700.9083333333333" y="686.0" />
+      <point x="700.9083333333333" y="71.0" />
+      <point x="309.8479166666667" y="71.0" />
+      <point x="64.16666666666669" y="25.5" />
+    </edge>
+    <edge source="homeWork.library.TestLibrary" target="homeWork.library.Library">
+      <point x="35.599999999999994" y="-14.5" />
+      <point x="326.76458333333323" y="666.0" />
+      <point x="552.4083333333333" y="666.0" />
+      <point x="-46.0" y="36.5" />
+    </edge>
+    <edge source="homeWork.library.TestLibrary" target="homeWork.library.Book">
+      <point x="-17.799999999999983" y="-14.5" />
+      <point x="273.36458333333326" y="676.0" />
+      <point x="80.69097222222223" y="676.0" />
+      <point x="80.69097222222223" y="518.0" />
+      <point x="42.5" y="518.0" />
+      <point x="-32.0" y="25.5" />
+    </edge>
+    <edge source="homeWork.library.Book" target="homeWork.library.Author">
+      <point x="-42.666666666666686" y="-25.5" />
+      <point x="31.833333333333314" y="290.0" />
+      <point x="48.69097222222223" y="290.0" />
+      <point x="48.69097222222223" y="81.0" />
+      <point x="207.18125" y="81.0" />
+      <point x="-38.5" y="25.5" />
+    </edge>
+    <edge source="homeWork.library.Reader" target="homeWork.library.Issue">
+      <point x="0.0" y="-91.5" />
+      <point x="494.49375" y="290.0" />
+      <point x="440.51458333333335" y="290.0" />
+      <point x="15.583333333333343" y="69.5" />
+    </edge>
+    <edge source="homeWork.library.Newspaper" target="homeWork.library.Issue">
+      <point x="0.0" y="-25.5" />
+      <point x="243.5" y="280.0" />
+      <point x="378.18125" y="280.0" />
+      <point x="-46.75" y="69.5" />
+    </edge>
+    <edge source="homeWork.library.TestLibraryReader" target="homeWork.library.Book">
+      <point x="-50.0" y="-14.5" />
+      <point x="393.91458333333327" y="646.0" />
+      <point x="91.6909722222222" y="646.0" />
+      <point x="91.6909722222222" y="518.0" />
+      <point x="106.5" y="518.0" />
+      <point x="32.0" y="25.5" />
+    </edge>
+    <edge source="homeWork.library.Library" target="homeWork.library.Issue">
+      <point x="23.0" y="-36.5" />
+      <point x="621.4083333333333" y="518.0" />
+      <point x="625.4937500000001" y="518.0" />
+      <point x="625.4937500000001" y="280.0" />
+      <point x="471.68125000000003" y="280.0" />
+      <point x="46.75000000000004" y="69.5" />
+    </edge>
+    <edge source="homeWork.library.TestLibraryReader" target="homeWork.library.Journal">
+      <point x="-25.0" y="-14.5" />
+      <point x="418.91458333333327" y="636.0" />
+      <point x="382.75" y="636.0" />
+      <point x="43.75" y="36.5" />
+    </edge>
+    <edge source="homeWork.library.TestLibraryReader" target="homeWork.library.Library">
+      <point x="25.0" y="-14.5" />
+      <point x="468.91458333333327" y="676.0" />
+      <point x="644.4083333333333" y="676.0" />
+      <point x="46.0" y="36.5" />
+    </edge>
+    <edge source="homeWork.library.Journal" target="homeWork.library.Issue">
+      <point x="0.0" y="-36.5" />
+      <point x="339.0" y="290.0" />
+      <point x="409.34791666666666" y="290.0" />
+      <point x="-15.583333333333329" y="69.5" />
+    </edge>
+    <edge source="homeWork.library.TestLibraryReader" target="homeWork.library.Reader">
+      <point x="0.0" y="-14.5" />
+      <point x="443.91458333333327" y="656.0" />
+      <point x="448.0" y="656.0" />
+      <point x="448.0" y="518.0" />
+      <point x="464.36875" y="518.0" />
+      <point x="-30.125" y="91.5" />
+    </edge>
+    <edge source="homeWork.library.Issue" target="homeWork.library.Author">
+      <point x="46.75" y="-69.5" />
+      <point x="471.68125" y="81.0" />
+      <point x="284.18125000000003" y="81.0" />
+      <point x="38.500000000000014" y="25.5" />
+    </edge>
+    <edge source="homeWork.library.Library" target="homeWork.library.Reader">
+      <point x="-23.0" y="-36.5" />
+      <point x="575.4083333333333" y="518.0" />
+      <point x="584.86875" y="518.0" />
+      <point x="90.375" y="91.5" />
+    </edge>
+    <edge source="homeWork.library.TestLibrary" target="homeWork.library.Journal">
+      <point x="0.0" y="-14.5" />
+      <point x="291.16458333333327" y="686.0" />
+      <point x="295.25" y="686.0" />
+      <point x="-43.75" y="36.5" />
+    </edge>
+    <edge source="homeWork.library.Book" target="homeWork.library.Issue">
+      <point x="42.66666666666666" y="-25.5" />
+      <point x="117.16666666666666" y="270.0" />
+      <point x="347.01458333333335" y="270.0" />
+      <point x="-77.91666666666667" y="69.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="295.5" y="369.5" />
+  <SelectedNodes>
+    <node>homeWork.library.Reader</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>packageLocal</VISIBILITY>
+</Diagram>
+
