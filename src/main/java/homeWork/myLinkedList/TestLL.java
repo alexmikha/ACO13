@@ -1,4 +1,4 @@
-package main.java.week4.linked_list;
+package main.java.homeWork.myLinkedList;
 
 
 /**
@@ -21,7 +21,7 @@ public class TestLL {
         int actual = list.size();
         boolean result = actual == expected;
 
-        System.out.printf("Method add, result %s, actual - %d, expected %d\n", result, actual, expected);
+        System.out.printf("Method - add, result %s, actual - %d, expected %d\n", result, actual, expected);
 
         list.add(15);
         list.add(25);
@@ -34,39 +34,41 @@ public class TestLL {
         expected = 1;
         actual = list.lastIndexOf(15);
         result = actual == expected;
-        System.out.printf("Method lastIndexOf(Object o), result %s, actual - %d, expected %d\n", result, actual, expected);
+        System.out.printf("Method - lastIndexOf(Object o), result %s, actual - %d, expected %d\n", result, actual, expected);
 
         expected = 2;
         actual = list.indexOf(25);
         result = actual == expected;
-        System.out.printf("Method indexOf, result %s, actual - %d, expected %d\n", result, actual, expected);
+        System.out.printf("Method - indexOf, result %s, actual - %d, expected %d\n", result, actual, expected);
 
 
         expected = 3;
         actual = list.size();
         result = actual == expected;
-        System.out.printf("Method add, result %s, actual - %d, expected %d\n", result, actual, expected);
+        System.out.printf("Method - add, result %s, actual - %d, expected %d\n", result, actual, expected);
 
         expected = 5;
         actual = (int) list.get(0);
         result = actual == expected;
-        System.out.printf("Method get, result %s, actual - %d, expected %d\n", result, actual, expected);
+        System.out.printf("Method - get, result %s, actual - %d, expected %d\n", result, actual, expected);
 
-        expected = 15;
-        actual = (int) list.remove(1);
+        list.remove(1);
+        expected = 2;
+        actual = list.size();
         result = actual == expected;
-        System.out.printf("Method remove(Object o), result %s, actual - %d, expected %d\n", result, actual, expected);
+        System.out.printf("Method - remove(Object o), result %s, actual - %d, expected %d\n", result, actual, expected);
 
-        expected = 5;
-        actual = (int) list.remove(0);
+        list.remove(0);
+        expected = 1;
+        actual = list.size();
         result = actual == expected;
-        System.out.printf("Method remove(Object o), result %s, actual - %d, expected %d\n", result, actual, expected);
+        System.out.printf("Method - remove(Object o), result %s, actual - %d, expected %d\n", result, actual, expected);
 
-
-        expected = 25;
-        actual = (int) list.remove(0);
+        list.remove(0);
+        expected = 0;
+        actual = list.size();
         result = actual == expected;
-        System.out.printf("Method remove(Object o), result %s, actual - %d, expected %d\n", result, actual, expected);
+        System.out.printf("Method - remove(Object o), result %s, actual - %d, expected %d\n", result, actual, expected);
 
 
         for (Object o : list) {
@@ -76,7 +78,7 @@ public class TestLL {
         int expected1 = 10;
         Integer actual1 = (Integer) list.get(0);
         boolean result1 = actual1.equals(expected1);
-        System.out.printf("Method name - %s, result - %s," +
+        System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "add(int index, T element)",
                 result1, expected1, actual1);
 
@@ -85,7 +87,7 @@ public class TestLL {
         boolean expected4 = true;
         boolean actual4 = list.contains(25);
         boolean result4 = actual4 == expected4;
-        System.out.printf("Method name - %s, result - %s," +
+        System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "contains",
                 result4, expected4, actual4);
 
@@ -94,7 +96,7 @@ public class TestLL {
         int expected5 = 6;
         Integer actual5 = list.size();
         boolean result5 = actual5 == (expected5);
-        System.out.printf("Method name - %s, result - %s," +
+        System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "addAll(Collection c)",
                 result5, expected5, actual5);
         for (Object o : list) {
@@ -104,7 +106,7 @@ public class TestLL {
         boolean expected11 = true;
         boolean actual11 = list.containsAll(list1);
         boolean result11 = actual11 == (expected11);
-        System.out.printf("Method name - %s, result - %s," +
+        System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "containsAll(Collection c)",
                 result11, expected11, actual11);
 
@@ -113,7 +115,7 @@ public class TestLL {
         int expected6 = 10;
         Integer actual6 = list.size();
         boolean result6 = actual6 == (expected6);
-        System.out.printf("Method name - %s, result - %s," +
+        System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "addAll(int index, Collection c)",
                 result6, expected6, actual6);
 
@@ -138,7 +140,7 @@ public class TestLL {
         int expected7 = 6;
         Integer actual7 = list1.size();
         boolean result7 = actual7.equals(expected7);
-        System.out.printf("Method name - %s, result - %s," +
+        System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "subList",
                 result7, expected7, actual7);
 
@@ -147,16 +149,16 @@ public class TestLL {
         actual11 = list.retainAll(list1);
         System.out.println("size after retainAll " + list.size());
         result11 = actual11 == (expected11);
-        System.out.printf("Method name - %s, result - %s," +
+        System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "retainAll",
                 result11, expected11, actual11);
 
         list1.removeAll(list1);
-        int expected8 = 0;
+        int expected8 = 5;
         Integer actual8 = list1.size();
 
         boolean result8 = actual8 == (expected8);
-        System.out.printf("Method name - %s, result - %s," +
+        System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "removeAll(Collection c)",
                 result8, expected8, actual8);
         for (Object o : list1) {
@@ -167,7 +169,7 @@ public class TestLL {
         int expected9 = 20;
         int actual9 = (int) list.get(0);
         boolean result9 = actual9 == (expected9);
-        System.out.printf("Method name - %s, result - %s," +
+        System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "set(int index, Object element)",
                 result9, expected9, actual9);
         for (Object o : list) {
@@ -179,7 +181,7 @@ public class TestLL {
         Integer actual2 = (Integer) list.get(0);
         list.remove(0);
         boolean result2 = actual2.equals(expected2);
-        System.out.printf("Method name - %s, result - %s," +
+        System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "remove(int index)",
                 result2, expected2, actual2);
         for (Object o : list) {
@@ -191,14 +193,14 @@ public class TestLL {
         int expected3 = 0;
         Integer actual3 = list.size();
         boolean result3 = actual3 == (expected3);
-        System.out.printf("Method name - %s, result - %s," +
+        System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "clear",
                 result3, expected3, actual3);
 
         boolean expected10 = true;
         boolean actual10 = list.isEmpty();
         boolean result10 = actual10 == (expected10);
-        System.out.printf("Method name - %s, result - %s," +
+        System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "isEmpty",
                 result10, expected10, actual10);
 

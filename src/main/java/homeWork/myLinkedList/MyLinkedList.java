@@ -2,16 +2,29 @@ package main.java.homeWork.myLinkedList;
 
 import java.util.*;
 
-/**
- * Created by gorobec on 05.06.16.
- */
-public class MyLinkedList implements List {
 
-    private Node head;
-    private Node tail;
+/**
+ * Created by mykhailov on 18.06.16.
+ */
+public class MyLinkedList<T> implements List<T> {
+
+    private Node<T> head;
+    private Node<T> tail;
     private int size;
 
     public MyLinkedList() {
+    }
+
+    private void assertIndex(int index) {
+        if (index < 0 || index >= size()) {
+            throw new IndexOutOfBoundsException("Invalid index input!!!");
+        }
+    }
+
+    private void assertIndexExclusive(final int index) {
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException("Invalid index input!!!");
+        }
     }
 
     @Override
@@ -26,214 +39,372 @@ public class MyLinkedList implements List {
 
     @Override
     public boolean contains(Object o) {
-        return indexOf(o) != -1;
+        Node<T> iter = head;
+        while (iter != null && !o.equals(iter.value))
+            iter = iter.next;
+        return (iter != null);
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new MyIterator<T>();
     }
 
 
     @Override
-    public Object[] toArray() {
-        return new Object[0];
+    public T[] toArray() {
+        T[] result = (T[]) new Object[size];
+        int i = 0;
+        for (Node<T> iter = head; iter != null; iter = iter.next)
+            result[i++] = iter.value;
+        return result;
     }
 
     @Override
     public boolean add(Object o) {
-
         if (head == null) {
             head = tail = new Node(o);
             size++;
             return true;
         }
-        tail.next = new Node(o);
-        tail = tail.next;
-
-
-        Node newNode = new Node(tail, o);
-        tail.setNext(newNode);
+        Node<T> newNode = new Node(tail, o);
+        tail.next = newNode;
         tail = newNode;
-
-        return false;
+        size++;
+        return true;
     }
 
     @Override
     public boolean remove(Object o) {
         int index = indexOf(o);
         if (index != -1) {
-            return (boolean) remove(index);
-        }else {
+            remove(index);
+            return true;
+        } else
             return false;
-        }
-    }
-
-    @Override
-    public Object remove(int index) {
-        if (index < 0 || index >= size) {
-         //   throw new IndexOutOfBoundsException("index = " + index);
-            System.exit(1);
-        }
-        Node prev = null,
-        p = head;
-        for (int i = 0; i < index; i++) {
-            prev = p;
-            p = p.next;
-        }
-        // remove
-        if (p == head){
-            head = head.next;
-        }else {
-            prev.next = p.next;
-        }
-        // if the last node was removed update tail
-        if (p == tail){
-            tail = prev;
-        }
-        size--;
-        return true;
     }
 
     @Override
     public boolean addAll(Collection c) {
-        return false;
+        boolean change = true;
+        change = true;
+        for (Object element : c) {
+            change = add(element);
+        }
+        return change;
     }
 
     @Override
     public boolean addAll(int index, Collection c) {
-        return false;
+        assertIndexExclusive(index);
+        T[] a = (T[]) c.toArray();
+        int numNew = a.length;
+        if (numNew == 0)
+            return false;
+
+        Node<T> predecessor;
+        Node<T> successor;
+        if (index == size) {
+            successor = null;
+            predecessor = head;
+        } else {
+            successor = findNode(index);
+            predecessor = successor.previous;
+        }
+
+        for (T o : a) {
+            Node<T> newNode = new Node<>(predecessor, o, null);
+            if (predecessor == null)
+                head = newNode;
+            else
+                predecessor.next = newNode;
+            predecessor = newNode;
+        }
+
+        if (successor == null) {
+            tail = predecessor;
+        } else {
+            predecessor.next = successor;
+            successor.previous = predecessor;
+        }
+        size += numNew;
+        return true;
     }
 
     @Override
     public void clear() {
-        size = 0;
+        if (isEmpty()) {
+            return;
+        }
+        for (Node<T> iter = head; iter != null; ) {
+            Node<T> next = iter.next;
+            iter.value = null;
+            iter.next = null;
+            iter.previous = null;
+            iter = next;
+        }
         head = tail = null;
+        size = 0;
+
     }
 
+    //todo Exception
     @Override
-    public Object get(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("index = " + index);
-        }
-        Node iter = head;
-        for (int i = 0; i < index; i++) {
+    public T get(int index) {
+        assertIndex(index);
+        Node<T> iter = findNode(index);
+        return iter.value;
+    }
 
+
+    private Node<T> findNode(int index) {
+        assertIndexExclusive(index);
+        Node<T> iter = head;
+        for (int i = 0; i < index; i++) {
             iter = iter.next;
         }
-        return iter.next;
-
-
+        return iter;
     }
+
 
     @Override
-    public Object set(int index, Object element) {
-        checkIndex(index);
-        Node p = head;
-        Object oldVal = p.next;
-        return oldVal;
-
-      //  return null;
-    }
-
-    private void checkIndex(int index) {
-        if (index < 0 || index >= size())
-            throw new IndexOutOfBoundsException();
+    public T set(int index, Object element) {
+        if (this == element) {
+            throw new IllegalArgumentException();
+        }
+        assertIndex(index);
+        Node iter = findNode(index);
+        T toReturn = (T) iter.value;
+        iter.value = element;
+        return toReturn;
     }
 
     @Override
     public void add(int index, Object element) {
+        assertIndexExclusive(index);
+        if (element == null) {
+            throw new NullPointerException("Invalid element input!!");
+        }
+        Node newNode = new Node(element);
 
-        if (index < 0 || index > size) {
-            throw new IndexOutOfBoundsException("index = " + index);
+        // inserting in an empty list
+        if (isEmpty()) {
+            head = newNode;
+            tail = newNode;
         }
-        // find  the node
-        Node prev = null;
-        Node p = head;
-        for (int i = 0; i < index; i++) {
-            prev = p;
-            p = p.next;
+        // inserting at the beginning list != empty
+        else if (index == 0) {
+            newNode.next = head;
+            head.previous = newNode;
+            head = newNode;
         }
-        // add a node between prev and p
-        Node n = new Node(element);
-        // first node
-        if (p == head) {
-            n.next = head;
-            head = n;
-        } else {
-            prev.next = n;
-            n.next = p;
+        // inserting at the end (list != empty)
+        else if (index == size()) {
+            newNode.previous = tail;
+            tail.next = newNode;
+            tail = newNode;
         }
-        // update tail if necessary
-        if (index == size) {
-            tail = n;
+        // inserting somewhere in the middle
+        else {
+            assert index >= 1;
+            Node nodeBefore = findNode(index - 1);
+
+            newNode.next = nodeBefore.next;
+            newNode.next.previous = newNode;
+
+            newNode.previous = nodeBefore;
+            nodeBefore.next = newNode;
         }
-        // update size
+
         size++;
     }
 
 
     @Override
-    public int indexOf(Object o) {
-        int index =0;
-        if(o == null){
-            for (Node p = head;  p != null ;  p = p.next) {
-                if (p.next == null) {
-                    return index;
-                }
-                index++;
+    public T remove(int index) {
+        assertIndex(index);
+        Node<T> iter = findNode(index);
+        if (iter == head) {
+            head = iter.next;
+            if (iter.next == null) {
+                head = tail = null;
+            } else {
+                head.previous = null;
+                iter.next = null;
             }
-        }else {
-            for (Node p = head;  p != null ;  p = p.next) {
-                if (o.equals(p.next)){
-                    return index;
-                }
-                index++;
-            }
+        } else if (iter == tail) {
+            tail = iter.previous;
+            tail.next = null;
+            iter.previous = null;
+
+        } else {
+//        previous-> me -> next --->  previous -> next
+            iter.previous.next = iter.next;
+//        previous<- me <- next ---> previous <- next
+            iter.next.previous = iter.previous;
+            iter.previous = null;
+            iter.next = null;
         }
-        // o is not in the list
+        size--;
+        //   return iter.value;
+
+        return null;
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        if (o == null) return -1;
+
+        Node<T> iter = head;
+        for (int i = 0; i < size; i++) {
+            if (o.equals(iter.value)) return i;
+            iter = iter.next;
+        }
         return -1;
     }
 
     @Override
     public int lastIndexOf(Object o) {
-        return 0;
-    }
-
-    @Override
-    public Iterator iterator() {
-        return null;
+        int index = size;
+        if (o == null) {
+            for (Node<T> iter = tail; iter != null; iter = iter.previous) {
+                index--;
+                if (iter.value == null)
+                    return index;
+            }
+        } else {
+            for (Node<T> iter = tail; iter != null; iter = iter.previous) {
+                index--;
+                if (o.equals(iter.value))
+                    return index;
+            }
+        }
+        return -1;
     }
 
     @Override
     public ListIterator listIterator() {
+//        NOP
         return null;
     }
 
     @Override
     public ListIterator listIterator(int index) {
+        //        NOP
         return null;
     }
 
     @Override
-    public List subList(int fromIndex, int toIndex) {
-        return null;
+    public List<T> subList(int fromIndex, int toIndex) {
+        if (fromIndex < 0 || toIndex > size() || fromIndex > toIndex) {
+            throw new IndexOutOfBoundsException("Invalid index input!!!");
+        }
+        MyLinkedList<T> newLinkedList = new MyLinkedList<>();
+        Node<T> startNode = head;
+        for (int i = 0; i < toIndex - fromIndex + 1; i++) {
+            newLinkedList.add(startNode.value);
+            startNode = startNode.getNext();
+        }
+        return newLinkedList;
+    }
+
+    public void checkIsEmty(Collection c) {
+        if (c.isEmpty()) return;
     }
 
     @Override
     public boolean retainAll(Collection c) {
-        return false;
+        checkIsEmty(c);
+        boolean change = false;
+        for (Object element : c) {
+            change = remove(element);
+        }
+        return change;
     }
 
     @Override
     public boolean removeAll(Collection c) {
-        return false;
+        checkIsEmty(c);
+        boolean change = true;
+
+        for (Object element : c) {
+            change = remove(element);
+        }
+        return change;
     }
 
     @Override
     public boolean containsAll(Collection c) {
-        return false;
+        for (Object e : c) {
+            if (!contains(e))
+                return false;
+        }
+        return true;
     }
 
     @Override
     public Object[] toArray(Object[] a) {
+        //        NOP
         return new Object[0];
     }
 
+    private static class Node<T> {
+        Node<T> next;
+        Node<T> previous;
+        T value;
 
+        public Node() {
+        }
+
+        public Node(T value) {
+            this.value = value;
+        }
+
+        public Node(Node<T> previous, T element, Node<T> next) {
+            this.previous = previous;
+            this.next = next;
+            this.value = element;
+        }
+
+        public Node(Node<T> previous, T value) {
+            this.previous = previous;
+            this.value = value;
+        }
+
+
+        public Node<T> getNext() {
+            return next;
+        }
+
+        public boolean hasNext() {
+            return (next != null);
+        }
+
+        public boolean hasPrevious() {
+            return (previous != null);
+        }
+    }
+
+    private class MyIterator<T> implements Iterator {
+
+        Node<T> iterator;
+
+
+        public MyIterator() {
+            iterator = new Node<>();
+            iterator.next = (Node<T>) head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return iterator.next != null;
+        }
+
+        @Override
+        public T next() {
+            iterator = iterator.next;
+            return iterator.value;
+        }
+    }
 }
+
