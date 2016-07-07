@@ -86,7 +86,7 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public boolean addAll(Collection c) {
-        boolean change = true;
+        boolean change;
         change = true;
         for (Object element : c) {
             change = add(element);
@@ -185,8 +185,7 @@ public class MyLinkedList<T> implements List<T> {
         if (element == null) {
             throw new NullPointerException("Invalid element input!!");
         }
-        Node newNode = new Node(element);
-
+        Node<T> newNode = new Node<>((T) element);
         // inserting in an empty list
         if (isEmpty()) {
             head = newNode;
@@ -206,8 +205,8 @@ public class MyLinkedList<T> implements List<T> {
         }
         // inserting somewhere in the middle
         else {
-            assert index >= 1;
-            Node nodeBefore = findNode(index - 1);
+            if(index >= 1);
+            Node<T> nodeBefore = findNode(index - 1);
 
             newNode.next = nodeBefore.next;
             newNode.next.previous = newNode;
@@ -315,9 +314,13 @@ public class MyLinkedList<T> implements List<T> {
     @Override
     public boolean retainAll(Collection c) {
         checkIsEmty(c);
-        boolean change = false;
-        for (Object element : c) {
-            change = remove(element);
+        boolean change = true;
+        Object[] a = c.toArray();
+        for (Object e : c) {
+            for (Object o : a) {
+                if(!e.equals(o))
+                    change = remove(e);
+            }
         }
         return change;
     }
@@ -326,7 +329,6 @@ public class MyLinkedList<T> implements List<T> {
     public boolean removeAll(Collection c) {
         checkIsEmty(c);
         boolean change = true;
-
         for (Object element : c) {
             change = remove(element);
         }

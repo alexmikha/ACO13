@@ -9,12 +9,15 @@ public class TestLL {
 
         MyLinkedList list = new MyLinkedList<>();
         MyLinkedList list1 = new MyLinkedList<>();
+        MyLinkedList list2 = new MyLinkedList<>();
 
         list1.add(1);
         list1.add(2);
         list1.add(3);
         list1.add(4);
 
+        list2.add(10);
+        list2.add(15);
 
         list.add(5);
         int expected = 1;
@@ -25,6 +28,8 @@ public class TestLL {
 
         list.add(15);
         list.add(25);
+        list.add("A");
+
 
         for (Object o : list) {
             System.out.print(o + ", ");
@@ -42,7 +47,7 @@ public class TestLL {
         System.out.printf("Method - indexOf, result %s, actual - %d, expected %d\n", result, actual, expected);
 
 
-        expected = 3;
+        expected = 4;
         actual = list.size();
         result = actual == expected;
         System.out.printf("Method - add, result %s, actual - %d, expected %d\n", result, actual, expected);
@@ -52,20 +57,20 @@ public class TestLL {
         result = actual == expected;
         System.out.printf("Method - get, result %s, actual - %d, expected %d\n", result, actual, expected);
 
-        list.remove(1);
+        list.remove(2);
+        expected = 3;
+        actual = list.size();
+        result = actual == expected;
+        System.out.printf("Method - remove(index), result %s, actual - %d, expected %d\n", result, actual, expected);
+
+        list.remove(0);
         expected = 2;
         actual = list.size();
         result = actual == expected;
-        System.out.printf("Method - remove(Object o), result %s, actual - %d, expected %d\n", result, actual, expected);
+        System.out.printf("Method - remove(index), result %s, actual - %d, expected %d\n", result, actual, expected);
 
-        list.remove(0);
+        list.remove("A");
         expected = 1;
-        actual = list.size();
-        result = actual == expected;
-        System.out.printf("Method - remove(Object o), result %s, actual - %d, expected %d\n", result, actual, expected);
-
-        list.remove(0);
-        expected = 0;
         actual = list.size();
         result = actual == expected;
         System.out.printf("Method - remove(Object o), result %s, actual - %d, expected %d\n", result, actual, expected);
@@ -93,7 +98,7 @@ public class TestLL {
 
 
         list.addAll(list1);
-        int expected5 = 6;
+        int expected5 = 7;
         Integer actual5 = list.size();
         boolean result5 = actual5 == (expected5);
         System.out.printf("Method - %s, result - %s," +
@@ -112,7 +117,7 @@ public class TestLL {
 
 
         list.addAll(3, list1);
-        int expected6 = 10;
+        int expected6 = 11;
         Integer actual6 = list.size();
         boolean result6 = actual6 == (expected6);
         System.out.printf("Method - %s, result - %s," +
@@ -145,25 +150,46 @@ public class TestLL {
                 result7, expected7, actual7);
 
         System.out.println("size before retainAll " + list.size());
-        expected11 = true;
-        actual11 = list.retainAll(list1);
+        for (Object o : list) {
+            System.out.print(o + ", ");
+        }
+        System.out.println();
+
+        list.retainAll(list1);
         System.out.println("size after retainAll " + list.size());
-        result11 = actual11 == (expected11);
+        for (Object o : list) {
+            System.out.print(o + ", ");
+        }
+        System.out.println();
+        int expected14 = 1;
+        Integer actual14 = list.size();
+        boolean result14 = actual11 == expected11;
         System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "retainAll",
-                result11, expected11, actual11);
+                result14, expected14, actual14);
 
-        list1.removeAll(list1);
-        int expected8 = 5;
+
+        System.out.println("size before removeAll " + list1.size());
+        for (Object o : list1) {
+            System.out.print(o + ", ");
+        }
+        System.out.println();
+        list1.removeAll(list2);
+        System.out.println("size after removeAll " + list1.size());
+        for (Object o : list1) {
+            System.out.print(o + ", ");
+        }
+        System.out.println();
+        int expected8 = 4;
         Integer actual8 = list1.size();
-
-        boolean result8 = actual8 == (expected8);
+        boolean result8 = actual8 == expected8;
         System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "removeAll(Collection c)",
                 result8, expected8, actual8);
         for (Object o : list1) {
             System.out.print(o + ", ");
         }
+        System.out.println();
 
         list.set(0, 20);
         int expected9 = 20;
