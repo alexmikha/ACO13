@@ -105,38 +105,44 @@ public class MyLinkedList<T> implements List<T> {
     @Override
     public boolean addAll(int index, Collection c) {
         assertIndexExclusive(index);
-        T[] a = (T[]) c.toArray();
-        int numNew = a.length;
-        if (numNew == 0)
-            return false;
-
-        Node<T> predecessor;
-        Node<T> successor;
-        if (index == size) {
-            successor = null;
-            predecessor = head;
-        } else {
-            successor = findNode(index);
-            predecessor = successor.previous;
+//        T[] a = (T[]) c.toArray();
+//        int numNew = a.length;
+//        if (numNew == 0)
+//            return false;
+//
+//        Node<T> predecessor;
+//        Node<T> successor;
+//        if (index == size) {
+//            successor = null;
+//            predecessor = head;
+//        } else {
+//            successor = findNode(index);
+//            predecessor = successor.previous;
+//        }
+//
+//        for (T o : a) {
+//            Node<T> newNode = new Node<>(predecessor, o, null);
+//            if (predecessor == null)
+//                head = newNode;
+//            else
+//                predecessor.next = newNode;
+//            predecessor = newNode;
+//        }
+//
+//        if (successor == null) {
+//            tail = predecessor;
+//        } else {
+//            predecessor.next = successor;
+//            successor.previous = predecessor;
+//        }
+//        size += numNew;
+//        return true;
+        for (Object o : c) {
+            add(index, (T) o);
+            index++;
         }
-
-        for (T o : a) {
-            Node<T> newNode = new Node<>(predecessor, o, null);
-            if (predecessor == null)
-                head = newNode;
-            else
-                predecessor.next = newNode;
-            predecessor = newNode;
-        }
-
-        if (successor == null) {
-            tail = predecessor;
-        } else {
-            predecessor.next = successor;
-            successor.previous = predecessor;
-        }
-        size += numNew;
         return true;
+
     }
 
 
@@ -253,19 +259,25 @@ public class MyLinkedList<T> implements List<T> {
             iter.next = null;
         }
         size--;
-           return iter.value;
+        return iter.value;
     }
 
 
     @Override
     public int indexOf(Object o) {
-        if (o == null) return -1;
+        //   if (o == null) return -1;
 
         Node<T> iter = head;
-        for (int i = 0; i < size; i++) {
-            if (o.equals(iter.value)) return i;
-            iter = iter.next;
-        }
+        if (o == null) {
+            for (int i = 0; i < size; i++) {
+                if (iter.value == null) return i;
+                iter = iter.next;
+            }
+        } else
+            for (int i = 0; i < size; i++) {
+                if (o.equals(iter.value)) return i;
+                iter = iter.next;
+            }
         return -1;
     }
 
@@ -332,10 +344,13 @@ public class MyLinkedList<T> implements List<T> {
     @Override
     public boolean removeAll(Collection c) {
         if (c.isEmpty()) return false;
-        boolean change = true;
+
+        boolean change = false;
         for (Object o : c) {
-            if (this.contains(o))
-                change = remove(o);
+            while (contains(o)) {
+                remove(o);
+                change = true;
+            }
         }
         return change;
     }
