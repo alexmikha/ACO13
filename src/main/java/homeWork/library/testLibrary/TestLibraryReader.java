@@ -1,4 +1,11 @@
-package main.java.homeWork.library;
+package main.java.homeWork.library.testLibrary;
+
+import main.java.homeWork.library.Library;
+import main.java.homeWork.library.issue.book.Author;
+import main.java.homeWork.library.issue.book.Book;
+import main.java.homeWork.library.issue.Issue;
+import main.java.homeWork.library.issue.Journal;
+import main.java.homeWork.library.reader.Reader;
 
 import java.util.ArrayList;
 import java.util.List;

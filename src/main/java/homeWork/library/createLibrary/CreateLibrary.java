@@ -1,4 +1,11 @@
-package main.java.homeWork.library;
+package main.java.homeWork.library.createLibrary;
+
+import main.java.homeWork.library.*;
+import main.java.homeWork.library.issue.book.Author;
+import main.java.homeWork.library.issue.book.Book;
+import main.java.homeWork.library.issue.Journal;
+import main.java.homeWork.library.menu.MenuLibrary;
+import main.java.homeWork.library.reader.Reader;
 
 import java.io.IOException;
 

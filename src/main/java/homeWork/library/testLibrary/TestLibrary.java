@@ -1,4 +1,12 @@
-package main.java.homeWork.library;
+package main.java.homeWork.library.testLibrary;
+
+import main.java.homeWork.library.Library;
+import main.java.homeWork.library.issue.book.Author;
+import main.java.homeWork.library.issue.book.Book;
+import main.java.homeWork.library.issue.Issue;
+import main.java.homeWork.library.issue.Journal;
+import main.java.homeWork.library.libraryController.LibraryController;
+import main.java.homeWork.library.reader.Reader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +19,7 @@ public class TestLibrary {
     public static void main(String[] args) {
 
         Library library = new Library();
-        SerialisationLibrary libraryFile = new SerialisationLibrary();
-        LibraryFromFile libraryFromFile = new LibraryFromFile();
+LibraryController libraryController = new LibraryController();
         Book book1 = new Book( new Author( "Bruce Eckel" ), "Java OPP", "PrintCenterUA", 2000 );
         Book book2 = new Book( new Author( "Joshua Bloch" ), "Effective Java", "Lory Moscow", 2008 );
         Book book3 = new Book( new Author( "Joan Rowling" ), "Harry Potter", "Scholastic Press", 1997 );
@@ -118,16 +125,16 @@ public class TestLibrary {
         library.showByIssueByYear(2000);
 
         System.out.println( "---------------------findIssueByWord - Java--------------" );
-        List<Issue> findWord = new ArrayList<>( library.findIssueByWord( "Java" ) );
+        List<Issue> findWord = new ArrayList<>( library.findIssueByWord("Java"));
         for (Issue issue : findWord) {
             System.out.println( issue );
         }
 
         System.out.println( "---------------------saveIssueToFile--------------" );
-        libraryFile.saveIssueReaderToFile(library.getPrints(), "issueLibrary.txt");
+        libraryController.saveIssueReaderToFile(library.getPrints(), "issueLibrary.txt");
 
         System.out.println( "---------------------showIssueFromFile--------------" );
-        libraryFromFile.showLibraryFromFile("issueLibrary.txt");
+        libraryController.showLibraryFromFile("issueLibrary.txt");
 
     }
 }
