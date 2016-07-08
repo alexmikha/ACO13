@@ -311,7 +311,7 @@ public class MyLinkedList<T> implements List<T> {
     @Override
     public boolean retainAll(Collection c) {
    //     checkIsEmty(c);
-        if (c.isEmpty()) return false;
+        if (c.isEmpty()) return true;
 
         MyLinkedList tmpList = new MyLinkedList();
         for (Object o : this) {
@@ -325,7 +325,7 @@ public class MyLinkedList<T> implements List<T> {
     public boolean removeAll(Collection c) {
     //    checkIsEmty(c);
         if (c.isEmpty()) return false;
-        boolean change = false;
+        boolean change = true;
         for (Object o : c) {
             if (this.contains(o))
                 change = remove(o);

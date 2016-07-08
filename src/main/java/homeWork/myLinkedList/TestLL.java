@@ -189,7 +189,7 @@ public class TestLL {
             System.out.print(o + ", ");
         }
         System.out.println();
-        list1.removeAll(list2);
+        list1.removeAll(list3);
         System.out.println("size after removeAll " + list1.size());
         for (Object o : list1) {
             System.out.print(o + ", ");
