@@ -13,6 +13,7 @@ public class TestLL {
         MyLinkedList list = new MyLinkedList<>();
         MyLinkedList list1 = new MyLinkedList<>();
         MyLinkedList list2 = new MyLinkedList<>();
+        MyLinkedList list3 = new MyLinkedList<>();
 
         list1.add(1);
         list1.add(2);
@@ -169,7 +170,7 @@ public class TestLL {
             System.out.print(o + ", ");
         }
         System.out.println();
-        list.retainAll(list1);
+        list.retainAll(list3);
         int expected14 = 10;
         System.out.println("size after retainAll " + list.size());
              for (Object o : list) {
