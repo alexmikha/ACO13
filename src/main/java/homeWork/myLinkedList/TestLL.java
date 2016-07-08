@@ -170,7 +170,7 @@ public class TestLL {
         }
         System.out.println();
         list.retainAll(list1);
-        int expected14 = 7;
+        int expected14 = 10;
         System.out.println("size after retainAll " + list.size());
              for (Object o : list) {
                  System.out.print(o + ", ");

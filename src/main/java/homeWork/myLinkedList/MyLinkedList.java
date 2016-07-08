@@ -311,13 +311,12 @@ public class MyLinkedList<T> implements List<T> {
     @Override
     public boolean retainAll(Collection c) {
         checkIsEmty(c);
-
-        boolean change = true;
-        for (Object o : c) {
-            if (!o.equals(head.next.value))
-                change = remove(head.getNext().next.value);
+        MyLinkedList tmpList = new MyLinkedList();
+        for (Object o : this) {
+            if (!c.contains(o))
+                tmpList.add(o);
         }
-        return change;
+         return this.removeAll(tmpList);
     }
 
     @Override
@@ -325,7 +324,7 @@ public class MyLinkedList<T> implements List<T> {
         checkIsEmty(c);
         boolean change = false;
         for (Object o : c) {
-            if (contains(o))
+            if (this.contains(o))
                 change = remove(o);
         }
         return change;
@@ -334,8 +333,8 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public boolean containsAll(Collection c) {
-        for (Object e : c) {
-            if (!contains(e))
+        for (Object o : c) {
+            if (!this.contains(o))
                 return false;
         }
         return true;
