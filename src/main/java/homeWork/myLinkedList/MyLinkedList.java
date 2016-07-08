@@ -86,12 +86,12 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public boolean addAll(Collection c) {
-        boolean change;
-        change = true;
+        boolean change = true;
         for (Object element : c) {
             change = add(element);
         }
         return change;
+
     }
 
     @Override
@@ -182,9 +182,6 @@ public class MyLinkedList<T> implements List<T> {
     @Override
     public void add(int index, Object element) {
         assertIndexExclusive(index);
-        if (element == null) {
-            throw new NullPointerException("Invalid element input!!");
-        }
         Node<T> newNode = new Node<>((T) element);
         // inserting in an empty list
         if (isEmpty()) {
@@ -205,7 +202,7 @@ public class MyLinkedList<T> implements List<T> {
         }
         // inserting somewhere in the middle
         else {
-            if(index >= 1);
+            if (index >= 1) ;
             Node<T> nodeBefore = findNode(index - 1);
 
             newNode.next = nodeBefore.next;
@@ -314,13 +311,11 @@ public class MyLinkedList<T> implements List<T> {
     @Override
     public boolean retainAll(Collection c) {
         checkIsEmty(c);
+
         boolean change = true;
-        Object[] a = c.toArray();
-        for (Object e : c) {
-            for (Object o : a) {
-                if(!e.equals(o))
-                    change = remove(e);
-            }
+        for (Object o : c) {
+            if (!o.equals(head.next.value))
+                change = remove(head.getNext().next.value);
         }
         return change;
     }
@@ -328,12 +323,14 @@ public class MyLinkedList<T> implements List<T> {
     @Override
     public boolean removeAll(Collection c) {
         checkIsEmty(c);
-        boolean change = true;
-        for (Object element : c) {
-            change = remove(element);
+        boolean change = false;
+        for (Object o : c) {
+            if (contains(o))
+                change = remove(o);
         }
         return change;
     }
+
 
     @Override
     public boolean containsAll(Collection c) {

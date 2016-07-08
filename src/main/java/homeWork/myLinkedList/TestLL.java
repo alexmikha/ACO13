@@ -5,6 +5,9 @@ package main.java.homeWork.myLinkedList;
  * Created by mykhailov on 18.06.16.
  */
 public class TestLL {
+
+
+
     public static void main(String[] args) {
 
         MyLinkedList list = new MyLinkedList<>();
@@ -23,7 +26,6 @@ public class TestLL {
         int expected = 1;
         int actual = list.size();
         boolean result = actual == expected;
-
         System.out.printf("Method - add, result %s, actual - %d, expected %d\n", result, actual, expected);
 
         list.add(15);
@@ -96,7 +98,11 @@ public class TestLL {
                         " expected - %s, actual - %s\n", "contains",
                 result4, expected4, actual4);
 
-
+        System.out.println("size before addAll(Collection c) " + list.size());
+        for (Object o : list) {
+            System.out.print(o + ", ");
+        }
+        System.out.println();
         list.addAll(list1);
         int expected5 = 7;
         Integer actual5 = list.size();
@@ -104,16 +110,17 @@ public class TestLL {
         System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "addAll(Collection c)",
                 result5, expected5, actual5);
+        System.out.println("size after addAll(Collection c) " + list.size());
         for (Object o : list) {
             System.out.print(o + ", ");
         }
         System.out.println();
-        boolean expected11 = true;
+
+
         boolean actual11 = list.containsAll(list1);
-        boolean result11 = actual11 == (expected11);
         System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "containsAll(Collection c)",
-                result11, expected11, actual11);
+                actual11, true, actual11);
 
 
         list.addAll(3, list1);
@@ -129,15 +136,22 @@ public class TestLL {
         }
         System.out.println();
 
+        list.add(5, "B");
+        String expected15 = "B";
+        String actual15 = (String) list.get(5);
+        boolean result15 = actual15.equals(expected15);
+        System.out.printf("Method - %s, result - %s," +
+                        " expected - %s, actual - %s\n", "add(int index, T element) in midle list",
+                result15, expected15, actual15);
+
         System.out.println();
-        System.out.print("subList before ");
+        System.out.println("subList before ");
         for (Object o : list1.subList(0, 3)) {
             System.out.print(o + ", ");
         }
         System.out.println();
-        System.out.println("------------------------");
         list1.addAll(list.subList(1, 2));
-        System.out.print("subList after addAll(list.subList(1,2)) ");
+        System.out.println("subList after addAll(list.subList(1,2)) ");
         for (Object o : list1) {
             System.out.print(o + ", ");
         }
@@ -149,21 +163,21 @@ public class TestLL {
                         " expected - %s, actual - %s\n", "subList",
                 result7, expected7, actual7);
 
-        System.out.println("size before retainAll " + list.size());
-        for (Object o : list) {
-            System.out.print(o + ", ");
-        }
-        System.out.println();
 
-        list.retainAll(list1);
-        System.out.println("size after retainAll " + list.size());
-        for (Object o : list) {
+        System.out.println("size before retainAll " + list.size());
+        for (Object o :list) {
             System.out.print(o + ", ");
         }
         System.out.println();
-        int expected14 = 1;
+        list.retainAll(list1);
+        int expected14 = 7;
+        System.out.println("size after retainAll " + list.size());
+             for (Object o : list) {
+                 System.out.print(o + ", ");
+            }
+        System.out.println();
         Integer actual14 = list.size();
-        boolean result14 = actual11 == expected11;
+        boolean result14 = actual14 == expected14;
         System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "retainAll",
                 result14, expected14, actual14);
@@ -186,10 +200,6 @@ public class TestLL {
         System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "removeAll(Collection c)",
                 result8, expected8, actual8);
-        for (Object o : list1) {
-            System.out.print(o + ", ");
-        }
-        System.out.println();
 
         list.set(0, 20);
         int expected9 = 20;
@@ -230,5 +240,7 @@ public class TestLL {
                         " expected - %s, actual - %s\n", "isEmpty",
                 result10, expected10, actual10);
 
-    }
+
+
+}
 }
