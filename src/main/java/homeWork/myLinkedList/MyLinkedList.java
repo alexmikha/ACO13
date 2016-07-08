@@ -27,15 +27,18 @@ public class MyLinkedList<T> implements List<T> {
         }
     }
 
+
     @Override
     public int size() {
         return size;
     }
 
+
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
+
 
     @Override
     public boolean contains(Object o) {
@@ -44,6 +47,7 @@ public class MyLinkedList<T> implements List<T> {
             iter = iter.next;
         return (iter != null);
     }
+
 
     @Override
     public Iterator<T> iterator() {
@@ -60,6 +64,7 @@ public class MyLinkedList<T> implements List<T> {
         return result;
     }
 
+
     @Override
     public boolean add(Object o) {
         if (head == null) {
@@ -74,6 +79,7 @@ public class MyLinkedList<T> implements List<T> {
         return true;
     }
 
+
     @Override
     public boolean remove(Object o) {
         int index = indexOf(o);
@@ -84,6 +90,7 @@ public class MyLinkedList<T> implements List<T> {
             return false;
     }
 
+
     @Override
     public boolean addAll(Collection c) {
         boolean change = true;
@@ -93,6 +100,7 @@ public class MyLinkedList<T> implements List<T> {
         return change;
 
     }
+
 
     @Override
     public boolean addAll(int index, Collection c) {
@@ -131,6 +139,7 @@ public class MyLinkedList<T> implements List<T> {
         return true;
     }
 
+
     @Override
     public void clear() {
         if (isEmpty()) {
@@ -147,6 +156,7 @@ public class MyLinkedList<T> implements List<T> {
         size = 0;
 
     }
+
 
     //todo Exception
     @Override
@@ -178,6 +188,7 @@ public class MyLinkedList<T> implements List<T> {
         iter.value = element;
         return toReturn;
     }
+
 
     @Override
     public void add(int index, Object element) {
@@ -242,10 +253,9 @@ public class MyLinkedList<T> implements List<T> {
             iter.next = null;
         }
         size--;
-        //   return iter.value;
-
-        return null;
+           return iter.value;
     }
+
 
     @Override
     public int indexOf(Object o) {
@@ -258,6 +268,7 @@ public class MyLinkedList<T> implements List<T> {
         }
         return -1;
     }
+
 
     @Override
     public int lastIndexOf(Object o) {
@@ -278,6 +289,7 @@ public class MyLinkedList<T> implements List<T> {
         return -1;
     }
 
+
     @Override
     public ListIterator listIterator() {
 //        NOP
@@ -289,6 +301,7 @@ public class MyLinkedList<T> implements List<T> {
         //        NOP
         return null;
     }
+
 
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
@@ -304,26 +317,20 @@ public class MyLinkedList<T> implements List<T> {
         return newLinkedList;
     }
 
-//    public void checkIsEmty(Collection c) {
-//        if (c.isEmpty()) return;
-//    }
 
     @Override
     public boolean retainAll(Collection c) {
-   //     checkIsEmty(c);
-        if (c.isEmpty()) return true;
-
         MyLinkedList tmpList = new MyLinkedList();
         for (Object o : this) {
             if (!c.contains(o))
                 tmpList.add(o);
         }
-         return this.removeAll(tmpList);
+        return this.removeAll(tmpList);
     }
+
 
     @Override
     public boolean removeAll(Collection c) {
-    //    checkIsEmty(c);
         if (c.isEmpty()) return false;
         boolean change = true;
         for (Object o : c) {
@@ -343,11 +350,13 @@ public class MyLinkedList<T> implements List<T> {
         return true;
     }
 
+
     @Override
     public Object[] toArray(Object[] a) {
         //        NOP
         return new Object[0];
     }
+
 
     private static class Node<T> {
         Node<T> next;

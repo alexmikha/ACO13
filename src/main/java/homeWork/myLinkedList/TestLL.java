@@ -142,10 +142,15 @@ public class TestLL {
         String actual15 = (String) list.get(5);
         boolean result15 = actual15.equals(expected15);
         System.out.printf("Method - %s, result - %s," +
-                        " expected - %s, actual - %s\n", "add(int index, T element) in midle list",
+                        " expected - %s, actual - %s\n", "add(int index, T element) in middle list ",
                 result15, expected15, actual15);
-
+        System.out.println("List after addAll(int index, T element) in middle list ");
+        for (Object o : list) {
+            System.out.print(o + ", ");
+        }
         System.out.println();
+
+
         System.out.println("subList before ");
         for (Object o : list1.subList(0, 3)) {
             System.out.print(o + ", ");
@@ -170,8 +175,8 @@ public class TestLL {
             System.out.print(o + ", ");
         }
         System.out.println();
-        list.retainAll(list3);
-        int expected14 = 10;
+        list.retainAll(list2);
+        int expected14 = 2;
         System.out.println("size after retainAll " + list.size());
              for (Object o : list) {
                  System.out.print(o + ", ");
@@ -189,7 +194,7 @@ public class TestLL {
             System.out.print(o + ", ");
         }
         System.out.println();
-        list1.removeAll(list3);
+        list1.removeAll(list2);
         System.out.println("size after removeAll " + list1.size());
         for (Object o : list1) {
             System.out.print(o + ", ");
@@ -202,26 +207,40 @@ public class TestLL {
                         " expected - %s, actual - %s\n", "removeAll(Collection c)",
                 result8, expected8, actual8);
 
-        list.set(0, 20);
-        int expected9 = 20;
-        int actual9 = (int) list.get(0);
-        boolean result9 = actual9 == (expected9);
-        System.out.printf("Method - %s, result - %s," +
-                        " expected - %s, actual - %s\n", "set(int index, Object element)",
-                result9, expected9, actual9);
-        for (Object o : list) {
+        System.out.println("List before set " + list1.size());
+        for (Object o : list1) {
             System.out.print(o + ", ");
         }
         System.out.println();
 
-        int expected2 = 20;
-        Integer actual2 = (Integer) list.get(0);
-        list.remove(0);
-        boolean result2 = actual2.equals(expected2);
+        list1.set(0, 20);
+        int expected9 = 20;
+        int actual9 = (int) list1.get(0);
+        boolean result9 = actual9 == (expected9);
+        System.out.printf("Method - %s, result - %s," +
+                        " expected - %s, actual - %s\n", "set(int index, Object element)",
+                result9, expected9, actual9);
+        System.out.println("List after set " + list1.size());
+        for (Object o : list1) {
+            System.out.print(o + ", ");
+        }
+        System.out.println();
+
+
+        System.out.println("List before remove(int index) " + list1.size());
+        for (Object o : list1) {
+            System.out.print(o + ", ");
+        }
+        System.out.println();
+        int expected2 = 3;
+        list1.remove(0);
+        Integer actual2 = list1.size();
+        boolean result2 = actual2 == expected2;
         System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "remove(int index)",
                 result2, expected2, actual2);
-        for (Object o : list) {
+        System.out.println("List after remove(int index) " + list1.size());
+        for (Object o : list1) {
             System.out.print(o + ", ");
         }
         System.out.println();
