@@ -166,13 +166,13 @@ public class TestLL {
             System.out.print(o + ", ");
         }
         System.out.println();
-        list1.addAll(list.subList(1, 2));
+        list1.addAll(list.subList(1, 3));
         System.out.println("subList after addAll(list.subList(1,2)) ");
         for (Object o : list1) {
             System.out.print(o + ", ");
         }
         System.out.println();
-        int expected7 = 6;
+        int expected7 = 7;
         Integer actual7 = list1.size();
         boolean result7 = actual7.equals(expected7);
         System.out.printf("Method - %s, result - %s," +

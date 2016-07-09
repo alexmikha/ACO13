@@ -105,44 +105,11 @@ public class MyLinkedList<T> implements List<T> {
     @Override
     public boolean addAll(int index, Collection c) {
         assertIndexExclusive(index);
-//        T[] a = (T[]) c.toArray();
-//        int numNew = a.length;
-//        if (numNew == 0)
-//            return false;
-//
-//        Node<T> predecessor;
-//        Node<T> successor;
-//        if (index == size) {
-//            successor = null;
-//            predecessor = head;
-//        } else {
-//            successor = findNode(index);
-//            predecessor = successor.previous;
-//        }
-//
-//        for (T o : a) {
-//            Node<T> newNode = new Node<>(predecessor, o, null);
-//            if (predecessor == null)
-//                head = newNode;
-//            else
-//                predecessor.next = newNode;
-//            predecessor = newNode;
-//        }
-//
-//        if (successor == null) {
-//            tail = predecessor;
-//        } else {
-//            predecessor.next = successor;
-//            successor.previous = predecessor;
-//        }
-//        size += numNew;
-//        return true;
         for (Object o : c) {
             add(index, (T) o);
             index++;
         }
         return true;
-
     }
 
 
@@ -265,8 +232,6 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public int indexOf(Object o) {
-        //   if (o == null) return -1;
-
         Node<T> iter = head;
         if (o == null) {
             for (int i = 0; i < size; i++) {
@@ -321,10 +286,12 @@ public class MyLinkedList<T> implements List<T> {
             throw new IndexOutOfBoundsException("Invalid index input!!!");
         }
         MyLinkedList<T> newLinkedList = new MyLinkedList<>();
-        Node<T> startNode = head;
-        for (int i = 0; i < toIndex - fromIndex + 1; i++) {
-            newLinkedList.add(startNode.value);
-            startNode = startNode.getNext();
+        int i = 0;
+        for (Node<T> iter = head; iter != null; iter = iter.next) {
+            if (i >= fromIndex && i <= toIndex) {
+                newLinkedList.add(iter.value);
+            }
+            i++;
         }
         return newLinkedList;
     }
