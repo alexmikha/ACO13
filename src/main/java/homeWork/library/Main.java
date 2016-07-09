@@ -1,7 +1,7 @@
-package main.java.homeWork.library.main;
+package main.java.homeWork.library;
 
 
-import main.java.homeWork.library.createLibrary.CreateLibrary;
+import main.java.homeWork.library.controller.CreateLibrary;
 
 /**
  * Created by ${mykhailov} on 03.07.2016.

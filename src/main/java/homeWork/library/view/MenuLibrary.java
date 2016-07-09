@@ -1,13 +1,9 @@
-package main.java.homeWork.library.menu;
+package main.java.homeWork.library.view;
 
-import main.java.homeWork.library.*;
-import main.java.homeWork.library.issue.book.Author;
-import main.java.homeWork.library.issue.book.Book;
-import main.java.homeWork.library.issue.Issue;
-import main.java.homeWork.library.issue.Journal;
-import main.java.homeWork.library.issue.Newspaper;
-import main.java.homeWork.library.libraryController.LibraryController;
-import main.java.homeWork.library.reader.Reader;
+import main.java.homeWork.library.model.Author;
+import main.java.homeWork.library.model.*;
+import main.java.homeWork.library.controller.LibraryController;
+import main.java.homeWork.library.model.Reader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,7 +16,7 @@ import java.util.List;
  */
 public class MenuLibrary {
 
-    private BufferedReader bf = new BufferedReader( new InputStreamReader( System.in ) );
+    private BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
     private Library library = new Library();
     private LibraryController libraryController = new LibraryController();
@@ -40,7 +36,6 @@ public class MenuLibrary {
         System.out.println();
         System.out.println("Select:");
 
-        System.out.println(0 + " Exit the menu");
         System.out.println(1 + " Add issue to library");
         System.out.println(2 + " Add reader to list");
         System.out.println(3 + " Give issue reader");
@@ -99,7 +94,7 @@ public class MenuLibrary {
             case "10":
                 List<Reader> readerList = new ArrayList<>(library.showReaderOfBlackList());
                 for (Reader reader : readerList) {
-                    System.out.println( reader );
+                    System.out.println(reader);
                 }
                 break;
             case "11":
@@ -111,10 +106,10 @@ public class MenuLibrary {
             case "12":
                 System.out.println("Enter the word:");
                 String word;
-                word =  bf.readLine();
+                word = bf.readLine();
                 List<Issue> findWord = new ArrayList<>(library.findIssueByWord(word));
                 for (Issue issue : findWord) {
-                    System.out.println( issue );
+                    System.out.println(issue);
                 }
                 break;
             case "13":
@@ -131,7 +126,25 @@ public class MenuLibrary {
                 libraryController.showLibraryFromFile("readerLibrary.txt");
                 break;
         }
-        return menu();
+        return choiceMenu();
+    }
+
+
+    public int choiceMenu() throws IOException {
+        System.out.println();
+        System.out.println("Select:");
+        System.out.println(1 + " Enter in the menu ");
+        System.out.println(2 + " Exit the application ");
+        String choice = bf.readLine();
+        switch (choice) {
+            case "1":
+              menu();
+              break;
+            case "2":
+                bf.close();
+                break;
+        }
+        return 0;
     }
 
     public Reader createReader() throws IOException {
@@ -140,21 +153,21 @@ public class MenuLibrary {
         System.out.println("Enter surname reader:");
         reader.setSurnameReader(bf.readLine());
         System.out.println("Enter address reader:");
-        reader.setAddress( bf.readLine());
-        System.out.println( "Enter phone reader:");
+        reader.setAddress(bf.readLine());
+        System.out.println("Enter phone reader:");
         reader.setPhone(bf.readLine());
-        reader = new Reader( reader.getNameReader(), reader.getSurnameReader(), reader.getAddress(), reader.getPhone() );
+        reader = new Reader(reader.getNameReader(), reader.getSurnameReader(), reader.getAddress(), reader.getPhone());
         return reader;
     }
 
     public Issue createIssue() throws IOException {
-        System.out.println( "Введите name title:" );
+        System.out.println("Введите name title:");
         issue.setTitle(bf.readLine());
 
-        System.out.println( "Введите name publisher:" );
+        System.out.println("Введите name publisher:");
         issue.setPublisher(bf.readLine());
 
-        System.out.println( "Введите year:" );
+        System.out.println("Введите year:");
         issue.setYear(Integer.parseInt(bf.readLine()));
 
         System.out.println("Введите");
@@ -170,7 +183,7 @@ public class MenuLibrary {
             book = new Book(issue.getAuthor(), issue.getTitle(), issue.getPublisher(), issue.getYear());
         }
 
-        System.out.println( "Введите number issue:");
+        System.out.println("Введите number issue:");
         if (typeIssue.equals("j")) {
             journal.setNumberJournal(Integer.parseInt(bf.readLine()));
             journal = new Journal(issue.getTitle(), issue.getPublisher(), issue.getYear(), journal.getNumberJournal());

@@ -1,12 +1,12 @@
 package main.java.homeWork.library.testLibrary;
 
-import main.java.homeWork.library.Library;
-import main.java.homeWork.library.issue.book.Author;
-import main.java.homeWork.library.issue.book.Book;
-import main.java.homeWork.library.issue.Issue;
-import main.java.homeWork.library.issue.Journal;
-import main.java.homeWork.library.libraryController.LibraryController;
-import main.java.homeWork.library.reader.Reader;
+import main.java.homeWork.library.model.Library;
+import main.java.homeWork.library.model.Author;
+import main.java.homeWork.library.model.Book;
+import main.java.homeWork.library.model.Issue;
+import main.java.homeWork.library.model.Journal;
+import main.java.homeWork.library.controller.LibraryController;
+import main.java.homeWork.library.model.Reader;
 
 import java.util.ArrayList;
 import java.util.List;

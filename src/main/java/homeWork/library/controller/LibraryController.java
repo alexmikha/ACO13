@@ -1,4 +1,4 @@
-package main.java.homeWork.library.libraryController;
+package main.java.homeWork.library.controller;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,31 +14,28 @@ public class LibraryController {
 
         File libraryFile = new File(file);
         try {
-            OutputStream fos = new FileOutputStream(libraryFile);
-            ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(fos));
+            ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(libraryFile)));
             oos.writeObject(list);
             oos.flush();
             oos.close();
-            fos.close();
+
         } catch (IOException e) {
             System.out.println(e);
         }
         if (libraryFile.getAbsoluteFile().length() > 0)
             System.out.println("File successfully written - " + libraryFile.getAbsoluteFile().getName());
         else
-            System.out.println("file not found written");
+            System.out.println("File not found written");
     }
+
 
     public void showLibraryFromFile(String file) {
 
         ArrayList arraylist;
         try {
-            FileInputStream fis = new FileInputStream(file);
-            ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(fis));
+            ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(file)));
             arraylist = (ArrayList) ois.readObject();
-            //   librarySer  = (Library) ois.readObject();
             ois.close();
-            fis.close();
         } catch (IOException e) {
             System.out.println(e);
             return;

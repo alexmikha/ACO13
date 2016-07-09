@@ -1,7 +1,4 @@
-package main.java.homeWork.library;
-
-import main.java.homeWork.library.issue.Issue;
-import main.java.homeWork.library.reader.Reader;
+package main.java.homeWork.library.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -11,7 +8,7 @@ import java.util.List;
 /**
  * Created by mykhailov on 03.06.2016.
  */
-public class Library implements Serializable{
+public class Library {
 
     private static List<Issue> prints;
     private static List<Reader> readers;

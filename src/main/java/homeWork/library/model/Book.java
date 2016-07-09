@@ -1,6 +1,4 @@
-package main.java.homeWork.library.issue.book;
-
-import main.java.homeWork.library.issue.Issue;
+package main.java.homeWork.library.model;
 
 import java.io.Serializable;
 
