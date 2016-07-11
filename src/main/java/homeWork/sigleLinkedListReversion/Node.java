@@ -3,7 +3,8 @@ package main.java.homeWork.sigleLinkedListReversion;
 public final class Node<T> implements A<T> {
 
     private T value;
-    private A<T> next;
+    A<T> next;
+
 
     public Node() {
     }

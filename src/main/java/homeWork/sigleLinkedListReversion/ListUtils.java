@@ -19,8 +19,18 @@ public class ListUtils {
         return head;
     }
 
-    public static<T> A<T> reversion(A<T> head) {
+    public static <T> A<T> reversion(A<T> head) {
 //        todo write your code
-        return head;
+        Node<T> previous = null;
+        Node<T> current = (Node<T>) head;
+        Node<T> forward;
+
+        while (current != null) {
+            forward = (Node<T>) current.next;
+            current.next = previous;
+            previous = current;
+            current = forward;
+        }
+        return previous;
     }
 }
