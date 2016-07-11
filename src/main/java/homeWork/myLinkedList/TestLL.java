@@ -167,7 +167,7 @@ public class TestLL {
         }
         System.out.println();
         list1.addAll(list.subList(1, 3));
-        System.out.println("subList after addAll(list.subList(1,2)) ");
+        System.out.println("subList after addAll(list.subList(1,3)) ");
         for (Object o : list1) {
             System.out.print(o + ", ");
         }
@@ -217,7 +217,7 @@ public class TestLL {
                         " expected - %s, actual - %s\n", "removeAll(Collection c)",
                 result8, expected8, actual8);
 
-        System.out.println("List before set " + list1.size());
+        System.out.println("List before set size " + list1.size());
         for (Object o : list1) {
             System.out.print(o + ", ");
         }
@@ -230,14 +230,14 @@ public class TestLL {
         System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "set(int index, Object element)",
                 result9, expected9, actual9);
-        System.out.println("List after set " + list1.size());
+        System.out.println("List after set size " + list1.size());
         for (Object o : list1) {
             System.out.print(o + ", ");
         }
         System.out.println();
 
 
-        System.out.println("List before remove(int index) " + list1.size());
+        System.out.println("List before remove(int index) size " + list1.size());
         for (Object o : list1) {
             System.out.print(o + ", ");
         }
@@ -249,7 +249,7 @@ public class TestLL {
         System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "remove(int index)",
                 result2, expected2, actual2);
-        System.out.println("List after remove(int index) " + list1.size());
+        System.out.println("List after remove(int index) size " + list1.size());
         for (Object o : list1) {
             System.out.print(o + ", ");
         }

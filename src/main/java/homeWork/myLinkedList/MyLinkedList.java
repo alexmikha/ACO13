@@ -43,8 +43,7 @@ public class MyLinkedList<T> implements List<T> {
     @Override
     public boolean contains(Object o) {
         Node<T> iter = head;
-        while (iter != null && !o.equals(iter.value))
-            iter = iter.next;
+        while (iter != null && !o.equals(iter.value)) iter = iter.next;
         return (iter != null);
     }
 
@@ -86,30 +85,31 @@ public class MyLinkedList<T> implements List<T> {
         if (index != -1) {
             remove(index);
             return true;
-        } else
-            return false;
+        } else return false;
     }
 
 
     @Override
     public boolean addAll(Collection c) {
-        boolean change = true;
-        for (Object element : c) {
-            change = add(element);
+        boolean change = false;
+        for (Object o : c) {
+            add(o);
+            change = true;
         }
         return change;
-
     }
 
 
     @Override
     public boolean addAll(int index, Collection c) {
         assertIndexExclusive(index);
+        boolean change = false;
         for (Object o : c) {
             add(index, (T) o);
             index++;
+            change = true;
         }
-        return true;
+        return change;
     }
 
 
@@ -195,7 +195,6 @@ public class MyLinkedList<T> implements List<T> {
             newNode.previous = nodeBefore;
             nodeBefore.next = newNode;
         }
-
         size++;
     }
 
@@ -238,11 +237,10 @@ public class MyLinkedList<T> implements List<T> {
                 if (iter.value == null) return i;
                 iter = iter.next;
             }
-        } else
-            for (int i = 0; i < size; i++) {
-                if (o.equals(iter.value)) return i;
-                iter = iter.next;
-            }
+        } else for (int i = 0; i < size; i++) {
+            if (o.equals(iter.value)) return i;
+            iter = iter.next;
+        }
         return -1;
     }
 
@@ -253,14 +251,12 @@ public class MyLinkedList<T> implements List<T> {
         if (o == null) {
             for (Node<T> iter = tail; iter != null; iter = iter.previous) {
                 index--;
-                if (iter.value == null)
-                    return index;
+                if (iter.value == null) return index;
             }
         } else {
             for (Node<T> iter = tail; iter != null; iter = iter.previous) {
                 index--;
-                if (o.equals(iter.value))
-                    return index;
+                if (o.equals(iter.value)) return index;
             }
         }
         return -1;
@@ -287,7 +283,7 @@ public class MyLinkedList<T> implements List<T> {
         }
         MyLinkedList<T> newLinkedList = new MyLinkedList<>();
         int i = 0;
-        for (Node<T> iter = head; iter != null; iter = iter.next) {
+        for (Node<T> iter = head; iter != null && i <= toIndex; iter = iter.next) {
             if (i >= fromIndex && i <= toIndex) {
                 newLinkedList.add(iter.value);
             }
@@ -301,8 +297,7 @@ public class MyLinkedList<T> implements List<T> {
     public boolean retainAll(Collection c) {
         MyLinkedList tmpList = new MyLinkedList();
         for (Object o : this) {
-            if (!c.contains(o))
-                tmpList.add(o);
+            if (!c.contains(o)) tmpList.add(o);
         }
         return this.removeAll(tmpList);
     }
@@ -311,7 +306,6 @@ public class MyLinkedList<T> implements List<T> {
     @Override
     public boolean removeAll(Collection c) {
         if (c.isEmpty()) return false;
-
         boolean change = false;
         for (Object o : c) {
             while (contains(o)) {
@@ -326,8 +320,7 @@ public class MyLinkedList<T> implements List<T> {
     @Override
     public boolean containsAll(Collection c) {
         for (Object o : c) {
-            if (!this.contains(o))
-                return false;
+            if (!this.contains(o)) return false;
         }
         return true;
     }
