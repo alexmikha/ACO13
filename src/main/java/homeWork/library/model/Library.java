@@ -1,5 +1,7 @@
 package main.java.homeWork.library.model;
 
+import main.java.homeWork.library.controller.CreateLibrary;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -8,7 +10,7 @@ import java.util.List;
 /**
  * Created by mykhailov on 03.06.2016.
  */
-public class Library {
+public class Library implements Serializable{
 
     private static List<Issue> prints;
     private static List<Reader> readers;
@@ -117,8 +119,6 @@ public class Library {
             if (print.equals( readerIssue ))
                 readerGive.getReaderList().remove( readerIssue );
         }
-//        if (prints.contains(readerIssue))
-//            readerGive.getReaderList().remove(readerIssue);
         readerGive.setCountIssue( readerGive.getCountIssue() - 1 );
         addIssueToLibrary( readerIssue );
 
@@ -187,7 +187,7 @@ public class Library {
             }
         }
         printsYear.sort( sortIssueByYear );
-        for (Object issue1 : printsYear) {
+        for (Issue issue1 : printsYear) {
             System.out.println( issue1 );
         }
         return printsYear;
@@ -210,6 +210,17 @@ public class Library {
             }
         }
         return issueWord;
+    }
+
+
+    @SuppressWarnings("unchecked")
+    public static void setPrints(Object prints) {
+        Library.prints = (List<Issue>) prints;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void setReaders(Object readers) {
+        Library.readers = (List<Reader>) readers;
     }
 
     public List<Reader> getReaders() {

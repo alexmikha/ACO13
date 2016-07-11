@@ -52,6 +52,8 @@ public class MenuLibrary {
         System.out.println(14 + " Save readers to file");
         System.out.println(15 + " Look issue by file");
         System.out.println(16 + " Look readers by file");
+        System.out.println(17 + " Save library to file");
+        System.out.println(18 + " Look library by file");
 
         String menu = bf.readLine();
         switch (menu) {
@@ -60,12 +62,9 @@ public class MenuLibrary {
                 return 0;
             case "1":
                 createIssue();
-                if (issue == book)
-                    library.addIssueToLibrary(book);
-                if (issue == journal)
-                    library.addIssueToLibrary(journal);
-                if (issue == newspaper)
-                    library.addIssueToLibrary(newspaper);
+                if (issue == book) library.addIssueToLibrary(book);
+                if (issue == journal) library.addIssueToLibrary(journal);
+                if (issue == newspaper) library.addIssueToLibrary(newspaper);
                 break;
             case "2":
                 library.addReaderToList(createReader());
@@ -121,9 +120,14 @@ public class MenuLibrary {
             case "15":
                 libraryController.showLibraryFromFile("issueLibrary.txt");
                 break;
-
             case "16":
                 libraryController.showLibraryFromFile("readerLibrary.txt");
+                break;
+            case "17":
+                libraryController.saveLibraryToFile("library.txt");
+                break;
+            case "18":
+                libraryController.showLibraryFromFile("library.txt");
                 break;
         }
         return choiceMenu();
@@ -138,14 +142,33 @@ public class MenuLibrary {
         String choice = bf.readLine();
         switch (choice) {
             case "1":
-              menu();
-              break;
+                menu();
+                break;
             case "2":
-                bf.close();
+                exitFromMenu();
                 break;
         }
         return 0;
     }
+
+
+    public void exitFromMenu() throws IOException {
+        System.out.println("Save changes to a file?");
+        System.out.println(1 + " yes");
+        System.out.println(2 + " no");
+        String choiceExit = bf.readLine();
+        switch (choiceExit) {
+            case "1":
+                libraryController.saveIssueReaderToFile(library.getPrints(), "issueLibrary.txt");
+                libraryController.saveIssueReaderToFile(library.getReaders(), "readerLibrary.txt");
+                bf.close();
+                break;
+            case "2":
+                bf.close();
+                break;
+        }
+    }
+
 
     public Reader createReader() throws IOException {
         System.out.println("Enter name reader:");
@@ -159,6 +182,7 @@ public class MenuLibrary {
         reader = new Reader(reader.getNameReader(), reader.getSurnameReader(), reader.getAddress(), reader.getPhone());
         return reader;
     }
+
 
     public Issue createIssue() throws IOException {
         System.out.println("Введите name title:");
