@@ -226,7 +226,7 @@ public class TestLL {
         list1.set(0, 20);
         int expected9 = 20;
         int actual9 = (int) list1.get(0);
-        boolean result9 = actual9 == (expected9);
+        boolean result9 = actual9 == expected9;
         System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "set(int index, Object element)",
                 result9, expected9, actual9);
@@ -242,7 +242,7 @@ public class TestLL {
             System.out.print(o + ", ");
         }
         System.out.println();
-        int expected2 = 5;
+        int expected2 = 6;
         list1.remove(0);
         Integer actual2 = list1.size();
         boolean result2 = actual2 == expected2;
@@ -258,14 +258,14 @@ public class TestLL {
         list.clear();
         int expected3 = 0;
         Integer actual3 = list.size();
-        boolean result3 = actual3 == (expected3);
+        boolean result3 = actual3 == expected3;
         System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "clear",
                 result3, expected3, actual3);
 
         boolean expected10 = true;
         boolean actual10 = list.isEmpty();
-        boolean result10 = actual10 == (expected10);
+        boolean result10 = actual10 == expected10;
         System.out.printf("Method - %s, result - %s," +
                         " expected - %s, actual - %s\n", "isEmpty",
                 result10, expected10, actual10);

@@ -15,15 +15,23 @@ public class MyLinkedList<T> implements List<T> {
     public MyLinkedList() {
     }
 
-    private void assertIndex(int index) {
+    private void assertIndex(int index)  {
         if (index < 0 || index >= size()) {
-            throw new IndexOutOfBoundsException("Invalid index input!!!");
+            try {
+                throw new MyIndexOutOfBoundsException("Invalid index input!!! " + String.valueOf(index));
+            } catch (MyIndexOutOfBoundsException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    private void assertIndexExclusive(final int index) {
+    private void assertIndexExclusive(int index)  {
         if (index < 0 || index > size()) {
-            throw new IndexOutOfBoundsException("Invalid index input!!!");
+            try {
+                throw new MyIndexOutOfBoundsException("Invalid index input!!! " + String.valueOf(index));
+            } catch (MyIndexOutOfBoundsException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -49,12 +57,14 @@ public class MyLinkedList<T> implements List<T> {
 
 
     @Override
+    @SuppressWarnings("unchecked")
     public Iterator<T> iterator() {
-        return new MyIterator<T>();
+        return new MyIterator<>();
     }
 
 
     @Override
+    @SuppressWarnings("unchecked")
     public T[] toArray() {
         T[] result = (T[]) new Object[size];
         int i = 0;
@@ -65,13 +75,13 @@ public class MyLinkedList<T> implements List<T> {
 
 
     @Override
-    public boolean add(Object o) {
+    public boolean add(T o) {
         if (head == null) {
-            head = tail = new Node(o);
+            head = tail = new Node<>(o);
             size++;
             return true;
         }
-        Node<T> newNode = new Node(tail, o);
+        Node<T> newNode = new Node<>(tail, o);
         tail.next = newNode;
         tail = newNode;
         size++;
@@ -90,10 +100,11 @@ public class MyLinkedList<T> implements List<T> {
 
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean addAll(Collection c) {
         boolean change = false;
         for (Object o : c) {
-            add(o);
+            add((T) o);
             change = true;
         }
         return change;
@@ -101,6 +112,7 @@ public class MyLinkedList<T> implements List<T> {
 
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean addAll(int index, Collection c) {
         assertIndexExclusive(index);
         boolean change = false;
@@ -151,22 +163,22 @@ public class MyLinkedList<T> implements List<T> {
 
 
     @Override
-    public T set(int index, Object element) {
+    public T set(int index, T element) {
         if (this == element) {
             throw new IllegalArgumentException();
         }
         assertIndex(index);
-        Node iter = findNode(index);
-        T toReturn = (T) iter.value;
+        Node<T> iter = findNode(index);
+        T toReturn = iter.value;
         iter.value = element;
         return toReturn;
     }
 
 
     @Override
-    public void add(int index, Object element) {
+    public void add(int index, T element) {
         assertIndexExclusive(index);
-        Node<T> newNode = new Node<>((T) element);
+        Node<T> newNode = new Node<> (element);
         // inserting in an empty list
         if (isEmpty()) {
             head = newNode;
@@ -264,13 +276,13 @@ public class MyLinkedList<T> implements List<T> {
 
 
     @Override
-    public ListIterator listIterator() {
+    public ListIterator<T> listIterator() {
 //        NOP
         return null;
     }
 
     @Override
-    public ListIterator listIterator(int index) {
+    public ListIterator<T> listIterator(int index) {
         //        NOP
         return null;
     }
@@ -295,8 +307,8 @@ public class MyLinkedList<T> implements List<T> {
 
     @Override
     public boolean retainAll(Collection c) {
-        MyLinkedList tmpList = new MyLinkedList();
-        for (Object o : this) {
+        MyLinkedList<T> tmpList = new MyLinkedList<>();
+        for (T o : this) {
             if (!c.contains(o)) tmpList.add(o);
         }
         return this.removeAll(tmpList);
@@ -345,36 +357,24 @@ public class MyLinkedList<T> implements List<T> {
             this.value = value;
         }
 
-        public Node(Node<T> previous, T element, Node<T> next) {
-            this.previous = previous;
+        public Node(Node<T> next, Node<T> previous, T value) {
             this.next = next;
-            this.value = element;
+            this.previous = previous;
+            this.value = value;
         }
 
         public Node(Node<T> previous, T value) {
             this.previous = previous;
             this.value = value;
         }
-
-
-        public Node<T> getNext() {
-            return next;
-        }
-
-        public boolean hasNext() {
-            return (next != null);
-        }
-
-        public boolean hasPrevious() {
-            return (previous != null);
-        }
     }
+
 
     private class MyIterator<T> implements Iterator {
 
         Node<T> iterator;
 
-
+        @SuppressWarnings("unchecked")
         public MyIterator() {
             iterator = new Node<>();
             iterator.next = (Node<T>) head;
