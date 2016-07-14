@@ -14,10 +14,6 @@ public class Book extends Issue implements Serializable {
         this.author = new Author(author.getAuthorName());
     }
 
-    public Book() {
-
-    }
-
     public Author getAuthor() {
         return author;
     }

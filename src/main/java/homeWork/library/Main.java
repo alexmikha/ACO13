@@ -4,7 +4,7 @@ package main.java.homeWork.library;
 import main.java.homeWork.library.controller.CreateLibrary;
 
 /**
- * Created by ${mykhailov} on 03.07.2016.
+ * Created by mykhailov on 03.07.2016.
  */
 public class Main {
 

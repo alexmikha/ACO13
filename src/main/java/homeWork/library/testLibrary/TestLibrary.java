@@ -126,7 +126,7 @@ public class TestLibrary {
         library.showByIssueByYear(2000);
 
         System.out.println("---------------------findIssueByWord - Java--------------");
-        List<Issue> findWord = new ArrayList<>(library.findIssueByWord("Java"));
+        List<Issue> findWord = new ArrayList<>(library.findIssueByWord("Joan"));
         for (Issue issue : findWord) {
             System.out.println(issue);
         }
@@ -135,19 +135,19 @@ public class TestLibrary {
         libraryController.saveIssueReaderToFile(library.getPrints(), "issueLibraryTest.txt");
 
         System.out.println("---------------------showIssueFromFile--------------");
-        libraryController.showLibraryFromFile("issueLibraryTest.txt");
+        libraryController.showIssueReaderFromFile("issueLibraryTest.txt");
 
         System.out.println("---------------------saveReaderToFile--------------");
         libraryController.saveIssueReaderToFile(library.getReaders(), "readerLibraryTest.txt");
 
         System.out.println("---------------------showReaderFromFile--------------");
-        libraryController.showLibraryFromFile("readerLibraryTest.txt");
+        libraryController.showIssueReaderFromFile("readerLibraryTest.txt");
 
 
         System.out.println("---------------------saveLibraryToFile--------------");
-        libraryController.saveLibraryToFile("libraryTest.txt");
+        libraryController.saveLibraryToFile(library, "libraryTest.txt");
 
-        System.out.println("---------------------showLibraryFromFile--------------");
-        libraryController.showLibraryFromFile("libraryTest.txt");
+        System.out.println("---------------------lookLibraryFromFile--------------");
+        libraryController.lookLibraryFromFile("libraryTest.txt");
     }
 }

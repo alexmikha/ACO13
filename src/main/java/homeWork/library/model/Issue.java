@@ -20,7 +20,6 @@ public class Issue implements Comparable<Issue>, Serializable {
         this.publisher = publisher;
         this.year = year;
         this.count = 0;
-        this.author = new Author(" ");
     }
 
     public Issue() {
@@ -31,9 +30,9 @@ public class Issue implements Comparable<Issue>, Serializable {
         return author;
     }
 
-    public void setAuthor(Author author) {
-        this.author = author;
-    }
+//    public void setAuthor(Author author) {
+//        this.author = author;
+//    }
 
     public int getYear() {
         return year;
@@ -48,16 +47,15 @@ public class Issue implements Comparable<Issue>, Serializable {
     }
 
     public int getCount() {
-         strCount = "not available";
+        strCount = "not available";
         if (count == 0)
             setCount(strCount);
-
-        return  count;
+        return count;
 
     }
 
     private void setCount(String strCount) {
-       this.strCount = strCount;
+        this.strCount = strCount;
     }
 
     public String getTitle() {
@@ -80,9 +78,7 @@ public class Issue implements Comparable<Issue>, Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Issue issue = (Issue) o;
-
         return this.title.equals(issue.title) && this.publisher.equals(issue.publisher) &&
                 this.publisher.equals(issue.publisher) && this.year == issue.year;
     }
@@ -111,8 +107,8 @@ public class Issue implements Comparable<Issue>, Serializable {
     public String toString() {
         strCount = "not available";
         if (getCount() > 0)
-        return String.format("title - %1s,  publisher - %2$s, year - %3$d, count - %4$d",
-                getTitle(), getPublisher(), getYear(), getCount());
+            return String.format("title - %1s,  publisher - %2$s, year - %3$d, count - %4$d",
+                    getTitle(), getPublisher(), getYear(), getCount());
         else
             return String.format("title - %1s,  publisher - %2$s, year - %3$d,  %4$s",
                     getTitle(), getPublisher(), getYear(), strCount);
@@ -122,5 +118,4 @@ public class Issue implements Comparable<Issue>, Serializable {
         return String.format("title - %1s,  publisher - %2$s, year - %3$d",
                 getTitle(), getPublisher(), getYear());
     }
-
 }

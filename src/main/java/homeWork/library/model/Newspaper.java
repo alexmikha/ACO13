@@ -9,14 +9,13 @@ public class Newspaper extends Issue implements Serializable {
 
     private int numberNewspaper;
 
-    public Newspaper(){
-
+    public Newspaper(String title, String publisher, int year, int numberNewspaper) {
+        super(title, publisher, year);
+        this.numberNewspaper = numberNewspaper;
     }
 
-    public Newspaper(String title, String publisher,  int year, int numberNewspaper) {
-        super(title, publisher, year);
+    public Newspaper() {
 
-        this.numberNewspaper = numberNewspaper;
     }
 
     public int getNumberNewspaper() {
@@ -37,20 +36,20 @@ public class Newspaper extends Issue implements Serializable {
         return getNumberNewspaper() == newspaper.getNumberNewspaper();
 
     }
+
     @Override
     public String toString() {
         String strCount = "not available";
         if (getCount() > 0)
-            return String.format("Newspaper - title - %1$s, publisher - %2$s, year - %3$d, numberJournal - %4$d, count - %5$d",
+            return String.format("Newspaper - title - %1$s, publisher - %2$s, year - %3$d, numberNewsPaper - %4$d, count - %5$d",
                     getTitle(), getPublisher(), getYear(), numberNewspaper, getCount());
-        else return String.format("Journal - title - %1$s, publisher - %2$s, year - %3$d, numberJournal - %4$d, %5$s",
+        else return String.format("Journal - title - %1$s, publisher - %2$s, year - %3$d, numberNewsPaper - %4$d, %5$s",
                 getTitle(), getPublisher(), getYear(), numberNewspaper, strCount);
 
     }
 
     public String asString() {
-        return String.format("Newspaper - title - %1$s, publisher - %2$s, year - %3$d, numberJournal - %4$d",
+        return String.format("Newspaper - title - %1$s, publisher - %2$s, year - %3$d, numberNewsPaper - %4$d",
                 getTitle(), getPublisher(), getYear(), numberNewspaper);
     }
-
 }

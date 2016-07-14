@@ -1,15 +1,14 @@
 package main.java.homeWork.library.view;
 
-import main.java.homeWork.library.model.Author;
-import main.java.homeWork.library.model.*;
 import main.java.homeWork.library.controller.LibraryController;
-import main.java.homeWork.library.model.Reader;
+import main.java.homeWork.library.model.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by mykhailov on 03.07.2016.
@@ -17,16 +16,14 @@ import java.util.List;
 public class MenuLibrary {
 
     private BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-
-    private Library library = new Library();
     private LibraryController libraryController = new LibraryController();
-
+    private Library library = new Library();
     private Author author = new Author();
     private Issue issue = new Issue();
-    private Book book = new Book();
     private Journal journal = new Journal();
     private Newspaper newspaper = new Newspaper();
     private Reader reader = new Reader();
+    private Book book;
 
     public MenuLibrary() {
 
@@ -54,12 +51,11 @@ public class MenuLibrary {
         System.out.println(16 + " Look readers by file");
         System.out.println(17 + " Save library to file");
         System.out.println(18 + " Look library by file");
+        System.out.println(19 + " Look book by author");
+        System.out.println(20 + " Look issue by title");
 
         String menu = bf.readLine();
         switch (menu) {
-            case "0":
-                bf.close();
-                return 0;
             case "1":
                 createIssue();
                 if (issue == book) library.addIssueToLibrary(book);
@@ -118,16 +114,22 @@ public class MenuLibrary {
                 libraryController.saveIssueReaderToFile(library.getReaders(), "readerLibrary.txt");
                 break;
             case "15":
-                libraryController.showLibraryFromFile("issueLibrary.txt");
+                libraryController.showIssueReaderFromFile("issueLibrary.txt");
                 break;
             case "16":
-                libraryController.showLibraryFromFile("readerLibrary.txt");
+                libraryController.showIssueReaderFromFile("readerLibrary.txt");
                 break;
             case "17":
-                libraryController.saveLibraryToFile("library.txt");
+                libraryController.saveLibraryToFile(library, "library.txt");
                 break;
             case "18":
-                libraryController.showLibraryFromFile("library.txt");
+                libraryController.lookLibraryFromFile("library.txt");
+                break;
+            case "19":
+                library.sortIssueByAuthor();
+                break;
+            case "20":
+                library.sortIssueByTitle();
                 break;
         }
         return choiceMenu();
@@ -185,36 +187,50 @@ public class MenuLibrary {
 
 
     public Issue createIssue() throws IOException {
-        System.out.println("Введите name title:");
-        issue.setTitle(bf.readLine());
-
-        System.out.println("Введите name publisher:");
-        issue.setPublisher(bf.readLine());
-
-        System.out.println("Введите year:");
-        issue.setYear(Integer.parseInt(bf.readLine()));
-
-        System.out.println("Введите");
-        System.out.println("j - если journal");
-        System.out.println("n - если newspaper");
-        System.out.println("b - если book");
+        System.out.println("Enter");
+        System.out.println("j - if this journal");
+        System.out.println("n - if this newspaper");
+        System.out.println("b - if this book");
 
         String typeIssue = bf.readLine();
-
-        if (typeIssue.equals("b")) {
-            System.out.println("Введите name author:");
-            author.setAuthorName(bf.readLine());
-            book = new Book(issue.getAuthor(), issue.getTitle(), issue.getPublisher(), issue.getYear());
+        switch (typeIssue) {
+            case "b":
+                System.out.println("Enter name author:");
+                author.setAuthorName(bf.readLine());
+                break;
+            case "j":
+                System.out.println("Enter number journal:");
+                journal.setNumberJournal(Integer.parseInt(bf.readLine()));
+                break;
+            case "n":
+                System.out.println("Enter number newspaper:");
+                newspaper.setNumberNewspaper(Integer.parseInt(bf.readLine()));
+                break;
         }
 
-        System.out.println("Введите number issue:");
-        if (typeIssue.equals("j")) {
-            journal.setNumberJournal(Integer.parseInt(bf.readLine()));
+        System.out.println("Enter name title:");
+        issue.setTitle(bf.readLine());
+
+        System.out.println("Enter name publisher:");
+        issue.setPublisher(bf.readLine());
+
+        System.out.println("Enter year:");
+        issue.setYear(Integer.parseInt(bf.readLine()));
+
+        if (Objects.equals(typeIssue, "b")) {
+            book = new Book(new Author(author.getAuthorName()), issue.getTitle(), issue.getPublisher(), issue.getYear());
+            issue = book;
+            return issue;
+        }
+        if (Objects.equals(typeIssue, "j")) {
             journal = new Journal(issue.getTitle(), issue.getPublisher(), issue.getYear(), journal.getNumberJournal());
+            issue = journal;
+            return issue;
         }
-        if (typeIssue.equals("n")) {
-            newspaper.setNumberNewspaper(Integer.parseInt(bf.readLine()));
-            newspaper = new Newspaper(issue.getTitle(), issue.getPublisher(), issue.getYear(), journal.getNumberJournal());
+        if (Objects.equals(typeIssue, "n")) {
+            newspaper = new Newspaper(issue.getTitle(), issue.getPublisher(), issue.getYear(), newspaper.getNumberNewspaper());
+            issue = newspaper;
+            return issue;
         }
         return issue;
     }
