@@ -57,14 +57,13 @@ public class MyLinkedList<T> implements List<T> {
 
 
     @Override
-    @SuppressWarnings("unchecked")
+
     public Iterator<T> iterator() {
         return new MyIterator<>();
     }
 
 
     @Override
-    @SuppressWarnings("unchecked")
     public T[] toArray() {
         T[] result = (T[]) new Object[size];
         int i = 0;
@@ -100,7 +99,6 @@ public class MyLinkedList<T> implements List<T> {
 
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean addAll(Collection c) {
         boolean change = false;
         for (Object o : c) {
@@ -112,7 +110,6 @@ public class MyLinkedList<T> implements List<T> {
 
 
     @Override
-    @SuppressWarnings("unchecked")
     public boolean addAll(int index, Collection c) {
         assertIndexExclusive(index);
         boolean change = false;
@@ -374,7 +371,6 @@ public class MyLinkedList<T> implements List<T> {
 
         Node<T> iterator;
 
-        @SuppressWarnings("unchecked")
         public MyIterator() {
             iterator = new Node<>();
             iterator.next = (Node<T>) head;
