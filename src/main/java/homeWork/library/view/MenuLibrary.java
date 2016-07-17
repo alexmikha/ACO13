@@ -22,8 +22,8 @@ public class MenuLibrary {
     private Issue issue = new Issue();
     private Journal journal = new Journal();
     private Newspaper newspaper = new Newspaper();
-    private Reader reader = new Reader();
-    private Book book;
+    private Reader reader;// = new Reader();
+    private Book book = new Book();
 
     public MenuLibrary() {
 
@@ -173,6 +173,7 @@ public class MenuLibrary {
 
 
     public Reader createReader() throws IOException {
+
         System.out.println("Enter name reader:");
         reader.setNameReader(bf.readLine());
         System.out.println("Enter surname reader:");
@@ -181,7 +182,8 @@ public class MenuLibrary {
         reader.setAddress(bf.readLine());
         System.out.println("Enter phone reader:");
         reader.setPhone(bf.readLine());
-        reader = new Reader(reader.getNameReader(), reader.getSurnameReader(), reader.getAddress(), reader.getPhone());
+        reader = new Reader(reader.getNameReader(), reader.getSurnameReader(),
+                reader.getAddress(), reader.getPhone(),false);
         return reader;
     }
 

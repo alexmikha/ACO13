@@ -13,6 +13,7 @@ public class Issue implements Comparable<Issue>, Serializable {
     private int count;
     private Author author;
     private String strCount;
+    private boolean readerIssue;
 
     public Issue(String title, String publisher, int year) {
         super();
@@ -20,6 +21,7 @@ public class Issue implements Comparable<Issue>, Serializable {
         this.publisher = publisher;
         this.year = year;
         this.count = 0;
+        this.readerIssue = false;
     }
 
     public Issue() {
@@ -33,6 +35,15 @@ public class Issue implements Comparable<Issue>, Serializable {
 //    public void setAuthor(Author author) {
 //        this.author = author;
 //    }
+
+
+    public boolean isReaderIssue() {
+        return readerIssue;
+    }
+
+    public void setReaderIssue(boolean readerIssue) {
+        this.readerIssue = readerIssue;
+    }
 
     public int getYear() {
         return year;

@@ -23,9 +23,9 @@ public class CreateLibrary {
     private Journal journal1 = new Journal("National Geographic", "National Geographic Society", 2016, 1);
     private Journal journal2 = new Journal("Cosmopolitan", "Independent Media", 2015, 1);
     private Newspaper newspaper = new Newspaper("Daily News.", "Tribune Company", 2016, 2);
-    private Reader reader1 = new Reader("Alex", "Kenton", "street one", "0-00-00-01");
-    private Reader reader2 = new Reader("Jack", "Fisher", "street two", "0-00-00-02");
-    private Reader reader3 = new Reader("Nick", "Evans", "street three", "0-00-00-03");
+    private Reader reader1 = new Reader("Alex", "Kenton", "street one", "0-00-00-01",false);
+    private Reader reader2 = new Reader("Jack", "Fisher", "street two", "0-00-00-02",false);
+    private Reader reader3 = new Reader("Nick", "Evans", "street three", "0-00-00-03",false);
 
     public CreateLibrary() {
 

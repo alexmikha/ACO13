@@ -7,19 +7,21 @@ import java.util.List;
 /**
  * Created by mykhailov on 02.06.2016.
  */
-public class Reader implements Comparable<Reader>,Serializable {
+public class Reader implements Comparable<Reader>, Serializable {
 
     private String nameReader;
     private String surnameReader;
     private String address;
     private String phone;
     private boolean readerBlackList;
+    private boolean readerIssue = false;
     private int countIssue;
 
-    private static List<Issue> readerList;
+
+    private static List<Issue> readerList = new ArrayList<>();
 
 
-    public Reader(String nameReader, String surnameReader, String address, String phone) {
+    public Reader(String nameReader, String surnameReader, String address, String phone, boolean readerIssue) {
         this.nameReader = nameReader;
         this.surnameReader = surnameReader;
         this.address = address;
@@ -27,11 +29,20 @@ public class Reader implements Comparable<Reader>,Serializable {
         this.countIssue = 0;
         this.readerBlackList = false;
         readerList = new ArrayList<>();
-
+        this.readerIssue = readerIssue;
     }
 
-    public Reader() {
 
+    public boolean isReaderIssue() {
+        return readerIssue;
+    }
+
+    public void setReaderIssue(boolean readerIssue) {
+        this.readerIssue = readerIssue;
+    }
+
+    public static void setReaderList(List<Issue> readerList) {
+        Reader.readerList = readerList;
     }
 
     public String getNameReader() {
@@ -94,8 +105,8 @@ public class Reader implements Comparable<Reader>,Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Reader reader = (Reader) o;
 
-return  this.nameReader.equals(reader.nameReader) && this.surnameReader.equals(reader.surnameReader) &&
-        this.address.equals(reader.address) && this.phone.equals(reader.phone);
+        return this.nameReader.equals(reader.nameReader) && this.surnameReader.equals(reader.surnameReader) &&
+                this.address.equals(reader.address) && this.phone.equals(reader.phone);
     }
 
     @Override
@@ -124,7 +135,7 @@ return  this.nameReader.equals(reader.nameReader) && this.surnameReader.equals(r
     public String asString() {
         String tmp = "";
         for (int i = 0; i < readerList.size(); i++)
-            tmp = readerList.get(i).asString();
+            tmp = readerList.get(i).toString();
         return tmp;
     }
 }

@@ -26,10 +26,10 @@ public class TestLibrary {
         Book book3 = new Book(new Author("Joan Rowling"), "Harry Potter", "Scholastic Press", 1997);
         Journal journal = new Journal("National Geographic", "National Geographic Society", 2016, 1);
         Journal journal1 = new Journal(" Cosmopolitan", "Independent Media", 2015, 1);
-        Reader reader1 = new Reader("Alex", "Kenton", "street one", "0-00-00-01");
-        Reader reader2 = new Reader("Jack", "Fisher", "street two", "0-00-00-02");
-        Reader reader3 = new Reader("Nick", "Evans", "street three", "0-00-00-03");
-        Reader reader5 = new Reader("Nick", "Evans", "street three", "0-00-00-03");
+        Reader reader1 = new Reader("Alex", "Kenton", "street one", "0-00-00-01",false);
+        Reader reader2 = new Reader("Jack", "Fisher", "street two", "0-00-00-02",false);
+        Reader reader3 = new Reader("Nick", "Evans", "street three", "0-00-00-03",false);
+        Reader reader5 = new Reader("Nick", "Evans", "street three", "0-00-00-03",false);
 
         System.out.println("---------------------addIssueToLibrary------------------");
         library.addIssueToLibrary(book1);
@@ -55,10 +55,10 @@ public class TestLibrary {
         System.out.println("---------------------giveIssueToReader >3-------------------");
         library.giveIssueToReader(book1, reader1);
         library.giveIssueToReader(book2, reader1);
-        library.giveIssueToReader(book3, reader1);
         library.giveIssueToReader(journal, reader1);
+        library.giveIssueToReader(book3, reader1);
         library.giveIssueToReader(journal1, reader2);
-        //library.giveIssueToReader(book3, reader2);
+        library.giveIssueToReader(book3, reader2);
         library.giveIssueToReader(book3, reader3);
         library.giveIssueToReader(book1, reader3);
         library.giveIssueToReader(journal, reader3);
@@ -89,7 +89,7 @@ public class TestLibrary {
         library.showIssueAllReader();
 
         System.out.println("---------------------addReaderOnBlackList - Alex,Nick----");
-        Reader reader4 = new Reader("Alex", "Kenton", "street one", "0-00-00-01");
+        Reader reader4 = new Reader("Alex", "Kenton", "street one", "0-00-00-01", false);
         library.addReaderOnBlack(reader4);
         //library.addReaderOnBlack(reader1);
         library.addReaderOnBlack(reader3);

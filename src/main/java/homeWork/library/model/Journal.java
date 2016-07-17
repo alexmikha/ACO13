@@ -7,8 +7,6 @@ import java.io.Serializable;
  */
 public class Journal extends Issue implements Serializable {
 
-//    private String nameJournal;
-
     private int numberJournal;
 
 
@@ -17,25 +15,13 @@ public class Journal extends Issue implements Serializable {
         this.numberJournal = numberJournal;
     }
 
-//    public Journal(String title, String publisher, int year) {
-//
-//    }
-
     public Journal() {
-
+        super();
     }
 
     public int getNumberJournal() {
         return numberJournal;
     }
-
-//    public String getNameJournal() {
-//        return nameJournal;
-//    }
-//
-//    public void setNameJournal(String nameJournal) {
-//        this.nameJournal = nameJournal;
-//    }
 
     public void setNumberJournal(int numberJournal) {
         this.numberJournal = numberJournal;

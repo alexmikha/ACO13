@@ -8,15 +8,16 @@ import java.util.List;
 /**
  * Created by mykhailov on 03.06.2016.
  */
-public class Library implements Serializable{
+public class Library implements Serializable {
 
     private static List<Issue> prints;
     private static List<Reader> readers;
 
-    private transient Comparator<Reader> sortByNameReaders = (o1, o2) -> o1.getNameReader().compareTo( o2.getNameReader() );
-    private transient Comparator<Issue> sortByIssue = (o1, o2) -> o1.getTitle().compareTo( o2.getTitle() );
+    private transient Comparator<Reader> sortByNameReaders = (o1, o2) -> o1.getNameReader().compareTo(o2.getNameReader());
+    private transient Comparator<Issue> sortByIssue = (o1, o2) -> o1.getTitle().compareTo(o2.getTitle());
     private transient Comparator<Issue> sortIssueByYear = (o1, o2) -> (o1.getYear() - o2.getYear());
     private transient Comparator<Issue> sortIssueByAuthor = (o1, o2) -> o1.getAuthor().compareTo(o2.getAuthor());
+    private boolean aBoolean;
 
     public Library() {
         prints = new ArrayList<>();
@@ -34,7 +35,7 @@ public class Library implements Serializable{
 
     public void showReadersLibrary() {
         if (readers.isEmpty()) return;
-        readers.sort( sortByNameReaders );
+        readers.sort(sortByNameReaders);
         for (int i = 0; i < readers.size(); i++) {
             System.out.println(readers.get(i));
         }
@@ -42,21 +43,21 @@ public class Library implements Serializable{
 
     public boolean addIssueToLibrary(Issue issue) {
         if (issue == null) return false;
-            if (!prints.contains(issue))
-                issue.setCount(1);
+        if (!prints.contains(issue))
+            issue.setCount(1);
         int index;
-            if (prints.contains(issue)) {
-                index = prints.indexOf(issue);
-                prints.get(index).setCount(issue.getCount() + 1);
-            } else
-                prints.add(issue);
+        if (prints.contains(issue)) {
+            index = prints.indexOf(issue);
+            prints.get(index).setCount(issue.getCount() + 1);
+        } else
+            prints.add(issue);
         return true;
     }
 
 
     public Reader searchReader(Reader reader) {
         for (Reader reader1 : readers) {
-            if (reader.equals( reader1)) ;
+            if (reader.equals(reader1)) ;
             return reader1;
         }
         return null;
@@ -91,21 +92,27 @@ public class Library implements Serializable{
     }
 
     public boolean giveIssueToReader(Issue readerIssue, Reader readerGet) {
-        if (readerIssue == null || readerGet == null || !prints.contains( readerIssue )) return false;
+      //  Reader reader = new Reader();
+        if (readerIssue == null || readerGet == null || !prints.contains(readerIssue)) return false;
         if (readerIssue.getCount() == 0) return false;
         if (readerGet.getCountIssue() >= 3) return false;
-        if (!readers.contains( readerGet ) || readerGet.isReaderBlackList()) return false;
+        if (!readers.contains(readerGet) || readerGet.isReaderBlackList()) return false;
 
         searchReader(readerGet);
-        readerGet.getReaderList().add(readerIssue);
+       // readerIssue.setCount(1);
+        //reader.getReaderList().add(readerIssue);
 
+       // readerIssue.setCount(1);
+        readerGet.getReaderList().add(readerIssue);
+        readerIssue.setCount(1);
+        readerIssue.setReaderIssue(true);
         readerGet.setCountIssue(readerGet.getCountIssue() + 1);
 
         int index;
         index = prints.indexOf(readerIssue);
 
         if (prints.get(index).getCount() >= 1) {
-            prints.get(index).setCount( prints.get(index).getCount() - 1);
+            prints.get(index).setCount(prints.get(index).getCount() - 1);
         }
         return false;
     }
@@ -123,27 +130,38 @@ public class Library implements Serializable{
         return false;
     }
 
-
     public void showIssueOfReader(Reader issueReader) {
-        if (issueReader == null || !readers.contains( issueReader )) return;
-        if (issueReader.getReaderList().size() > 0) {
+        if (issueReader == null || !readers.contains(issueReader)) return;
+        if (issueReader.getCountIssue() >0) {
             System.out.println(issueReader + " :");
+            // }
 
+
+            // }
+            // if (issueReader.) {
             for (int i = 0; i < issueReader.getReaderList().size(); i++) {
-                System.out.println(issueReader.getReaderList().get(i).asString());
+                if (issueReader.getReaderList().get(i).isReaderIssue()== false) {
+                  //  System.out.println(issueReader);
+                    System.out.println(issueReader.getReaderList().get(i).asString());
+
             }
-        } else
-            System.out.format("%1$s, does not have prints\n", issueReader);
+//                else
+//                    System.out.format("%1$s, does not have prints\n", issueReader);
+             //   }  else
+                    System.out.format("%1$s, does not have prints\n", issueReader);
+
+            }
+        }
     }
 
     public void showIssueAllReader() {
         for (Reader reader : readers) {
-            if (reader.getReaderList().size() > 0)
+            if (reader.getReaderList().size() != 0)
                 System.out.println(reader + " :");
 
-            for (int i = 0; i < readers.size(); i++) {
-                if (readers.get(i).getCountIssue() > 0)
-                    System.out.println(readers.get(i).getReaderList().get(i).asString());
+            for (int i = 0; i < reader.getReaderList().size(); i++) {
+                if (reader.getCountIssue() > 0)
+                    System.out.println(reader.getReaderList().get(i).asString());
             }
         }
     }
@@ -154,7 +172,7 @@ public class Library implements Serializable{
         for (Issue print : prints) {
             isuueTitle.add(print);
         }
-        isuueTitle.sort( sortByIssue );
+        isuueTitle.sort(sortByIssue);
         for (int i = 0; i < isuueTitle.size(); i++) {
             System.out.println(isuueTitle.get(i));
         }
@@ -164,7 +182,7 @@ public class Library implements Serializable{
         List<Issue> isuueAuthor = new ArrayList<>();
         for (Issue print : prints) {
             if (print instanceof Book)
-            isuueAuthor.add(print);
+                isuueAuthor.add(print);
         }
         isuueAuthor.sort(sortIssueByAuthor);
         for (int i = 0; i < isuueAuthor.size(); i++) {
@@ -199,8 +217,8 @@ public class Library implements Serializable{
         for (Issue print : prints) {
 
             if (print instanceof Book) {
-               if (print.getAuthor().getAuthorName().contains(string))
-                issueWord.add(print);
+                if (print.getAuthor().getAuthorName().contains(string))
+                    issueWord.add(print);
             }
             if (print.getTitle().contains(string)) {
                 issueWord.add(print);
@@ -212,13 +230,10 @@ public class Library implements Serializable{
         return issueWord;
     }
 
-
-    @SuppressWarnings("unchecked")
     public static void setPrints(Object prints) {
         Library.prints = (List<Issue>) prints;
     }
 
-    @SuppressWarnings("unchecked")
     public static void setReaders(Object readers) {
         Library.readers = (List<Reader>) readers;
     }

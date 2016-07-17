@@ -15,7 +15,7 @@ public class Newspaper extends Issue implements Serializable {
     }
 
     public Newspaper() {
-
+        super();
     }
 
     public int getNumberNewspaper() {

@@ -23,8 +23,8 @@ public class TestLibraryReader {
         Book book2 = new Book(new Author("Joshua Bloch"), "Effective Java", "Lory Moscow", 2008);
         Journal journal = new Journal("National Geographic", "National Geographic Society", 2016, 1);
         Journal journa2 = new Journal(" Cosmopolitan", "Independent Media", 2015, 1);
-        Reader reader1 = new Reader("Alex", "Kenton", "street one", "0-00-00-01");
-        Reader reader2 = new Reader("Jack", "Fisher", "street two", "0-00-00-02");
+        Reader reader1 = new Reader("Alex", "Kenton", "street one", "0-00-00-01",false);
+        Reader reader2 = new Reader("Jack", "Fisher", "street two", "0-00-00-02",false);
 
         library.addIssueToLibrary(book1);
         library.addIssueToLibrary(book1);
