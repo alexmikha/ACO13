@@ -12,7 +12,7 @@ import java.util.List;
 
 public class LibraryController {
 
-    public void saveIssueReaderToFile(List<? extends Comparable> list, String file) {
+    public void saveIssueReaderToFile(List list, String file) {
         File libraryFile = new File(file);
         try {
             ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(libraryFile)));

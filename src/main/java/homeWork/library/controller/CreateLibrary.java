@@ -5,14 +5,18 @@ import main.java.homeWork.library.model.Reader;
 import main.java.homeWork.library.view.MenuLibrary;
 
 import java.io.*;
+import java.util.List;
 
 /**
  * Created by mykhailov on 03.07.2016.
  */
 public class CreateLibrary {
 
-    private File fileIssue = new File("issueLibrary.txt");
-    private File fileReader = new File("readerLibrary.txt");
+    private final String Issue_Library = "issueLibrary.txt";
+    private final String Reader_Library = "readerLibrary.txt";
+
+    private File fileIssue = new File(Issue_Library);
+    private File fileReader = new File(Reader_Library);
 
     private Library createLibrary = new Library();
     private MenuLibrary menuLibrary = new MenuLibrary();
@@ -23,9 +27,9 @@ public class CreateLibrary {
     private Journal journal1 = new Journal("National Geographic", "National Geographic Society", 2016, 1);
     private Journal journal2 = new Journal("Cosmopolitan", "Independent Media", 2015, 1);
     private Newspaper newspaper = new Newspaper("Daily News.", "Tribune Company", 2016, 2);
-    private Reader reader1 = new Reader("Alex", "Kenton", "street one", "0-00-00-01",false);
-    private Reader reader2 = new Reader("Jack", "Fisher", "street two", "0-00-00-02",false);
-    private Reader reader3 = new Reader("Nick", "Evans", "street three", "0-00-00-03",false);
+    private Reader reader1 = new Reader("Alex", "Kenton", "street one", "0-00-00-01");
+    private Reader reader2 = new Reader("Jack", "Fisher", "street two", "0-00-00-02");
+    private Reader reader3 = new Reader("Nick", "Evans", "street three", "0-00-00-03");
 
     public CreateLibrary() {
 
@@ -48,12 +52,12 @@ public class CreateLibrary {
         createLibrary.addReaderToList(reader3);
 
         createLibrary.giveIssueToReader(book1, reader1);
-        // createLibrary.giveIssueToReader(book2, reader1);
-        createLibrary.giveIssueToReader(book3, reader1);
-        // createLibrary.giveIssueToReader(journal, reader1);
-        createLibrary.giveIssueToReader(journal1, reader2);
+        createLibrary.giveIssueToReader(book2, reader1);
+        // createLibrary.giveIssueToReader(book3, reader1);
+        createLibrary.giveIssueToReader(journal1, reader1);
+        createLibrary.giveIssueToReader(journal2, reader2);
         // createLibrary.giveIssueToReader(book3, reader2);
-        // createLibrary.giveIssueToReader(book3, reader3);
+        createLibrary.giveIssueToReader(book2, reader3);
         createLibrary.giveIssueToReader(book3, reader3);
         createLibrary.addReaderOnBlack(reader1);
     }
@@ -62,11 +66,11 @@ public class CreateLibrary {
     public void buildLibraryFromFile() {
         try {
             ObjectInputStream oisIssue = new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileIssue)));
-            Library.setPrints(oisIssue.readObject());
+            Library.setPrints((List<Issue>) oisIssue.readObject());
             oisIssue.close();
 
             ObjectInputStream oisReader = new ObjectInputStream(new BufferedInputStream(new FileInputStream(fileReader)));
-            Library.setReaders(oisReader.readObject());
+            Library.setReaders((List<Reader>) oisReader.readObject());
             oisReader.close();
 
         } catch (IOException e) {

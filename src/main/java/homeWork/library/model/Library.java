@@ -17,7 +17,6 @@ public class Library implements Serializable {
     private transient Comparator<Issue> sortByIssue = (o1, o2) -> o1.getTitle().compareTo(o2.getTitle());
     private transient Comparator<Issue> sortIssueByYear = (o1, o2) -> (o1.getYear() - o2.getYear());
     private transient Comparator<Issue> sortIssueByAuthor = (o1, o2) -> o1.getAuthor().compareTo(o2.getAuthor());
-    private boolean aBoolean;
 
     public Library() {
         prints = new ArrayList<>();
@@ -92,25 +91,18 @@ public class Library implements Serializable {
     }
 
     public boolean giveIssueToReader(Issue readerIssue, Reader readerGet) {
-      //  Reader reader = new Reader();
         if (readerIssue == null || readerGet == null || !prints.contains(readerIssue)) return false;
         if (readerIssue.getCount() == 0) return false;
         if (readerGet.getCountIssue() >= 3) return false;
         if (!readers.contains(readerGet) || readerGet.isReaderBlackList()) return false;
 
         searchReader(readerGet);
-       // readerIssue.setCount(1);
-        //reader.getReaderList().add(readerIssue);
-
-       // readerIssue.setCount(1);
-        readerGet.getReaderList().add(readerIssue);
         readerIssue.setCount(1);
-        readerIssue.setReaderIssue(true);
+        readerGet.getReaderList().add(readerIssue);
         readerGet.setCountIssue(readerGet.getCountIssue() + 1);
 
         int index;
         index = prints.indexOf(readerIssue);
-
         if (prints.get(index).getCount() >= 1) {
             prints.get(index).setCount(prints.get(index).getCount() - 1);
         }
@@ -131,41 +123,35 @@ public class Library implements Serializable {
     }
 
     public void showIssueOfReader(Reader issueReader) {
-        if (issueReader == null || !readers.contains(issueReader)) return;
-        if (issueReader.getCountIssue() >0) {
-            System.out.println(issueReader + " :");
-            // }
-
-
-            // }
-            // if (issueReader.) {
-            for (int i = 0; i < issueReader.getReaderList().size(); i++) {
-                if (issueReader.getReaderList().get(i).isReaderIssue()== false) {
-                  //  System.out.println(issueReader);
-                    System.out.println(issueReader.getReaderList().get(i).asString());
-
-            }
-//                else
-//                    System.out.format("%1$s, does not have prints\n", issueReader);
-             //   }  else
+        if (issueReader == null) return;
+        if (!readers.contains(issueReader)) {
+            System.out.println("This reader is not");
+        } else
+            for (Reader reader : readers) {
+                if (reader.equals(issueReader) && reader.getCountIssue() == 0) {
                     System.out.format("%1$s, does not have prints\n", issueReader);
-
+                } else if (reader.getCountIssue() > 0 && reader.equals(issueReader))
+                    System.out.println(reader + " :");
+                for (int i = 0; i < reader.getReaderList().size(); i++)
+                    if (reader.equals(issueReader))
+                        System.out.println(reader.getReaderList().get(i).asString());
             }
-        }
     }
+
 
     public void showIssueAllReader() {
         for (Reader reader : readers) {
-            if (reader.getReaderList().size() != 0)
+//            if (reader.getCountIssue() == 0) {
+//                System.out.format("%1$s, does not have prints\n", reader);
+//            } else
+                if (reader.getCountIssue() > 0)
                 System.out.println(reader + " :");
 
             for (int i = 0; i < reader.getReaderList().size(); i++) {
-                if (reader.getCountIssue() > 0)
-                    System.out.println(reader.getReaderList().get(i).asString());
+                System.out.println(reader.getReaderList().get(i).asString());
             }
         }
     }
-
 
     public void sortIssueByTitle() {
         List<Issue> isuueTitle = new ArrayList<>();
@@ -230,12 +216,12 @@ public class Library implements Serializable {
         return issueWord;
     }
 
-    public static void setPrints(Object prints) {
-        Library.prints = (List<Issue>) prints;
+    public static void setPrints(List<Issue> prints) {
+        Library.prints = prints;
     }
 
-    public static void setReaders(Object readers) {
-        Library.readers = (List<Reader>) readers;
+    public static void setReaders(List<Reader> readers) {
+        Library.readers = readers;
     }
 
     public List<Reader> getReaders() {

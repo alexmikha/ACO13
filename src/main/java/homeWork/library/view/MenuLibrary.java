@@ -1,6 +1,7 @@
 package main.java.homeWork.library.view;
 
 import main.java.homeWork.library.controller.LibraryController;
+import main.java.homeWork.library.controller.CreateLibrary;
 import main.java.homeWork.library.model.*;
 
 import java.io.BufferedReader;
@@ -9,24 +10,27 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Created by mykhailov on 03.07.2016.
  */
 public class MenuLibrary {
 
+    private final String All_Library;
     private BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
     private LibraryController libraryController = new LibraryController();
-    private Library library = new Library();
+    private Library allLibrary = new Library();
     private Author author = new Author();
     private Issue issue = new Issue();
     private Journal journal = new Journal();
     private Newspaper newspaper = new Newspaper();
-    private Reader reader;// = new Reader();
+    private Reader reader = new Reader();
     private Book book = new Book();
 
     public MenuLibrary() {
 
+        All_Library = "library.txt";
     }
 
     public int menu() throws IOException {
@@ -58,36 +62,36 @@ public class MenuLibrary {
         switch (menu) {
             case "1":
                 createIssue();
-                if (issue == book) library.addIssueToLibrary(book);
-                if (issue == journal) library.addIssueToLibrary(journal);
-                if (issue == newspaper) library.addIssueToLibrary(newspaper);
+                if (issue == book) allLibrary.addIssueToLibrary(book);
+                if (issue == journal) allLibrary.addIssueToLibrary(journal);
+                if (issue == newspaper) allLibrary.addIssueToLibrary(newspaper);
                 break;
             case "2":
-                library.addReaderToList(createReader());
-                break;
+                allLibrary.addReaderToList(createReader());
+                //  break;
             case "3":
-                library.giveIssueToReader(createIssue(), createReader());
+                allLibrary.giveIssueToReader(createIssue(), createReader());
                 break;
             case "4":
-                library.returnIssueToLibOfReader(createIssue(), createReader());
+                allLibrary.returnIssueToLibOfReader(createIssue(), createReader());
                 break;
             case "5":
-                library.showIssueLibrary();
+                allLibrary.showIssueLibrary();
                 break;
             case "6":
-                library.showIssueOfReader(createReader());
+                allLibrary.showIssueOfReader(createReader());
                 break;
             case "7":
-                library.showReadersLibrary();
-                break;
+                allLibrary.showReadersLibrary();
+                //  break;
             case "8":
-                library.showIssueAllReader();
+                allLibrary.showIssueAllReader();
                 break;
             case "9":
-                library.addReaderOnBlack(createReader());
+                allLibrary.addReaderOnBlack(createReader());
                 break;
             case "10":
-                List<Reader> readerList = new ArrayList<>(library.showReaderOfBlackList());
+                List<Reader> readerList = new ArrayList<>(allLibrary.showReaderOfBlackList());
                 for (Reader reader : readerList) {
                     System.out.println(reader);
                 }
@@ -96,22 +100,22 @@ public class MenuLibrary {
                 System.out.println("Enter year of publishing:");
 
                 issue.setYear(Integer.parseInt(bf.readLine()));
-                library.showByIssueByYear(issue.getYear());
+                allLibrary.showByIssueByYear(issue.getYear());
                 break;
             case "12":
                 System.out.println("Enter the word:");
                 String word;
                 word = bf.readLine();
-                List<Issue> findWord = new ArrayList<>(library.findIssueByWord(word));
+                List<Issue> findWord = new ArrayList<>(allLibrary.findIssueByWord(word));
                 for (Issue issue : findWord) {
                     System.out.println(issue);
                 }
                 break;
             case "13":
-                libraryController.saveIssueReaderToFile(library.getPrints(), "issueLibrary.txt");
+                libraryController.saveIssueReaderToFile(allLibrary.getPrints(), "issueLibrary.txt");
                 break;
             case "14":
-                libraryController.saveIssueReaderToFile(library.getReaders(), "readerLibrary.txt");
+                libraryController.saveIssueReaderToFile(allLibrary.getReaders(), "readerLibrary.txt");
                 break;
             case "15":
                 libraryController.showIssueReaderFromFile("issueLibrary.txt");
@@ -120,16 +124,16 @@ public class MenuLibrary {
                 libraryController.showIssueReaderFromFile("readerLibrary.txt");
                 break;
             case "17":
-                libraryController.saveLibraryToFile(library, "library.txt");
+                libraryController.saveLibraryToFile(allLibrary, All_Library);
                 break;
             case "18":
-                libraryController.lookLibraryFromFile("library.txt");
+                libraryController.lookLibraryFromFile(All_Library);
                 break;
             case "19":
-                library.sortIssueByAuthor();
+                allLibrary.sortIssueByAuthor();
                 break;
             case "20":
-                library.sortIssueByTitle();
+                allLibrary.sortIssueByTitle();
                 break;
         }
         return choiceMenu();
@@ -161,8 +165,8 @@ public class MenuLibrary {
         String choiceExit = bf.readLine();
         switch (choiceExit) {
             case "1":
-                libraryController.saveIssueReaderToFile(library.getPrints(), "issueLibrary.txt");
-                libraryController.saveIssueReaderToFile(library.getReaders(), "readerLibrary.txt");
+                libraryController.saveIssueReaderToFile(allLibrary.getPrints(), "issueLibrary.txt");
+                libraryController.saveIssueReaderToFile(allLibrary.getReaders(), "readerLibrary.txt");
                 bf.close();
                 break;
             case "2":
@@ -173,7 +177,6 @@ public class MenuLibrary {
 
 
     public Reader createReader() throws IOException {
-
         System.out.println("Enter name reader:");
         reader.setNameReader(bf.readLine());
         System.out.println("Enter surname reader:");
@@ -183,7 +186,7 @@ public class MenuLibrary {
         System.out.println("Enter phone reader:");
         reader.setPhone(bf.readLine());
         reader = new Reader(reader.getNameReader(), reader.getSurnameReader(),
-                reader.getAddress(), reader.getPhone(),false);
+                reader.getAddress(), reader.getPhone());
         return reader;
     }
 

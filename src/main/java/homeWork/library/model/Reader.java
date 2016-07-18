@@ -14,14 +14,13 @@ public class Reader implements Comparable<Reader>, Serializable {
     private String address;
     private String phone;
     private boolean readerBlackList;
-    private boolean readerIssue = false;
     private int countIssue;
 
 
-    private static List<Issue> readerList = new ArrayList<>();
+    private  List<Issue> readerList = new ArrayList<>();
 
 
-    public Reader(String nameReader, String surnameReader, String address, String phone, boolean readerIssue) {
+    public Reader(String nameReader, String surnameReader, String address, String phone) {
         this.nameReader = nameReader;
         this.surnameReader = surnameReader;
         this.address = address;
@@ -29,20 +28,15 @@ public class Reader implements Comparable<Reader>, Serializable {
         this.countIssue = 0;
         this.readerBlackList = false;
         readerList = new ArrayList<>();
-        this.readerIssue = readerIssue;
+
     }
 
-
-    public boolean isReaderIssue() {
-        return readerIssue;
+    public Reader(){
+        readerList = new ArrayList<>();
     }
 
-    public void setReaderIssue(boolean readerIssue) {
-        this.readerIssue = readerIssue;
-    }
-
-    public static void setReaderList(List<Issue> readerList) {
-        Reader.readerList = readerList;
+    public List<Issue> getReaderList() {
+        return readerList;
     }
 
     public String getNameReader() {
@@ -78,9 +72,7 @@ public class Reader implements Comparable<Reader>, Serializable {
         return phone;
     }
 
-    public List<Issue> getReaderList() {
-        return readerList;
-    }
+
 
     public boolean isReaderBlackList() {
         return readerBlackList;
