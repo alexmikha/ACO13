@@ -57,7 +57,6 @@ public class MyLinkedList<T> implements List<T> {
 
 
     @Override
-
     public Iterator<T> iterator() {
         return new MyIterator<>();
     }
@@ -140,7 +139,6 @@ public class MyLinkedList<T> implements List<T> {
     }
 
 
-    //todo Exception
     @Override
     public T get(int index) {
         assertIndex(index);
